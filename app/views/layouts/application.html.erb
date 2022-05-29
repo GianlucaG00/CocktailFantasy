@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>CocktailFantasy</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+  <body>
+    <!-- Sezione bottoni bootstrap -->
+    <div>
+      <button type="button" class="btn btn-primary">Primary</button>
+      <button type="button" class="btn btn-secondary">Secondary</button>
+      <button type="button" class="btn btn-success">Success</button>
+      <button type="button" class="btn btn-danger">Danger</button>
+      <button type="button" class="btn btn-warning">Warning</button>
+      <button type="button" class="btn btn-info">Info</button>
+      <button type="button" class="btn btn-light">Light</button>
+      <button type="button" class="btn btn-dark">Dark</button>
+    </div>
+    <!-- --- -->
+    <%= yield %>
+  </body>
+</html>
