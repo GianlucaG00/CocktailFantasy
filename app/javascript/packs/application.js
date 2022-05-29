@@ -10,6 +10,7 @@ import "channels"
 
 // per lo stile 
 import 'stylesheets/application'
+import '@fortawesome/fontawesome-free/css/all'
 
 // per bootstrap 
 import 'bootstrap'
