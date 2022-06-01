@@ -2,12 +2,12 @@
 
 one:
   name: MyString
+  description: MyText
   address: MyString
   tel: MyString
-  description: MyText
 
 two:
   name: MyString
+  description: MyText
   address: MyString
   tel: MyString
-  description: MyText

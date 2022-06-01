@@ -1,10 +1,10 @@
-class CreateAds < ActiveRecord::Migration[6.1]
+class CreateBars < ActiveRecord::Migration[6.1]
   def change
-    create_table :ads do |t|
+    create_table :bars do |t|
       t.string :name
+      t.text :description
       t.string :address
       t.string :tel
-      t.text :description
 
       t.timestamps
     end
