@@ -1,0 +1,12 @@
+<h1>Aggiungi nel menu un nuovo Cocktail</h1>
+<p id="notice"><%= notice %></p>
+
+<%= render 'form', cocktail: @cocktail %>
+
+<p>
+    Vuoi utilizzare le API ? ecco qui: 
+</p>
+<%=  button_to 'Cerca infromazioni', :class => "btn btn-success"%>
+
+
+<%= link_to 'Back', cocktails_path %>

@@ -1,6 +1,7 @@
 class BarsController < ApplicationController
-  before_action :set_bar, only: %i[ show edit update destroy ]
-
+  before_action :set_bar, only: %i[ show edit update destroy ] 
+  
+  # CRUD operations
   # GET /bars or /bars.json
   def index
     @bars = Bar.all
