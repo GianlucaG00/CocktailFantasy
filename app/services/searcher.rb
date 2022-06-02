@@ -5,11 +5,10 @@ class Searcher
     def self.search_cocktail(name)
         # name è il nome del cocktail da cercare
         begin
-            response = HTTP.timeout(7).get("http://www.thecocktaildb.com/api/json/v1/1/search.php?", :params => {:s => name})
+            response = HTTP.timeout(7).get("http://www.thecocktaildb.com/api/json/v1/1/search.php", :params => {:s => name})
         rescue => exception
-            return false
+            response =  nil
         end
-        puts response
-        return true
+        return response
     end 
 end 

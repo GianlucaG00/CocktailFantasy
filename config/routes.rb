@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   resources :cocktails
 
   # per la richiesta API 
-  get "/api/:name", to: "api#trigger"
+  get "/api", to: "api#trigger"
 
 
 
