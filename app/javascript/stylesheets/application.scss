@@ -189,3 +189,13 @@ hr:not([size]) {
 .giallo {
 	color: var(--giallo);
 }
+
+.no-border {
+	background: none;
+	padding: 0px;
+	border: none;
+}
+
+.fa-solid:hover{
+	color: red;
+}

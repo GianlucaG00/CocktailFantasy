@@ -13,8 +13,8 @@ class ApiController < ApplicationController
             @drink_name = data["strDrink"]
             @drink_img = data["strDrinkThumb"]
             @alcholic = data["strAlcoholic"]
-            @type = data["strGlass"]
-            @instructions = data["strInstructionsIT"]
+            @glass = data["strGlass"]
+            @instructionsIT = data["strInstructionsIT"]
             
             @ing1 = data["strIngredient1"]
             @ing2 = data["strIngredient2"]
@@ -31,9 +31,24 @@ class ApiController < ApplicationController
             @ing13 = data["strIngredient13"]
             @ing14 = data["strIngredient14"]
             @ing15 = data["strIngredient15"]
-            redirect_to :controller => 'cocktails', :action => 'new', :method => :post, :id_drink => @id_drink, :drink_name => @drink_name, :drink_img => @drink_img, :instructions => @instructions, :found => true 
+
+
+            session[:found] = true; 
+            session[:id_drink] = @id_drink
+            session[:drink_name] = @drink_name
+            session[:drink_img] = @drink_img
+            session[:alcholic] = @alcholic
+            session[:glass] = @glass
+            session[:instructionsIT] = @instructionsIT
+
+            # parametri passati tramite URL: 
+            # redirect_to :controller => 'cocktails', :action => 'new', :id_drink => @id_drink, :drink_name => @drink_name, :drink_img => @drink_img, :instructions => @instructions, :found => true
+
+            redirect_to :controller => 'cocktails', :action => 'new'
+
         rescue => exception 
-            redirect_to :controller => 'cocktails', :action => 'new', :method => :post, :found => false
+            session[:found] = false
+            redirect_to :controller => 'cocktails', :action => 'new'
         end
     end
 end
