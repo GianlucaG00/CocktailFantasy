@@ -1,3 +1,3 @@
-$(document).ready(function(){
-    alert("Pagina caricata!"); 
+$(document).ready(function () {
+    alert("sto eseguendo"); 
 }); 

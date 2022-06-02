@@ -1,5 +1,15 @@
 <p id="notice"><%= notice %></p>
 <h1>Lista dei Bar!</h1>
+<div class="row justify-content-end">
+  <div class="col-3">
+    <div class="input-group rounded">
+      <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
+      <span class="input-group-text border-0" id="search-addon">
+        <i class="fas fa-search"></i>
+      </span>
+    </div>
+  </div>
+</div>
 <%if barman_signed_in?%>
   Bentornato BARMAN <%= current_barman.email%> [ <%= link_to 'Logout', destroy_barman_session_path, :method => :delete%> ] 
 <%end%>
@@ -90,6 +100,5 @@
   <%= link_to('Aggiungi Annuncio', new_bar_path, class: "btn btn-dark")%>
 </div>
 <br>
-
 <!-- Per importare del codice javscript inserito in app/javascript/packs/bar-->
 <%= javascript_pack_tag 'bar/bar' %>
