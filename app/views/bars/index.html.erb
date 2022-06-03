@@ -1,10 +1,28 @@
 <p id="notice"><%= notice %></p>
-
-<h1>Bars</h1>
+<div class="row">
+  <div class="col text-center">
+    <h1>Lista dei Bar!</h1>
+  </div>
+</div>
+<hr/>
+<div class="row justify-content-end">
+  <div class="col-3">
+    <div class="input-group rounded">
+      <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
+      <span class="input-group-text border-0" id="search-addon">
+        <i class="fas fa-search"></i>
+      </span>
+    </div>
+  </div>
+</div>
 <%if barman_signed_in?%>
-  Logged in as <%= current_barman.email%> [<%= link_to 'Logout', destroy_barman_session_path, :method => :delete%>]
+  Bentornato BARMAN <%= current_barman.email%> [ <%= link_to 'Logout', destroy_barman_session_path, :method => :delete%> ] 
 <%end%>
-
+<br/>
+<%if drinker_signed_in?%>
+  Bentornato DRINKER <%= current_drinker.email%> [ <%= link_to 'Logout', destroy_drinker_session_path, :method => :delete%> ] 
+<%end%>
+<!-- 
 <div class="row">
   <div class="col">
     <button type="button" class="btn btn-success">SUCCESS</button>
@@ -40,3 +58,52 @@
 <br>
 
 <%= link_to 'New Bar', new_bar_path %>
+
+-->
+<div class="container mx-auto text-center m-3">
+  <%@bars.each do |bar|%>
+    <div class="row mt-2">
+      <div class="col">
+        <div class="card p-3 mb-2">
+          <div class="d-flex justify-content-between">
+            <div class="d-flex flex-row align-items-center">
+              <div class="icon"> <i class="bx bxl-mailchimp"></i> </div>
+              <div class="ms-2 c-details">
+                <h6 class="mb-0">
+                  <%= bar.name%>
+                </h6>
+                <span>
+                  <%= bar.address%>
+                </span>
+              </div>
+            </div>
+            <div class="badge">
+              <%= link_to(edit_bar_path(bar), class: "fa-solid fa-pencil mx-2") do%>
+              <%end%>
+              <%= link_to(bar, method: :delete, class: "fa-solid fa-trash mx-2", data: {confirm: 'Sei sicuro di voler eliminare?'}) do%>
+              <%end%>
+            </div>
+          </div>
+          <div class="mt-5">
+            <p>
+              <%= bar.description%>
+            </p>
+            <div>
+              <%= link_to('Visualizza', bar)%> <i class="fa-solid fa-arrow-right"></i>
+            </div>
+            <div class="mt-5">
+              <div class="progress">
+                <div class="progress-bar" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+              </div>
+              <div class="mt-3"> <span class="text1">Questo locale ha ricevuto <span class="text2">3 recensioni</span></span> </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  <%end%>
+  <%= link_to('Aggiungi Annuncio', new_bar_path, class: "btn btn-dark")%>
+</div>
+<br>
+<!-- Per importare del codice javscript inserito in app/javascript/packs/bar-->
+<%= javascript_pack_tag 'bar/bar' %>

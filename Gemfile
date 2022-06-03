@@ -59,3 +59,7 @@ gem 'devise'
 
 gem 'omniauth-facebook'
 gem 'omniauth-rails_csrf_protection'
+
+#gemma per richieste HTTP
+gem 'httparty'
+gem 'http'

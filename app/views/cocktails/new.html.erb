@@ -1,0 +1,87 @@
+<div class="row text-center mt-3">
+  <div class="col">
+    <h1>Aggiungi nel menu un nuovo Cocktail</h1>
+  </div>
+</div>
+<hr/>
+<p id="notice"><%= notice %></p>
+<%= render 'form', cocktail: @cocktail %>
+<hr/>
+<div class="row">
+  <div class="col text-center">
+    <h2>Vuoi cercare le informazioni? <i class="fa-solid fa-circle-info mt-1" style="font-size:25px"></i></h2>
+  </div>
+</div>
+<div class="row">
+  <div class="col-12">
+    <%= form_with url: "/api", :method => :get do |form|%>
+      <label for="cocktail_name" class="form-label">Nome del Cocktail </label>
+      <div class="row">
+        <div class="col-11">
+          <%= form.text_field :cocktail_name, :id => "text-field",:class => "form-control", :placeholder => "Inserisci il nome del cocktail", :require => true%>
+        </div>
+        <div class="col-1">
+          <button type="submit" class="no-border mt-1" id="search-cocktail">
+            <i class="fa-solid fa-search mt-1" style="font-size: 40px; border:none"></i>
+          </button>
+        </div>
+      </div>
+    <%end%>
+  </div>
+</div>
+<hr/>
+<div class="row">
+  <div class="col">
+  </div>
+</div>
+<!-- -->
+<%if session[:found] == true%>
+  <div class="row m-3">
+    <div class="col text-center">
+      <h1>
+        <span id="drink-name-api"><%= session[:drink_name]%></span>
+        <%= button_tag class: 'btn btn-success', :id => "add-button" do %>
+          <i class="fa-solid fa-plus"></i>
+        <% end %>
+      </h1>
+      ( <i><span id="drink-id-api"><%= session[:id_drink]%></span></i> )
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <div class="text-center">
+        <img src="<%=session[:drink_img]%>" class="img-fluid rounded border border-danger mx-auto" width="400px">
+      </div>
+    </div>
+  </div>
+  <div class="row my-4">
+    <div class="col">
+      <div id="drink-preparation-api"><%= session[:instructionsIT]%></div>
+    </div>
+  </div>
+  <!-- Vengono resettate le variabili -->
+  <%session[:found] = nil%>
+  <%session[:drink_name] = nil%>
+  <%session[:id_drink] = nil%>
+  <%session[:drink_img] = nil%>
+  <%session[:instructionsIT] = nil%>
+<%else%>
+  <!-- NESSUN RISULTATO DALLA RICERCA-->
+  <%if session[:found] == false%>
+    <div class="row">
+      <div class="col text-center">
+        <p> Spiecente, la ricerca non ha forn alcun risultato. Prova ad inserire un nome valido</p>
+      </div>
+    </div>
+  <%end%>
+  <%session[:found] = nil%>
+<%end%>
+<div class="row justify-content-between">
+  <div class="col-2">
+    <%= button_to "Cancella", new_cocktail_path, :method => :get ,:class => "btn btn-lg btn-danger mt-2"%>
+  </div>
+  <div class="col-2">
+    <%= button_to "Indietro", cocktails_path, :method => :get , :class => "btn btn-lg btn-danger mt-2"%>
+  </div>
+</div>
+<%= javascript_pack_tag 'cocktails/search_api' %>

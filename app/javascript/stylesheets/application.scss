@@ -1,4 +1,201 @@
 @import "bootstrap";
-body{
-    background-color: azure;
+@import url('https://fonts.googleapis.com/css2?family=Monserrat&display=swap');
+
+:root {
+	/* Grazie Bootstrap 5.2! */
+	--giallo: #ff0000;
+	--giallo-rgb: 218, 165, 32;
+	--bs-border-color: var(--giallo);
+	--bs-border-radius: 3rem;
+	--bs-link-color: var(--bs-light);
+	--bs-link-hover-color: var(--giallo);
+}
+
+html {
+	scroll-behavior: smooth;
+}
+
+body {
+	font-family: 'Monserrat', sans-serif;
+	height: 100%;
+}
+
+.text-yellow {
+	color: var(--giallo);
+}
+
+/* Navbar */
+.navbar {
+	background-color: #1a1a1a;
+}
+
+.navbar .dropdown-menu {
+	background-color: #1a1a1a;
+}
+
+.dropdown-menu {
+	--bs-dropdown-link-active-bg: rgb(var(--giallo-rgb), 0.5);
+}
+
+.navbar-dark .navbar-nav .nav-link:hover {
+	color: var(--giallo);
+}
+
+
+/* Menu logo User sulla navbar in alto a sinistra */
+@media screen and (min-width: 576px) {
+	.user-logo-menu {
+		order: 1;
+	}
+}
+
+.user-menu-btn {
+	cursor: pointer;
+
+}
+
+.user-menu-btn img {
+	position: relative;
+	left: 50%;
+	transform: translate(-50%);
+}
+
+
+/* per evitare che la navbar copra il contenuto */
+section>*:first-child {
+	padding-top: 76px;
+}
+
+section>*:last-child {
+	padding-bottom: 76px;
+}
+
+/* Stile: Links */
+a,
+a:hover,
+a:active {
+	text-decoration: none;
+}
+
+/* Stile: Bottoni */
+.btn {
+	--bs-btn-focus-box-shadow: 0 0 0 0.1rem rgba(var(--giallo-rgb), .5);
+	border-radius: 3rem;
+	box-shadow: none;
+}
+
+/* .btn:focus {
+	box-shadow: 0 0 0 0.1rem var(--giallo);
+} */
+
+.btn-light,
+.btn-light:visited {
+	color: var(--bs-dark);
+}
+
+.btn-dark,
+.btn-dark:visited {
+	color: var(--giallo);
+}
+
+.btn-dark:active {
+	border-color: var(--bs-light);
+}
+
+.btn-dark:hover,
+.btn-light:hover {
+	background: var(--giallo);
+	color: var(--bs-dark);
+}
+
+/* Dropdown */
+.dropdown-menu {
+	border-color: var(--giallo);
+}
+
+/* Forms */
+.form-select:focus {
+	border-color: var(--giallo);
+	box-shadow: 0 0 0 0.1rem rgba(var(--giallo-rgb), .5);
+}
+
+.form-control:focus {
+	border-color: var(--giallo);
+	box-shadow: 0 0 0 0.1rem rgba(var(--giallo-rgb), .5);
+}
+
+.form-control {
+	height: 100%;
+	border: 2px solid var(--bs-dark);
+	border-radius: 25px;
+	padding: 1.25rem;
+	/*Non evidenzia quando si seleziona*/
+}
+
+.form-control:hover {
+	border-color: #8b8b94;
+}
+
+.form-control:focus {
+	border-color: var(--giallo);
+}
+
+.input-group-text {
+	border: 1px solid var(--bs-dark);
+	border-radius: 25px;
+}
+
+.form-select {
+	height: 100%;
+	border: 2px solid var(--bs-dark);
+	border-radius: 25px;
+	padding: 1.25rem;
+}
+
+/* Cards */
+.card {
+	border-color: var(--giallo);
+}
+
+hr,
+hr:not([size]) {
+	border: none;
+	height: 1px;
+	background-color: var(--giallo);
+	opacity: 1;
+}
+
+/* calendario */
+.day {
+	color: var(--giallo)
+}
+
+.day.active {
+	background-color: rgb(var(--giallo-rgb), 0.25) !important;
+	color: var(--giallo) !important;
+}
+
+.day.today:before {
+	border-bottom-color: rgb(var(--giallo-rgb), 0.25) !important;
+}
+
+/* icone social footer */
+.btn-social {
+	color: var(--giallo);
+	width: 40px;
+	height: 40px;
+}
+
+.giallo {
+	color: var(--giallo);
+}
+
+.no-border {
+	background: none;
+	padding: 0px;
+	border: none;
+}
+
+.fa-solid:hover{
+	color: red;
 }
