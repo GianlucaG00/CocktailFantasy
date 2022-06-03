@@ -1,29 +1,52 @@
-<h2>Sign up!!!</h2>
+<div class="row text-center">
+  <div class="col">
+    <h1>Iscriviti al nostro servizio</h1>
+    <h2>Diventa un Barman!</h2>
+  </div>
+</div>
+<hr/>
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <%= render "barmen/shared/error_messages", resource: resource %>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+  <div class="col-12">
+    <%= f.label :name, :class => "form-label", :value => "Nome"%>
+    <%= f.text_field :name, :class => "form-control", :placeholder => "Inserisci il nome", :require => true%>
   </div>
 
-  <div class="field">
-    <%= f.label :password %>
+  <div class="col-12">
+    <%= f.label :surname, :class => "form-label", :value => "Cognome"%>
+    <%= f.text_field :surname, :class => "form-control", :placeholder => "Inserisci il cognome", :require => true%>
+  </div>
+
+  <div class="col-12">
+    <%= f.label :email, :class => "form-label", :value => "Email"%>
+    <%= f.email_field :email, :autocomplete => "email",  :class => "form-control", :placeholder => "Inserisci l'email", :require => true%>
+  </div>
+
+  <div class="col-12">
+    <%= f.label :password, :value => "Password"%>
     <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
+    <em>(<%= @minimum_password_length %> caratteri almeno)</em>
     <% end %><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
+     <%= f.password_field :password, :class => "form-control", :autocomplete => "new-password", :placeholder => "Inserisci la password", :require => true%>
   </div>
 
   <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+    <%= f.label :password_confirmation, :value => "Conferma Password"%><br />
+    <%= f.password_field :password_confirmation, :class => "form-control", :autocomplete => "new-password", :placeholder => "Conferma Password" %>
   </div>
 
-  <div class="actions">
-    <%= f.submit "Sign up" %>
+  <div class="containter">
+    <div class="actions">
+      <div class= "row">
+        <div class="col-12">
+          <%= f.submit "Sign up", :class => "btn btn-lg btn-success"%>
+        </div>
+      </div>
+    </div>
   </div>
+
 <% end %>
 
 <%= render "barmen/shared/links" %>

@@ -10,22 +10,22 @@
     <div class="user-logo-menu">
       <div class="nav-item dropdown text-light ml-auto mr-3">
         <%if(drinker_signed_in? || barman_signed_in?) %>
-          <i class="fa-solid fa-user" alt="Avatar data-bs-toggle="dropdown" style="color:red; font-size:25px"></i>
+          <!-- Utente AUTENTICATO-->
+          <i class="fa-solid fa-user" style="font-size:25px; color:red" alt="Avatar" data-bs-toggle="dropdown"></i>
+          <div class="dropdown-menu dropdown-menu-dark dropdown-menu-end">
+            <a href="#" class="dropdown-item">Logout <i class="fa-solid fa-door-open" style="font-size:20px"></i></a>
+            <hr>
+            <a href="#" class="dropdown-item">Area Personale <i class="fa-solid fa-pencil" style="font-size:20px"></i></a>
+          </div>
         <%else%>
+          <!-- Utente NON autenticato-->
           <i class="fa-solid fa-user" style="font-size:25px" alt="Avatar" data-bs-toggle="dropdown"></i>
+          <div class="dropdown-menu dropdown-menu-dark dropdown-menu-end">
+            <a href="#" class="dropdown-item">Login <i class="fa-solid fa-door-open" style="font-size:20px"></i></a>
+            <hr>
+            <a href="#" class="dropdown-item">Registrazione <i class="fa-solid fa-pencil" style="font-size:20px"></i></a>
+          </div>
         <%end%>
-        <!---->
-        <div class="dropdown-menu dropdown-menu-dark dropdown-menu-end">
-          <a href="#" class="dropdown-item">Login <i class="fa-solid fa-door-open" style="font-size:20px"></i></a>
-          <hr>
-          <a href="#" class="dropdown-item">Registrazione <i class="fa-solid fa-pencil" style="font-size:20px"></i></a>
-        </div>
-        <!---->
-        <div class="dropdown-menu dropdown-menu-dark dropdown-menu-end">';
-          <a href="./login.php" class="dropdown-item">Login <img src="./icons/enter.svg" height="20" width="20" /></a>'
-          <hr>
-          <a href="./registrazione.php" class="dropdown-item">Registrazione <img src="./icons/pencil.svg" height="20" width="20" /></a>'
-        </div>
       </div>
     </div>
     <div class="collapse navbar-collapse justify-content-center" id="navbarContent">
