@@ -13,25 +13,26 @@
 
   <div class="field">
     <%= form.label :name %>
-    <%= form.text_field :name %>
+    <%= form.text_field :name, :id => "cocktail-name" %>
   </div>
 
   <div class="field">
     <%= form.label :preparation %>
-    <%= form.text_area :preparation %>
+    <%= form.text_area :preparation, :id => "cocktail-preparation" %>
   </div>
 
   <div class="field">
     <%= form.label :ingredients %>
-    <%= form.text_field :ingredients %>
+    <%= form.text_field :ingredients, :id => "cocktail-ingredients" %>
   </div>
 
   <div class="field">
     <%= form.label :price %>
-    <%= form.number_field :price %>
+    <%= form.number_field :price, :id => "cocktail-price"%>
   </div>
 
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit 'Aggiungi Cocktail'%>
+    <%= button_tag 'Reset', :type => 'reset'%> <!-- Button per reset-->
   </div>
 <% end %>
