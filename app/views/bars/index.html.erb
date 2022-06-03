@@ -16,7 +16,7 @@
   </div>
 </div>
 <%if barman_signed_in?%>
-  Bentornato BARMAN <%= current_barman.email%> [ <%= link_to 'Logout', destroy_barman_session_path, :method => :delete%> ] 
+  Bentornato BARMAN <%= current_barman.email%>[ <%= link_to 'Logout', destroy_barman_session_path, :method => :delete%> ] 
 <%end%>
 <br/>
 <%if drinker_signed_in?%>

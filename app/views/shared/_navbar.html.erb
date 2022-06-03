@@ -10,18 +10,21 @@
     <div class="user-logo-menu">
       <div class="nav-item dropdown text-light ml-auto mr-3">
         <%if(barman_signed_in?)%>
-          <!-- Utente DRINKER AUTENTICATO-->
-          <i class="fa-solid fa-user-tie" style="font-size:25px; color:red" alt="Avatar" data-bs-toggle="dropdown"></i>
+          <!-- Utente BARMAN AUTENTICATO-->
+          <i class="fa-solid fa-user-tie" style="font-size:25px; color:red" alt="Avatar" data-bs-toggle="dropdown"></i> <span class="text-white"></span>
           <div class="dropdown-menu dropdown-menu-dark dropdown-menu-end">
+            <div class="text-center"><%= current_barman.email%></div>
+            <hr/>
             <a href="#" class="dropdown-item">Logout <i class="fa-solid fa-door-open" style="font-size:20px"></i></a>
-            <hr>
             <a href="#" class="dropdown-item">Area Personale <i class="fa-solid fa-pencil" style="font-size:20px"></i></a>
           </div>
         <%elsif(drinker_signed_in?)%>
+          <!-- Utente BARMAN AUTENTICATO--> 
           <i class="fa-solid fa-user" style="font-size:25px; color:red" alt="Avatar" data-bs-toggle="dropdown"></i>
           <div class="dropdown-menu dropdown-menu-dark dropdown-menu-end">
-            <a href="#" class="dropdown-item">Logout <i class="fa-solid fa-door-open" style="font-size:20px"></i></a>
+            <div class="text-center"><%= current_drinker.email%></div>
             <hr>
+            <a href="#" class="dropdown-item">Logout <i class="fa-solid fa-door-open" style="font-size:20px"></i></a>
             <a href="#" class="dropdown-item">Area Personale <i class="fa-solid fa-pencil" style="font-size:20px"></i></a>
           </div>
         <%else%>
