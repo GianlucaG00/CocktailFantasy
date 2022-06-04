@@ -52,10 +52,9 @@
 		    </div>
 		    <div class="col-md-6 col-12">
                 <%= form_with url: "/???", :method => :get do |form|%>
-                    <label for="cocktail_name" class="form-label">Messaggio da inviare </label>
                     <div class="row">
-                        <div class="col-11">
-                        <%= form.text_field :cocktail_name, :id => "text-field",:class => "form-control", :placeholder => "Inserisci il nome del cocktail", :require => true%>
+                        <div class="col-11 mt-2">
+                        <%= form.text_area :message, :id => "text-field",:class => "form-control", :placeholder => "Inserisci il messaggio", :require => true%>
                         </div>
                         <div class="col-1">
                             <button type="submit" class="no-border mt-1" id="search-cocktail">

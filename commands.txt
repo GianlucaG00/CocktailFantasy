@@ -1,0 +1,3 @@
+per eliminare il contenuto del database
+$ rails console
+$ > ModelName.delete_all
