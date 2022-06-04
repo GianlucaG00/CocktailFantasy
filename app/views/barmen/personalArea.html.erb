@@ -47,31 +47,20 @@
 	</div>
     <div class="container m-4">
         <div class="row align-items-center my-2">
-		    <div class="col-md-6 col-12">
-		    	<label>Componi messaggio da inviare agli iscritti</label>
-		    </div>
-		    <div class="col-md-6 col-12">
-                <%= form_with url: "/???", :method => :get do |form|%>
+		    <div class="col-12">
+                <%= form_with url: "/", :method => :get do |form|%>
                     <div class="row">
-                        <div class="col-11 mt-2">
-                        <%= form.text_area :message, :id => "text-field",:class => "form-control", :placeholder => "Inserisci il messaggio", :require => true%>
+                        <div class="col-12 mt-2">
+                        <%= form.text_area :message, :id => "text-field",:class => "form-control", :placeholder => "Inserisci il messaggio...", :require => true%>
                         </div>
-                        <div class="col-1">
-                            <button type="submit" class="no-border mt-1" id="search-cocktail">
-                            <i class="fa-solid fa-search mt-1" style="font-size: 40px; border:none"></i>
-                             </button>
+                    </div>
+                    <div class="row mt-4">
+                        <div class="col-12">
+                            <button type="button" class="btn btn-lg btn-primary">Invia messaggio <i class="fa-brands fa-telegram"></i></button>
                         </div>
                     </div>
                 <%end%>
 		    </div>
-	    </div>
-	    <div class="row align-items-center my-2">
-	    	<div class="col-md-6 col-12">
-	    		<label>Punti fedelt&agrave; </label>
-	    	</div>
-	    	<div class="col-md-6 col-12">
-	    		<span style="margin-right: 0.5rem">XXX</span>
-	    	</div>
 	    </div>
     </div>
 	<div class="row align-items-center my-2">
