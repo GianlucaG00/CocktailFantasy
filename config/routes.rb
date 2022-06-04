@@ -7,6 +7,9 @@ Rails.application.routes.draw do
   # per la richiesta API 
   get "/api", to: "api#trigger"
 
+  #area Personale BARMAN
+  get "/barmen/personalArea", to: "barmen#personalArea"
+
 
 
   # gestione delle UTENZE

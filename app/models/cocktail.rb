@@ -1,6 +1,6 @@
 class Cocktail < ApplicationRecord
 
-    # model validation
+    # model validation per i COCKTAILS
 	validates :name, :presence => true    # uniqueness: { case_sensitive: false }
 	validates :preparation, :presence => true
 

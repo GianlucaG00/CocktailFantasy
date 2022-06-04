@@ -1,8 +1,14 @@
-<h2>Edit <%= resource_name.to_s.humanize %></h2>
+<div class="row text-center mt-3">
+  <div class="col">
+    <h1>Area personale BARMAN</h1>
+  </div>
+</div>
+<hr/>
+
+
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
   <%= render "barmen/shared/error_messages", resource: resource %>
-
   <div class="field">
     <%= f.label :email %><br />
     <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
@@ -27,7 +33,7 @@
   </div>
 
   <div class="field">
-    <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
+    <%= f.label :current_password %> <i>(Abbiamo bisogno della tua password corrente per confermare le modifiche)</i><br />
     <%= f.password_field :current_password, autocomplete: "current-password" %>
   </div>
 

@@ -199,3 +199,23 @@ hr:not([size]) {
 .fa-solid:hover{
 	color: red;
 }
+
+.btn-info {
+	/*Rendiamo invisibile il bottone*/
+	padding: 0;
+	background: transparent;
+	margin: 0;
+	border: none;
+}
+.btn-info:hover{
+	cursor: help;
+}
+
+.user-logo{
+	cursor: pointer;
+}
+
+.btn-primary{
+	background-color: #0088cc;
+	border: none;
+}
