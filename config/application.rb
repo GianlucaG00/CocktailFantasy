@@ -13,8 +13,8 @@ def startBot
   help = "Ciao! Io sono il Bot di COCKTAIL FANTASY.\n\nQuesti sono i comandi che puoi utilizzare:\n
   /subscribe : permette l'iscrizione alle notifiche di uno specifico bar; 
   /unsubscribe: permette la disiscrizione dalle notifiche di uno specifico bar"
-  token = '5305253621:AAE9ff-75kqLnlyCiIpyXH1Dso69wvD2vDE'
-  
+  token = '...'
+
   Telegram::Bot::Client.run(token) do |bot|
     bot.listen do |message|
       # controllo
@@ -35,7 +35,9 @@ def startBot
               if(bar.text == "BAR") 
                   bot.api.send_message(chat_id: message.chat.id, text: "Iscrizione effettuata con successo!")
                   puts "PARAMETRO CORRETTO"
-                  Chat.create(chat_id: message.chat.id, bar_id: nil)
+                  if !Chat.exists?(chat_id: message.chat.id)
+                    Chat.create(chat_id: message.chat.id, bar_id: nil)
+                  end
                   break
               else
                   bot.api.send_message(chat_id: message.chat.id, text: "Non esiste alcun bar con quel nome!")

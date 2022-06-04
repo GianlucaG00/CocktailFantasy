@@ -1,7 +1,7 @@
 require File.expand_path("../config/environment")
 require 'telegram/bot'
 
-token = "5305253621:AAE9ff-75kqLnlyCiIpyXH1Dso69wvD2vDE"
+token = "..."
 class Bot
     def inizitalize
         Telegram::Bot::Client.run(token) do |bot|
