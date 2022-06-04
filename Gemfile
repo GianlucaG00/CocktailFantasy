@@ -63,3 +63,10 @@ gem 'omniauth-rails_csrf_protection'
 #gemma per richieste HTTP
 gem 'httparty'
 gem 'http'
+
+#gemma per il bot di TELEGRAM 
+gem 'telegram-bot-ruby'
+gem  'json'
+gem 'net-http-persistent', '~> 2.9', '>= 2.9.4'
+# Funziona solo con la dipendenza v 1.0
+gem 'faraday', '~> 1.0'

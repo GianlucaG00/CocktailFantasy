@@ -11,7 +11,7 @@
       <div class="nav-item dropdown text-light ml-auto mr-3">
         <%if(barman_signed_in?)%>
           <!-- Utente BARMAN AUTENTICATO-->
-          <i class="fa-solid fa-user-tie" style="font-size:25px; color:red" alt="Avatar" data-bs-toggle="dropdown"></i> <span class="text-white"></span>
+          <i class="fa-solid fa-user-tie user-logo" style="font-size:25px; color:red" alt="Avatar" data-bs-toggle="dropdown"></i> <span class="text-white"></span>
           <div class="dropdown-menu dropdown-menu-dark dropdown-menu-end">
             <div class="text-center"><%= current_barman.email%></div>
             <hr/>
@@ -20,7 +20,7 @@
           </div>
         <%elsif(drinker_signed_in?)%>
           <!-- Utente BARMAN AUTENTICATO--> 
-          <i class="fa-solid fa-user" style="font-size:25px; color:red" alt="Avatar" data-bs-toggle="dropdown"></i>
+          <i class="fa-solid fa-user user-logo" style="font-size:25px; color:red" alt="Avatar" data-bs-toggle="dropdown"></i>
           <div class="dropdown-menu dropdown-menu-dark dropdown-menu-end">
             <div class="text-center"><%= current_drinker.email%></div>
             <hr>
@@ -29,7 +29,7 @@
           </div>
         <%else%>
           <!-- Utente NON autenticato-->
-          <i class="fa-solid fa-user" style="font-size:25px" alt="Avatar" data-bs-toggle="dropdown"></i>
+          <i class="fa-solid fa-user user-logo" style="font-size:25px" alt="Avatar" data-bs-toggle="dropdown"></i>
           <div class="dropdown-menu dropdown-menu-dark dropdown-menu-end">
             <a href="#" class="dropdown-item">Login <i class="fa-solid fa-door-open" style="font-size:20px"></i></a>
             <hr>
