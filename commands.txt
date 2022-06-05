@@ -1,3 +1,7 @@
 per eliminare il contenuto del database
 $ rails console
 $ > ModelName.delete_all
+
+per aggiungere una colonna ad una tabella
+$rails generate migration add_fieldname_to_tablename fieldname:string
+$rake db:migrate

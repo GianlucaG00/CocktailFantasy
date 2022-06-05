@@ -35,6 +35,8 @@ class CocktailsController < ApplicationController
       if @cocktail.save
         format.html { redirect_to cocktail_url(@cocktail), notice: "Cocktail was successfully created." }
         format.json { render :show, status: :created, location: @cocktail }
+        text = "E' stato aggiunto un cocktail nel menù: #{@cocktail.name}"
+        TelegramMailer.send_notification(text).deliver_now
       else
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @cocktail.errors, status: :unprocessable_entity }
@@ -48,6 +50,8 @@ class CocktailsController < ApplicationController
       if @cocktail.update(cocktail_params)
         format.html { redirect_to cocktail_url(@cocktail), notice: "Cocktail was successfully updated." }
         format.json { render :show, status: :ok, location: @cocktail }
+        text = "E' stato aggiornato un cocktail nel menù: #{@cocktail.name}"
+        TelegramMailer.send_notification(text).deliver_now
       else
         format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @cocktail.errors, status: :unprocessable_entity }
@@ -62,6 +66,8 @@ class CocktailsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to cocktails_url, notice: "Cocktail was successfully destroyed." }
       format.json { head :no_content }
+      text = "E' stato elimiato un cocktail nel menù: #{@cocktail.name}"
+      TelegramMailer.send_notification(text).deliver_now
     end
   end
 

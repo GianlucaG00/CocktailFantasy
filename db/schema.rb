@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_06_04_134403) do
+ActiveRecord::Schema.define(version: 2022_06_05_121741) do
 
   create_table "barmen", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -73,6 +73,7 @@ ActiveRecord::Schema.define(version: 2022_06_04_134403) do
     t.string "last_sign_in_ip"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "name"
     t.index ["email"], name: "index_drinkers_on_email", unique: true
     t.index ["reset_password_token"], name: "index_drinkers_on_reset_password_token", unique: true
   end
