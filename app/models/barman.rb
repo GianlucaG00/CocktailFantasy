@@ -4,9 +4,11 @@ class Barman < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable,
          :omniauthable, :omniauth_providers => [:facebook]
-
-
   
+  # ASSOCIATIONS
+  has_many :bars
+
+
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |barman|
       barman.email = auth.info.email

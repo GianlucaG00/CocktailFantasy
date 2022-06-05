@@ -9,8 +9,8 @@ Bundler.require(*Rails.groups)
 require 'telegram/bot'
 
 def startBot 
-  token = "5305253621:AAE9ff-75kqLnlyCiIpyXH1Dso69wvD2vDE"
   puts "BOT AVVIVATO"
+  token = "5305253621:AAE9ff-75kqLnlyCiIpyXH1Dso69wvD2vDE"
   help = "Ciao! Io sono il Bot di COCKTAIL FANTASY.\n\nQuesti sono i comandi che puoi utilizzare:\n
   /subscribe : permette l'iscrizione alle notifiche di uno specifico bar; 
   /unsubscribe: permette la disiscrizione dalle notifiche di uno specifico bar"
@@ -23,7 +23,6 @@ def startBot
           bot.api.send_message(chat_id: message.chat.id, text: help)
       end
 
-      # messaggi dell'utente
       case message.text
       # HELPER
       when "/help"
@@ -45,6 +44,7 @@ def startBot
                   break
               end
           end
+      # disiscrizione dal bar
       when "/unsubscribe"
           bot.api.send_message(chat_id: message.chat.id, text: "Bene ora dimmi il nome del Bar da cui vuoi disiscriverti")
           bot.listen do |bar|

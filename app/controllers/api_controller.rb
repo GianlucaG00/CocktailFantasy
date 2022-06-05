@@ -53,6 +53,18 @@ class ApiController < ApplicationController
     end
 
     def message
-        redirect_to root_path
+        text = params[:message]
+        api_key = "5305253621:AAE9ff-75kqLnlyCiIpyXH1Dso69wvD2vDE"
+        chat_id = "726564883"
+        HTTParty.post("https://api.telegram.org/bot#{api_key}/sendMessage",
+            headers: {
+                'Content-Type' => 'application/json'
+            },
+            body: {
+                chat_id: chat_id,
+                text: text
+            }.to_json
+        )
+        redirect_to barmen_personalArea_path, :notice => "Il messaggio è stato inviato correttamente"
     end
 end
