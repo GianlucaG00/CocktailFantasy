@@ -1,4 +1,8 @@
-<h1 class="text-center">Area personale Drinker</h1>
+<div class="row text-center mt-3">
+	<div class="col">
+		<h1> Area Personale Drinker </h1>
+	</div>
+</div>
     <hr/>
 <div class="container">
 	<div class="row align-items-center my-2">
@@ -7,6 +11,14 @@
 		</div>
 		<div class="col-md-6 col-12">
 			<div><strong><%=current_drinker.name%></strong></div>
+		</div>
+	</div>
+	<div class="row align-items-center my-2">
+		<div class="col-md-6 col-12">
+			<label>Codice utente</label>
+		</div>
+		<div class="col-md-6 col-12">
+			<div><strong><%=current_drinker.id%></strong></div>
 		</div>
 	</div>
 	<div class="row align-items-center my-2">
@@ -41,12 +53,15 @@
     <div class="container m-4">
         <div class="row align-items-center my-2">
         	<div class="col-12"> 
+				 
 				<script async 
-				src="https://telegram.org/js/telegram-widget.js?19" 
-				data-telegram-login="Rails2000Gian_bot" 
-				data-size="large" 
-				data-auth-url="http://127.0.0.1:3000" 
-				data-request-access="write"></script>
+  					src="https://telegram.org/js/telegram-widget.js?19" 
+  					data-telegram-login="Rails2000Gian_bot" 
+  					data-size="large"
+  					data-userpic="false"
+  					data-auth-url="https://localhost:3000/drinkers/personalArea"
+  					data-request-access="write">
+				</script>
 
 				<a href=" https://oauth.telegram.org/embed/Rails2000Gian_bot?origin=http%3A%2F%2F127.0.0.1%3A3000&size=large&request_access=write"> Link</a>
 
@@ -55,7 +70,7 @@
 	    </div>
     </div>
 	<div class="row align-items-center my-2">
-        <h2 class="text-center">I Bar che possiedi</h2>
+        <h2 class="text-center">I Commenti che hai lasciato</h2>
         <hr/>
     </div>
 </div>

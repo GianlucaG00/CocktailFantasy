@@ -14,6 +14,7 @@ Rails.application.routes.draw do
 
   # DRINKER
   get "/drinkers/personalArea", to: "drinkers#personalArea"
+  get "/drinkers/info", to: "drinkers#getkey" 
 
 
 
