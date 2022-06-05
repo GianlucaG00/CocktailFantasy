@@ -8,12 +8,12 @@ Bundler.require(*Rails.groups)
 
 require 'telegram/bot'
 
-
 def startBot 
+  token = "5305253621:AAE9ff-75kqLnlyCiIpyXH1Dso69wvD2vDE"
+  puts "BOT AVVIVATO"
   help = "Ciao! Io sono il Bot di COCKTAIL FANTASY.\n\nQuesti sono i comandi che puoi utilizzare:\n
   /subscribe : permette l'iscrizione alle notifiche di uno specifico bar; 
   /unsubscribe: permette la disiscrizione dalle notifiche di uno specifico bar"
-  token = '...'
 
   Telegram::Bot::Client.run(token) do |bot|
     bot.listen do |message|

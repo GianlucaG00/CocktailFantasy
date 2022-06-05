@@ -71,3 +71,4 @@ gem 'net-http-persistent', '~> 2.9', '>= 2.9.4'
 # Funziona solo con la dipendenza v 1.0
 gem 'faraday', '~> 1.0'
 
+

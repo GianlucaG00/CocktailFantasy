@@ -6,6 +6,8 @@ Rails.application.routes.draw do
 
   # per la richiesta API 
   get "/api", to: "api#trigger"
+  # per le API di telegram 
+  #post "api/message", to: "api#message"
 
   #area Personale BARMAN
   get "/barmen/personalArea", to: "barmen#personalArea"

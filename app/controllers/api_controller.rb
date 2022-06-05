@@ -51,4 +51,8 @@ class ApiController < ApplicationController
             redirect_to :controller => 'cocktails', :action => 'new'
         end
     end
+
+    def message
+        redirect_to root_path
+    end
 end
