@@ -1,4 +1,7 @@
 class BarmenController < ApplicationController
-    def personalArea
-    end
+    def personalArea 
+        if(!(barman_signed_in?))
+            redirect_to "/"
+        end
+    end 
 end 

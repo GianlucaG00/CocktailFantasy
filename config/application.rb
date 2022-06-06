@@ -35,7 +35,6 @@ def startBot
       when '/help'
         bot.api.send_message(chat_id: message.chat.id, text: help)
       end
-          
       puts message
     end
   end 

@@ -1,5 +1,9 @@
 class DrinkersController < ApplicationController
     def personalArea 
+        if(!(drinker_signed_in?))
+            redirect_to "/"
+        end
+        @bar_subscriptions = Drinker.select(:bar_id).find_by(chat_id: current_drinker.id)
     end 
 
     def verify

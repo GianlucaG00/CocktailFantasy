@@ -13,22 +13,22 @@
     <% end %>
     <div class="row g-3 justify-content-center align-items-center m-4">
       <div class="col-sm-6 col-12">
-        <label for="nome" class="form-label">Nome del Bar </label>
+        <label for="name" class="form-label">Nome del Bar </label>
         <%= form.text_field :name, :class => "form-control", :placeholder => "Inserisci il nome", :require => true%>
       </div>
 
       <div class="col-sm-6 col-12">
-        <label for="nome" class="form-label">Indirizzo </label>
+        <label for="address" class="form-label">Indirizzo </label>
         <%= form.text_field :address, :class => "form-control", :placeholder => "Inserisci l'indirizzo", :require => true%>
       </div>
 
       <div class="col-12">
-        <label for="nome" class="form-label">Descrizione del Locale</label>
-        <%= form.text_area :address, :class => "form-control", :placeholder => "Inserisci una descrizione", :require => true%>
+        <label for="address" class="form-label">Descrizione del Locale</label>
+        <%= form.text_area :description, :class => "form-control", :placeholder => "Inserisci una descrizione", :require => true%>
       </div>
 
       <div class="col-12">
-        <label for="nome" class="form-label">Telefono: </label>
+        <label for="tel" class="form-label">Telefono: </label>
         <%= form.text_field :tel, :class => "form-control", :placeholder => "Inserisci il telefono", :require => true%>
       </div>
 

@@ -50,10 +50,21 @@
 		</ul>
 	</div>
 	<p id="notice"><%= notice %></p>
-    <div class="container m-4">
-        <div class="row align-items-center my-2">
-        	<div class="col-12"> 
+	<div class="container m-4">
+        <div class="row my-2">
+        	<div class="col-lg-6 col-12"> 
+				<h2>Le tue iscrizioni</h2>
+				<%if @bar_subscriptions == nil %>
+					Non ci sono iscrizioni
+				<%else%>
+					<% @bar_subscriptions.each do |bar| %>
+      					<tr>
+        				<td><%= Bar.select(:name).find(id: bar) %></td>
+      					</tr>
+					<%end%>
+    			<% end %>
 				 
+				 <!-- NON FUNZIONANTE
 				<script async 
   					src="https://telegram.org/js/telegram-widget.js?19" 
   					data-telegram-login="Rails2000Gian_bot" 
@@ -62,15 +73,29 @@
   					data-auth-url="https://localhost:3000/drinkers/personalArea"
   					data-request-access="write">
 				</script>
-
-				<a href=" https://oauth.telegram.org/embed/Rails2000Gian_bot?origin=http%3A%2F%2F127.0.0.1%3A3000&size=large&request_access=write"> Link</a>
+				-->
 
         		<button  type="submit" class="btn btn-lg btn-primary">Invia messaggio <i class="fa-brands fa-telegram"></i></button>
         	</div>
+
+			<div class="col-lg-6 col-12">
+				<h2>Aggiungi iscrizioni <i></i></h2>
+				<div class="row">
+					<%= form_with url: "/api/message", :method => :post do |form|%>
+						<div class="col-10">
+        					<label for="name" class="form-label">Nome del Bar </label>
+        					<%= form.text_field :name, :class => "form-control", :placeholder => "Inserisci il nome", :require => true%>
+      					</div>
+						<div class="col-2 mt-3">
+							<button type="submit" class="btn btn-lg btn-success">Cerca</button>
+						</div>
+					<%end%>
+				</div>
+			</div>
 	    </div>
     </div>
 	<div class="row align-items-center my-2">
-        <h2 class="text-center">I Commenti che hai lasciato</h2>
+        <h2 class="text-center">I Commenti che hai lasciato <i class="fa-solid fa-comment"></i></h2>
         <hr/>
     </div>
 </div>
@@ -95,3 +120,5 @@
 		</div>
 	</div>
 </div>
+
+<%= javascript_pack_tag 'drinker/personalArea' %>

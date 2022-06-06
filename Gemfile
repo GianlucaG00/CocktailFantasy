@@ -60,11 +60,11 @@ gem 'devise'
 gem 'omniauth-facebook'
 gem 'omniauth-rails_csrf_protection'
 
-#gemma per richieste HTTP
+# gemma per richieste HTTP
 gem 'httparty'
 gem 'http'
 
-#gemma per il bot di TELEGRAM 
+# gemma per il bot di TELEGRAM 
 gem 'telegram-bot-ruby'
 gem  'json'
 gem 'net-http-persistent', '~> 2.9', '>= 2.9.4'
