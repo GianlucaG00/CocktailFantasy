@@ -23,10 +23,13 @@ class BarsController < ApplicationController
   # POST /bars or /bars.json
   def create
     @bar = Bar.new(bar_params)
+    puts "-------------------------------------------------------||-----------------------"
+    puts current_barman.id
+    @bar.barman = current_barman
 
     respond_to do |format|
       if @bar.save
-        format.html { redirect_to bar_url(@bar), notice: "Bar was successfully created." }
+        format.html { redirect_to bar_url(@bar), notice: "Il Bar è stato correttamente inserito" }
         format.json { render :show, status: :created, location: @bar }
       else
         format.html { render :new, status: :unprocessable_entity }

@@ -12,9 +12,10 @@ Rails.application.routes.draw do
   # BARMAN
   get "/barmen/personalArea", to: "barmen#personalArea"
 
-  # DRINKER
+  # DRINKERS
   get "/drinkers/personalArea", to: "drinkers#personalArea"
   get "/drinkers/info", to: "drinkers#getkey" 
+  post "/drinkers/subscribe", to: "drinkers#subscribe"
 
 
 

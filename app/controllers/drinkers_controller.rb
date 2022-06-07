@@ -1,9 +1,17 @@
 class DrinkersController < ApplicationController
     def personalArea 
-        if(!(drinker_signed_in?))
+        if(!(drinker_signed_in?) || barman_signed_in?)
             redirect_to "/"
+        else
+            @bar_subscriptions = Drinker.select(:bar_id).find_by(chat_id: current_drinker.id)
+            @bars = Bar.all
+            puts "CIAOOOO"
+            puts @bars
         end
-        @bar_subscriptions = Drinker.select(:bar_id).find_by(chat_id: current_drinker.id)
+    end 
+
+    def subscribe
+        redirect_to bars_path
     end 
 
     def verify
