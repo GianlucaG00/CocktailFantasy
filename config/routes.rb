@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
+  resources :reviews
   # model relativo ai BAR
   resources :bars do
-    resources :cocktails, only:[:new, :show, :create]
+    resources :cocktails, only:[:new, :show, :create, :destroy]
+    resources :reviews, only:[:new, :show, :create]
   end 
   
   # relativo al model COCKTAILS

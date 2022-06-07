@@ -1,16 +1,12 @@
-<p id="notice"><%= notice %></p>
 <div class="container">
 
-  <div class="row">
-    </div class="col text-center">
-      <h1><%=@bar.name%></h1>
-    </div>
-  </div>
+  <section class="text-center">
+    <h1 class="display-5"><%=@bar.name%> <i class="fa-solid fa-shop"></i></h1>
+  </section>
 
-  <hr/>
 
   <p>
-    <strong>Name:</strong>
+    <strong>Nome:</strong>
     <%= @bar.name %>
   </p>
 
@@ -37,6 +33,7 @@
   <div class="row">
     <div class="col-11 text-center">
       <h2>Cocktail Menù del <strong><%=@bar.name%></strong> <i class="fa-solid fa-book"></i></h2>
+      <p id="notice"><%= notice %></p>
     </div>
     <div class="col-1">
       <a href="<%=new_bar_cocktail_url(:bar_id=> @bar.id)%>"><h2><i class="fa-solid fa-plus-circle" style="color: green"></i></h2></a>

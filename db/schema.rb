@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_06_07_124448) do
+ActiveRecord::Schema.define(version: 2022_06_07_230007) do
 
   create_table "barmen", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -62,6 +62,7 @@ ActiveRecord::Schema.define(version: 2022_06_07_124448) do
     t.datetime "updated_at", precision: 6, null: false
     t.integer "bar_id", null: false
     t.string "pic"
+    t.boolean "signature"
     t.index ["bar_id"], name: "index_cocktails_on_bar_id"
   end
 
@@ -84,6 +85,19 @@ ActiveRecord::Schema.define(version: 2022_06_07_124448) do
     t.index ["reset_password_token"], name: "index_drinkers_on_reset_password_token", unique: true
   end
 
+  create_table "reviews", force: :cascade do |t|
+    t.string "text"
+    t.integer "vote"
+    t.integer "Drinker_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.integer "bar_id", null: false
+    t.index ["Drinker_id"], name: "index_reviews_on_Drinker_id"
+    t.index ["bar_id"], name: "index_reviews_on_bar_id"
+  end
+
   add_foreign_key "bars", "barmen"
   add_foreign_key "cocktails", "bars"
+  add_foreign_key "reviews", "Drinkers"
+  add_foreign_key "reviews", "bars"
 end

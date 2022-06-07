@@ -75,15 +75,17 @@ class CocktailsController < ApplicationController
 
   # DELETE /cocktails/1 or /cocktails/1.json
   def destroy
+    @bar = @cocktail.bar
     @cocktail.destroy
 
     respond_to do |format|
-      format.html { redirect_to cocktails_url, notice: "Il cocktail è stato rimosso con successo" }
+      format.html { redirect_to @bar, notice: "Il cocktail è stato rimosso con successo" }
       format.json { head :no_content }
-      text = "Dai un'occhiata! E' stato aggiunto un cocktail nel menù: #{@cocktail.name}"
-        Chat.select(:chat_id).find_by(bar_id: @cocktail.bar).each do |user|
-          TelegramMailer.send_notification(text).deliver_now
-        end 
+
+      #text = "Dai un'occhiata! E' stato aggiunto un cocktail nel menù: #{@cocktail.name}"
+       # Chat.select(:chat_id).find_by(bar_id: @cocktail.bar).each do |user|
+        #  TelegramMailer.send_notification(text).deliver_now
+        #end 
     end
   end
 
@@ -95,6 +97,6 @@ class CocktailsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def cocktail_params
-      params.require(:cocktail).permit(:name, :preparation, :ingredients, :price)
+      params.require(:cocktail).permit(:name, :preparation, :ingredients, :price, :pic, :signature)
     end
 end

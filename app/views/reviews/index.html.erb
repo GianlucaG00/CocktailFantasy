@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+<div class="row">
+  <div class="col">
+    <h1> Elenco Recensioni </h1>
+  </div>
+</div>
+
+<table>
+  <thead>
+    <tr>
+      <th>Text</th>
+      <th>Vote</th>
+      <th>Drinker</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @reviews.each do |review| %>
+      <tr>
+        <td><%= review.text %></td>
+        <td><%= review.vote %></td>
+        <td><%= review.Drinker_id %></td>
+        <td><%= link_to 'Show', review %></td>
+        <td><%= link_to 'Edit', edit_review_path(review) %></td>
+        <td><%= link_to 'Destroy', review, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Review', new_review_path %>

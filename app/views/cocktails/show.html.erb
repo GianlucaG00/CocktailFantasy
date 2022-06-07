@@ -1,5 +1,23 @@
 <p id="notice"><%= notice %></p>
 
+<div class="row">
+  <div class="col-1 text-center">
+    <h1><a href="<%=bar_path(:id => @cocktail.bar)%>"><i class="fa-solid fa-arrow-left-long"></i></a></h1>
+  </div>
+  <div class="col-11 text-center">
+    <h1><%=@cocktail.name%></h1>
+  </div>
+</div>
+
+<hr/>
+<div class="container my-4 text-center">
+  <%if @cocktail.pic != nil%>
+    <img src="<%=@cocktail.pic%>" class="img-fluid"/>
+  <%else%>
+    <%= image_tag "bar/not-available.jpg", :class => "img-fluid"%>
+  <%end%>
+</div>
+
 <p>
   <strong>Name:</strong>
   <%= @cocktail.name %>
@@ -11,13 +29,17 @@
 </p>
 
 <p>
-  <strong>Ingredients:</strong>
+  <strong>Ingredienti:</strong>
   <%= @cocktail.ingredients %>
 </p>
 
 <p>
-  <strong>Price:</strong>
+  <strong>Prezzo:</strong>
   <%= @cocktail.price %>
 </p>
 
-<%= link_to 'Back', bar_path(:id => @cocktail.bar) %>
+<div class="row">
+  <div class="col">
+    <%= link_to 'Destroy', "/bars/#{@cocktail.bar.id}/cocktails/#{@cocktail.id}", method: :delete, data: { confirm: "Sei sicuro di voler cancellare #{@cocktail.name} ?" } %>
+  </div>
+</div>

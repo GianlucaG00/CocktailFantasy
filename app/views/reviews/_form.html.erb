@@ -1,0 +1,28 @@
+<div class="container">
+  <%= form_with(model: review) do |form| %>
+    <% if review.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(review.errors.count, "error") %> prohibited this review from being saved:</h2>
+
+        <ul>
+          <% review.errors.each do |error| %>
+            <li><%= error.full_message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="row g-3 justify-content-center align-items-center m-4">
+      <div class="col-12">
+        <label for="text" class="form-label">Testo Recensione: </label>
+        <%= form.text_field :text, :class => "form-control", :placeholder => "Inserisci la recensione", :require => true%>
+      </div>
+
+      <div class="col-lg-6 text-center">
+        <label for="vote" class="form-label">Voto: </label>
+        <%= form.number_field :vote, :class => "form-control", :placeholder => "Inserisci il voto", :min => 0, :max => 5 %>
+        <%= form.submit "Crea recensione", :class => "mt-4"%>
+      </div>
+    </div>
+  <% end %>
+</div>

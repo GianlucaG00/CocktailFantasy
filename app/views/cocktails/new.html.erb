@@ -1,6 +1,6 @@
 <div class="row text-center mt-3">
   <div class="col">
-    <h1>Aggiungi nel menu un nuovo Cocktail</h1>
+    <h1>Aggiungi nel menù un nuovo Cocktail</h1>
   </div>
 </div>
 <hr/>
@@ -13,9 +13,9 @@
   </div>
 </div>
 <div class="row">
+  <label for="cocktail_name" class="form-label">Nome del Cocktail </label>
   <div class="col-12">
     <%= form_with url: "/api", :method => :get do |form|%>
-      <label for="cocktail_name" class="form-label">Nome del Cocktail </label>
       <div class="row">
         <div class="col-11">
           <%= form.text_field :cocktail_name, :id => "text-field",:class => "form-control", :placeholder => "Inserisci il nome del cocktail", :require => true%>
@@ -53,6 +53,7 @@
       <div class="text-center">
         <img src="<%=session[:drink_img]%>" class="img-fluid rounded border border-danger mx-auto" width="400px">
       </div>
+      <p class="invisible" id="drink-pic-api"><%=session[:drink_img]%></p>
     </div>
   </div>
   <div class="row my-4">
@@ -71,7 +72,7 @@
   <%if session[:found] == false%>
     <div class="row">
       <div class="col text-center">
-        <p> Spiecente, la ricerca non ha forn alcun risultato. Prova ad inserire un nome valido</p>
+        <p> Spiecente, la ricerca non ha fornito alcun risultato. Prova ad inserire un nome  di un cocktail valido</p>
       </div>
     </div>
   <%end%>
