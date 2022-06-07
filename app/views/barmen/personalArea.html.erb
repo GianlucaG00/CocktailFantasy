@@ -45,18 +45,19 @@
 			</li>
 		</ul>
 	</div>
+	<p id="notice"><%= notice %></p>
     <div class="container m-4">
         <div class="row align-items-center my-2">
 		    <div class="col-12">
-                <%= form_with url: "/api/message", :method => :post do |form|%>
+                <%= form_with url: "/api/message", :id => "form-telegram", :method => :post, :id => "form" do |form|%>
                     <div class="row">
                         <div class="col-12 mt-2">
-                        <%= form.text_area :message, :id => "text-field",:class => "form-control", :placeholder => "Inserisci il messaggio...", :require => true%>
+                        <%= form.text_area :message, :id => "msg", :name => "msg", :class => "form-control", :placeholder => "Inserisci il messaggio...", :require => true%>
                         </div>
                     </div>
                     <div class="row mt-4">
                         <div class="col-12">
-                        	<button  type="submit" class="btn btn-lg btn-primary">Invia messaggio <i class="fa-brands fa-telegram"></i></button>
+                        	<button id="submit" type="submit" class="btn btn-lg btn-primary">Invia messaggio <i class="fa-brands fa-telegram"></i></button>
                         </div>
                     </div>
                 <%end%>
@@ -70,22 +71,24 @@
 </div>
 
 <div class="modal fade" id="popupInfo" tabindex="-1" aria-labelledby="popupInfoLabel" aria-hidden="true">
-		<div class="modal-dialog modal-dialog-centered">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title" id="popupInfoLabel">Come funziona il Bot?<i class="fa-solid fa-robot mx-2"></i></h5>
-					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-				</div>
-				<div class="modal-body">
-					<!-- todo: scrivere le info  -->
-					<div>In qualità di utente barman, puoi notificare gli utenti che si iscriveranno al tuo bar tramite telegram.<br>Ogni volta che vuoi inviare un messaggio o che inserisci una nuova proposta nel menù il bot si 
-                    occuperà di notificare tutti gli iscritti!</div>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-success" data-bs-dismiss="modal">
-						<span>Ho capito</span>
-					</button>
-				</div>
+	<div class="modal-dialog modal-dialog-centered">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="popupInfoLabel">Come funziona il Bot?<i class="fa-solid fa-robot mx-2"></i></h5>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body">
+				<!-- todo: scrivere le info  -->
+				<div>In qualità di utente barman, puoi notificare gli utenti che si iscriveranno al tuo bar tramite telegram.<br>Ogni volta che vuoi inviare un messaggio o che inserisci una nuova proposta nel menù il bot si 
+                occuperà di notificare tutti gli iscritti!</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-success" data-bs-dismiss="modal">
+					<span>Ho capito</span>
+				</button>
 			</div>
 		</div>
 	</div>
+</div>
+
+	<%= javascript_pack_tag 'barman/personalArea' %>

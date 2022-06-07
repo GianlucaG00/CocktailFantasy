@@ -1,16 +1,24 @@
 Rails.application.routes.draw do
   # model relativo ai BAR
-  resources :bars
+  resources :bars do
+    resources :cocktails, only:[:new, :show, :create]
+  end 
+  
   # relativo al model COCKTAILS
-  resources :cocktails
+ 
 
   # per la richiesta API 
   get "/api", to: "api#trigger"
   # per le API di telegram 
-  #post "api/message", to: "api#message"
+  post "api/message", to: "api#message"
 
-  #area Personale BARMAN
+  # BARMAN
   get "/barmen/personalArea", to: "barmen#personalArea"
+
+  # DRINKERS
+  get "/drinkers/personalArea", to: "drinkers#personalArea"
+  get "/drinkers/info", to: "drinkers#getkey" 
+  post "/drinkers/subscribe", to: "drinkers#subscribe"
 
 
 

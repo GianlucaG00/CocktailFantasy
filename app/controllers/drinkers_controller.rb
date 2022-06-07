@@ -1,12 +1,26 @@
-class ApiController < ApplicationController
+class DrinkersController < ApplicationController
+    def personalArea 
+        if(!(drinker_signed_in?) || barman_signed_in?)
+            redirect_to "/"
+        else
+            @bar_subscriptions = Drinker.select(:bar_id).find_by(chat_id: current_drinker.id)
+            @bars = Bar.all
+            puts "CIAOOOO"
+            puts @bars
+        end
+    end 
 
-    def trigger
-        name = params[:cocktail_name] #nome del cocktail
-        id_bar = params[:bar]
-        puts id_bar
-        puts name
+    def subscribe
+        redirect_to bars_path
+    end 
+
+    def verify
+        code = params[:code] #codice inviato dall'utente
+        puts code
         #response = Searcher.search_cocktail(name)
-        response = HTTP.get("https://www.thecocktaildb.com/api/json/v1/1/search.php?", :params => {:s => name})
+
+        api_key = "5305253621:AAE9ff-75kqLnlyCiIpyXH1Dso69wvD2vDE"
+        response = HTTP.get("https://api.telegram.org/bot#{api_key}/getUpdates")
         res = JSON.parse(response.body)
         begin
             data  = res["drinks"][0]
@@ -46,28 +60,12 @@ class ApiController < ApplicationController
             # parametri passati tramite URL: 
             # redirect_to :controller => 'cocktails', :action => 'new', :id_drink => @id_drink, :drink_name => @drink_name, :drink_img => @drink_img, :instructions => @instructions, :found => true
 
-            redirect_to "/bars/#{id_bar}/cocktails/new"
+            redirect_to :controller => 'cocktails', :action => 'new'
 
         rescue => exception 
             session[:found] = false
-            redirect_to "/bars/#{id_bar}/cocktails/new"
-            #redirect_to :controller => 'cocktails', :action => 'new'
+            redirect_to :controller => 'cocktails', :action => 'new'
         end
     end
-
-    def message
-        text = params[:message]
-        api_key = "5305253621:AAE9ff-75kqLnlyCiIpyXH1Dso69wvD2vDE"
-        chat_id = "726564883"
-        HTTParty.post("https://api.telegram.org/bot#{api_key}/sendMessage",
-            headers: {
-                'Content-Type' => 'application/json'
-            },
-            body: {
-                chat_id: chat_id,
-                text: text
-            }.to_json
-        )
-        redirect_to barmen_personalArea_path, :notice => "Il messaggio è stato inviato correttamente"
-    end
-end
+    
+end 

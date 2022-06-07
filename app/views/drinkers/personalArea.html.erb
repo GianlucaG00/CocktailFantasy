@@ -1,0 +1,141 @@
+<div class="row text-center mt-3">
+	<div class="col">
+		<h1> Area Personale Drinker </h1>
+	</div>
+</div>
+    <hr/>
+<div class="container">
+	<div class="row align-items-center my-2">
+		<div class="col-md-6 col-12">
+			<label>Nome utente</label>
+		</div>
+		<div class="col-md-6 col-12">
+			<div><strong><%=current_drinker.name%></strong></div>
+		</div>
+	</div>
+	<div class="row align-items-center my-2">
+		<div class="col-md-6 col-12">
+			<label>Codice utente</label>
+		</div>
+		<div class="col-md-6 col-12">
+			<div><strong><%=current_drinker.id%></strong></div>
+		</div>
+	</div>
+	<div class="row align-items-center my-2">
+		<div class="col-md-6 col-12">
+			<label>Email</label>
+		</div>
+		<div class="col-md-6 col-12">
+			<div><strong><%= current_drinker.email%></strong></div>
+		</div>
+	</div>
+	<div class="row align-items-center my-2">
+		<div class="col-md-6 col-12 ">
+			<label>Password</label>
+		</div>
+		<div class="col-md-6 col-12">
+			<!-- Button trigger modal -->
+			<button id="btn-chg-pass" type="button" class="btn btn-warning btn-custom btn-red" data-bs-toggle="modal" data-bs-target="#popupCambioPass">
+				<span>Cambia password</span>
+			</button>
+		</div>
+	</div>
+	<div class="row align-items-center my-2">
+		<ul class="nav nav-tabs" id="myTab" role="tablist">
+			<li class="nav-item">
+				<div class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">
+					Servizio Bot <button class="btn-info" type="button" data-bs-toggle="modal" data-bs-target="#popupInfo" style="border:none;"><i class="fa-solid fa-info-circle"></i></button>
+				</div>
+			</li>
+		</ul>
+	</div>
+	<p id="notice"><%= notice %></p>
+	<div class="container m-4">
+        <div class="row my-2">
+        	<div class="col-lg-6 col-12"> 
+				<h2>Le tue iscrizioni</h2>
+				<hr/>
+				<%if @bar_subscriptions == nil %>
+					Non ci sono iscrizioni
+				<%else%>
+					<% @bar_subscriptions.each do |bar| %>
+      					<tr>
+        				<td><%= Bar.select(:name).find(id: bar) %></td>
+      					</tr>
+					<%end%>
+    			<% end %>
+				 
+				 <!-- NON FUNZIONANTE
+				<script async 
+  					src="https://telegram.org/js/telegram-widget.js?19" 
+  					data-telegram-login="Rails2000Gian_bot" 
+  					data-size="large"
+  					data-userpic="false"
+  					data-auth-url="https://localhost:3000/drinkers/personalArea"
+  					data-request-access="write">
+				</script>
+				-->
+
+        		<button  type="submit" class="btn btn-lg btn-primary">Invia messaggio <i class="fa-brands fa-telegram"></i></button>
+        	</div>
+
+			<div class="col-lg-6 col-12">
+				<h2>Aggiungi iscrizioni <i></i></h2>
+				<hr/>
+				<div class="row">
+					<%= form_with url: "/drinkers/subscribe", :method => :post do |form|%>
+						<div class="col-10">
+        					<label for="name" class="form-label">Nome del Bar </label>
+        					<%= form.text_field :name, :class => "form-control", :placeholder => "Inserisci il nome del bar", :require => true%>
+      					</div>
+						<div class="row mt-3">
+							<div class="col">
+								<div class="input-group">
+									<span class="input-group-text">
+										<span class="fa-solid fa-shop"></span>
+									</span>
+									<select class="form-select" id="select-bar">
+										<option value="" selected>Seleziona nome del Bar</option>
+										<% @bars.each do |bar|%>
+											<option value="<%=bar.id%>"><%=bar.name%></option>
+										<%end%>
+									</select>
+								</div>
+							</div>
+						</div>
+						<div class="col-2 mt-3">
+							<button type="submit" id="subscribe-btn" class="btn btn-lg btn-success">Iscriviti!</button>
+						</div>
+					<%end%>
+				</div>
+			</div>
+	    </div>
+    </div>
+	<div class="row align-items-center my-2">
+        <h2 class="text-center">I Commenti che hai lasciato <i class="fa-solid fa-comment"></i></h2>
+        <hr/>
+    </div>
+</div>
+
+<div class="modal fade" id="popupInfo" tabindex="-1" aria-labelledby="popupInfoLabel" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="popupInfoLabel">Come funziona il Bot?<i class="fa-solid fa-robot mx-2"></i></h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					<!-- todo: scrivere le info  -->
+					<div>In qualità di utente drinker, puoi ricevere tutti gli aggiornamenti sui bar a cui ti iscrivi.<br>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-success" data-bs-dismiss="modal">
+						<span>Ho capito</span>
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<%= javascript_pack_tag 'drinker/personalArea' %>

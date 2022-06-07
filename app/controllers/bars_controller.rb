@@ -9,6 +9,9 @@ class BarsController < ApplicationController
 
   # GET /bars/1 or /bars/1.json
   def show
+    id_bar = params[:id] # bars/:id
+    @bar = Bar.find(id_bar)
+    @cocktails = Cocktail.where(bar_id: id_bar)
   end
 
   # GET /bars/new
@@ -23,10 +26,13 @@ class BarsController < ApplicationController
   # POST /bars or /bars.json
   def create
     @bar = Bar.new(bar_params)
+    puts "-------------------------------------------------------||-----------------------"
+    puts current_barman.id
+    @bar.barman = current_barman
 
     respond_to do |format|
       if @bar.save
-        format.html { redirect_to bar_url(@bar), notice: "Bar was successfully created." }
+        format.html { redirect_to bar_url(@bar), notice: "Il Bar è stato correttamente inserito" }
         format.json { render :show, status: :created, location: @bar }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -58,7 +64,7 @@ class BarsController < ApplicationController
     end
   end
 
-  private
+    private
     # Use callbacks to share common setup or constraints between actions.
     def set_bar
       @bar = Bar.find(params[:id])

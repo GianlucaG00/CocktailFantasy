@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_06_04_134403) do
+ActiveRecord::Schema.define(version: 2022_06_07_124448) do
 
   create_table "barmen", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -40,6 +40,8 @@ ActiveRecord::Schema.define(version: 2022_06_04_134403) do
     t.string "tel"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "barman_id", null: false
+    t.index ["barman_id"], name: "index_bars_on_barman_id"
   end
 
   create_table "chats", force: :cascade do |t|
@@ -58,6 +60,9 @@ ActiveRecord::Schema.define(version: 2022_06_04_134403) do
     t.integer "price"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "bar_id", null: false
+    t.string "pic"
+    t.index ["bar_id"], name: "index_cocktails_on_bar_id"
   end
 
   create_table "drinkers", force: :cascade do |t|
@@ -73,8 +78,12 @@ ActiveRecord::Schema.define(version: 2022_06_04_134403) do
     t.string "last_sign_in_ip"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "name"
+    t.string "chat_id"
     t.index ["email"], name: "index_drinkers_on_email", unique: true
     t.index ["reset_password_token"], name: "index_drinkers_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "bars", "barmen"
+  add_foreign_key "cocktails", "bars"
 end

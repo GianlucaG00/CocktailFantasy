@@ -9,7 +9,7 @@
 <hr/>
 <div class="row">
   <div class="col text-center">
-    <h2>Vuoi cercare le informazioni? <i class="fa-solid fa-circle-info mt-1" style="font-size:25px"></i></h2>
+    <h2>Vuoi cercare le informazioni? <button class="btn-info" type="button" data-bs-toggle="modal" data-bs-target="#popupInfo" style="border:none;"><i class="fa-solid fa-info-circle"></i></button>
   </div>
 </div>
 <div class="row">
@@ -19,6 +19,7 @@
       <div class="row">
         <div class="col-11">
           <%= form.text_field :cocktail_name, :id => "text-field",:class => "form-control", :placeholder => "Inserisci il nome del cocktail", :require => true%>
+          <input type="hidden" value="<%=@bar.id%>" name="bar"/>
         </div>
         <div class="col-1">
           <button type="submit" class="no-border mt-1" id="search-cocktail">
@@ -78,10 +79,31 @@
 <%end%>
 <div class="row justify-content-between">
   <div class="col-2">
-    <%= button_to "Cancella", new_cocktail_path, :method => :get ,:class => "btn btn-lg btn-danger mt-2"%>
+    <%= button_to "Cancella", new_bar_cocktail_path, :method => :get ,:class => "btn btn-lg btn-danger mt-2"%>
   </div>
   <div class="col-2">
-    <%= button_to "Indietro", cocktails_path, :method => :get , :class => "btn btn-lg btn-danger mt-2"%>
+    <%= button_to "Indietro", bar_cocktails_path, :method => :get , :class => "btn btn-lg btn-danger mt-2"%>
   </div>
+</div>
+
+
+<div class="modal fade" id="popupInfo" tabindex="-1" aria-labelledby="popupInfoLabel" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="popupInfoLabel">Come funziona il servizio?<i class="fa-solid fa-glass mx-2"></i></h5>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body">
+				<!-- todo: scrivere le info  -->
+				<div>Inserisci il nome del cocktail che vuoi cercare. Effettueremo una ricerca per fornirti le informazioni che cerchi.<br> Con il pulsante <i class="fa-solid fa-plus" style="color:green"></i> puoi aggiungere quel cocktail al tuo menù</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-success" data-bs-dismiss="modal">
+					<span>Ho capito</span>
+				</button>
+			</div>
+		</div>
+	</div>
 </div>
 <%= javascript_pack_tag 'cocktails/search_api' %>

@@ -1,14 +1,23 @@
-<h2>Log in</h2>
 
+<div class="container mt-3">
+  <div class="row text-center">
+    <div class="col">
+      <h1>Log in </h1>
+    </div>
+  </div>
+</div>
+<hr/>
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+
+
+  <div class="col-12">
+    <%= f.label :email, :class => "form-label"%>
+    <%= f.email_field :email, :autofocus => true, :autocomplete => "email",  :class => "form-control", :placeholder => "Inserisci la mail", :require => true%>
   </div>
 
-  <div class="field">
-    <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "current-password" %>
+  <div class="col-12">
+    <%= f.label :password, :class => "form-label"%>
+    <%= f.password_field :password, :autofocus => true, :autocomplete => "email",  :class => "form-control", :placeholder => "Inserisci la password", :require => true%>
   </div>
 
   <% if devise_mapping.rememberable? %>
@@ -18,9 +27,17 @@
     </div>
   <% end %>
 
-  <div class="actions">
-    <%= f.submit "Log in" %>
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-4">
+        <%= f.submit "Login", :class => "btn btn-lg btn-success"%>
+      </div>
+      <div class="col-4">
+        <button type="reset" class="btn btn-lg btn-warning">Reset</button>
+      </div>
+    </div>
   </div>
+
 <% end %>
 
 <%= render "drinkers/shared/links" %>

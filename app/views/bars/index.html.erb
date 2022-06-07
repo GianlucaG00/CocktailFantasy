@@ -1,11 +1,14 @@
 <p id="notice"><%= notice %></p>
 <div class="row">
   <div class="col text-center">
-    <h1>Lista dei Bar!</h1>
+    <h1>Lista dei Bar <i class="fa-solid fa-shop"></i></h1>
   </div>
 </div>
 <hr/>
-<div class="row justify-content-end">
+<div class="row justify-content-between">
+  <div class="col-3">
+    <a href="/bars/new" class="btn btn-lg btn-success"><i class="fa-solid fa-plus"></i></a>
+  </div>
   <div class="col-3">
     <div class="input-group rounded">
       <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
@@ -102,7 +105,11 @@
       </div>
     </div>
   <%end%>
-  <%= link_to('Aggiungi Annuncio', new_bar_path, class: "btn btn-dark")%>
+  <div class="row mt-3">
+    <div class="col-12">
+      <%= link_to('Aggiungi Annuncio', new_bar_path, class: "btn btn-lg btn-primary")%>
+    </div>
+  </div>
 </div>
 <br>
 <!-- Per importare del codice javscript inserito in app/javascript/packs/bar-->

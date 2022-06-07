@@ -1,73 +1,51 @@
 require_relative "boot"
 
 require "rails/all"
+require "telegram/bot"
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)  
 
-require 'telegram/bot'
-
 def startBot 
-  token = "5305253621:AAE9ff-75kqLnlyCiIpyXH1Dso69wvD2vDE"
   puts "BOT AVVIVATO"
-  help = "Ciao! Io sono il Bot di COCKTAIL FANTASY.\n\nQuesti sono i comandi che puoi utilizzare:\n
-  /subscribe : permette l'iscrizione alle notifiche di uno specifico bar; 
-  /unsubscribe: permette la disiscrizione dalle notifiche di uno specifico bar"
+  token = "5305253621:AAE9ff-75kqLnlyCiIpyXH1Dso69wvD2vDE"
+  help = "Ciao! Io sono il Bot di COCKTAIL FANTASY.\n\nEcco i parametri che puoi passarmi:\n
+/password id_utente password_utente: registrazione al servizio di notifiche Cocktail Fantasy;"
 
   Telegram::Bot::Client.run(token) do |bot|
+    puts "PARTITOOO"
     bot.listen do |message|
-      # controllo
-      if !Chat.exists?(chat_id: message.chat.id)
-          # un nuovo utente ha scritto al bot
-          bot.api.send_message(chat_id: message.chat.id, text: help)
-      end
-
-      # messaggi dell'utente
       case message.text
       # HELPER
-      when "/help"
-          bot.api.send_message(chat_id: message.chat.id, text: help)
-      # iscrizione al BAR
-      when "/subscribe"
-          bot.api.send_message(chat_id: message.chat.id, text: "Bene ora dimmi il nome del Bar da cui vuoi ricevere le notifiche")
-          bot.listen do |bar|
-              if(bar.text == "BAR") 
-                  bot.api.send_message(chat_id: message.chat.id, text: "Iscrizione effettuata con successo!")
-                  puts "PARAMETRO CORRETTO"
-                  if !Chat.exists?(chat_id: message.chat.id)
-                    Chat.create(chat_id: message.chat.id, bar_id: nil)
-                  end
-                  break
-              else
-                  bot.api.send_message(chat_id: message.chat.id, text: "Non esiste alcun bar con quel nome!")
-                  puts "NON CORRETTO: ELSE"
-                  break
-              end
-          end
-      when "/unsubscribe"
-          bot.api.send_message(chat_id: message.chat.id, text: "Bene ora dimmi il nome del Bar da cui vuoi disiscriverti")
-          bot.listen do |bar|
-              if(bar.text == "BAR") 
-                  bot.api.send_message(chat_id: message.chat.id, text: "Iscrizione effettuata con successo!")
-                  puts "PARAMETRO CORRETTO"
-                  break
-              else
-                  bot.api.send_message(chat_id: message.chat.id, text: "Non esiste alcun bar con quel nome!")
-                  puts "NON CORRETTO: ELSE"
-                  break 
-              end
-          end
+      when /\/password [0-9]* [\w]*/
+        array = message.text.split(" ")
+        id_utente = array[1]
+        password = array[2]
+        if(Drinker.exists?(id: id_utente))
+          if(Drinker.find(id_utente).valid_password?(password))
+            bot.api.send_message(chat_id: message.chat.id, text: "Password corretta!")
+            Drinker.find(id_utente).update(chat_id: message.chat.id)
+          else
+            bot.api.send_message(chat_id: message.chat.id, text: "Password non corretta! Riprovare")
+          end 
+        else 
+          bot.api.send_message(chat_id: message.chat.id, text: "L'id inserito non corrisponde a nessun utente.")
+        end 
+      when '/help'
+        bot.api.send_message(chat_id: message.chat.id, text: help)
       end
       puts message
-  end   
+    end
   end 
-end 
+end   
+
 def function
-  Thread.new {
+  Thread.new{
     startBot()
   }
 end
+
 
 module CocktailFantasy4
   class Application < Rails::Application
