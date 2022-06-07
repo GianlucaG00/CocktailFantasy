@@ -1,4 +1,5 @@
 class BarsController < ApplicationController
+  before_action :authenticate_barman!, only: %i[new edit update destroy ]
   before_action :set_bar, only: %i[ show edit update destroy ] 
   
   # CRUD operations

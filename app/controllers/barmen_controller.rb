@@ -4,4 +4,10 @@ class BarmenController < ApplicationController
             redirect_to "/"
         end
     end 
+
+    def new 
+        if drinker_signed_in?
+            redirect_to bars_path
+        end 
+    end 
 end 
