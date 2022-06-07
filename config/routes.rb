@@ -1,8 +1,11 @@
 Rails.application.routes.draw do
   # model relativo ai BAR
-  resources :bars
+  resources :bars do
+    resources :cocktails, only:[:new, :show, :create]
+  end 
+  
   # relativo al model COCKTAILS
-  resources :cocktails
+ 
 
   # per la richiesta API 
   get "/api", to: "api#trigger"

@@ -2,6 +2,8 @@ class ApiController < ApplicationController
 
     def trigger
         name = params[:cocktail_name] #nome del cocktail
+        id_bar = params[:bar]
+        puts id_bar
         puts name
         #response = Searcher.search_cocktail(name)
         response = HTTP.get("https://www.thecocktaildb.com/api/json/v1/1/search.php?", :params => {:s => name})
@@ -44,11 +46,12 @@ class ApiController < ApplicationController
             # parametri passati tramite URL: 
             # redirect_to :controller => 'cocktails', :action => 'new', :id_drink => @id_drink, :drink_name => @drink_name, :drink_img => @drink_img, :instructions => @instructions, :found => true
 
-            redirect_to :controller => 'cocktails', :action => 'new'
+            redirect_to "/bars/#{id_bar}/cocktails/new"
 
         rescue => exception 
             session[:found] = false
-            redirect_to :controller => 'cocktails', :action => 'new'
+            redirect_to "/bars/#{id_bar}/cocktails/new"
+            #redirect_to :controller => 'cocktails', :action => 'new'
         end
     end
 

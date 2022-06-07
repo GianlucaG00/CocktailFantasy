@@ -1,38 +1,48 @@
-<%= form_with(model: cocktail) do |form| %>
-  <% if cocktail.errors.any? %>
+<%= form_with model: [ @bar, @cocktail ] do |form| %>
+  <% if @cocktail.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(cocktail.errors.count, "error") %> prohibited this cocktail from being saved:</h2>
+      <h2><%= pluralize(@cocktail.errors.count, "error") %> Il cocktail non può essere salvato:</h2>
 
       <ul>
-        <% cocktail.errors.each do |error| %>
+        <% @cocktail.errors.each do |error| %>
           <li><%= error.full_message %></li>
         <% end %>
       </ul>
     </div>
   <% end %>
+  <div class="row g-3 justify-content-center align-items-center m-4">
+    <div class="col-lg-6 col-12">
+      <label for="name" class="form-label">Nome del Bar </label>
+      <%= form.text_field :name, :id => "cocktail-name", :class => "form-control", :placeholder => "Inserisci il nome", :require => true%>
+    </div>
 
-  <div class="field">
-    <%= form.label :name %>
-    <%= form.text_field :name, :id => "cocktail-name" %>
-  </div>
+    <div class="col-lg-6 col-12">
+      <%= form.label :price %>
+      <%= form.number_field :price, :id => "cocktail-price", :class => "form-control", max: 20, min: 1%>
+    </div>
 
-  <div class="field">
-    <%= form.label :preparation %>
-    <%= form.text_area :preparation, :id => "cocktail-preparation" %>
-  </div>
+    <div class="col-12">
+      <label for="prepatation" class="form-label">Preparazione </label>
+      <%= form.text_area :preparation, :id => "cocktail-preparation", :class => "form-control", :placeholder => "Inserisci la preparazione", :require => true%>
+    </div>
 
-  <div class="field">
-    <%= form.label :ingredients %>
-    <%= form.text_field :ingredients, :id => "cocktail-ingredients" %>
-  </div>
+    <div class="field">
+      <%= form.label :ingredients %>
+      <%= form.text_field :ingredients, :id => "cocktail-ingredients" %>
+    </div>
 
-  <div class="field">
-    <%= form.label :price %>
-    <%= form.number_field :price, :id => "cocktail-price"%>
-  </div>
+    <div class="row justify-content-between">
+      <div class="col-lg-6 col-12">
+        <%= button_tag 'Reset', :type => 'reset', :class => "btn btn-lg btn-warning"%> <!-- Button per reset-->
+      </div>
+      <div class="col-lg-6 col-12">
+        <%= form.submit 'Aggiungi Cocktail', :class => 'btn btn-lg btn-success'%>
+      </div>
+    </div>
 
-  <div class="actions">
-    <%= form.submit 'Aggiungi Cocktail'%>
-    <%= button_tag 'Reset', :type => 'reset'%> <!-- Button per reset-->
+    <div class="actions">
+      <%= form.submit 'Aggiungi Cocktail'%>
+      <%= button_tag 'Reset', :type => 'reset'%> <!-- Button per reset-->
+    </div>
   </div>
 <% end %>
