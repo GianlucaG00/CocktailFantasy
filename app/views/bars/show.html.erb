@@ -9,9 +9,20 @@
     </div>
   </section>
 
+  <div class="row text-center">
+    <div class="col-6">
+      <a href="<%=edit_bar_path(@bar)%>"><button type="button" class="btn btn-outline-warning">Modifica <i class="fa-solid fa-pencil"></i></button></a>
+    </div>
+    <div class="col-6">
+      <%= link_to  @bar, :method => :delete, :class => "btn btn-outline-danger" do%>
+        Elimina <i class="fa-solid fa-trash"></i>
+      <%end%>
+    </div>
+  </div>
+
 
   <div class="row">
-    <ul class="list-group list-group-flush">
+    <ul class="list-group list-group-flush text-center">
       <li class="list-group-item">Nome: <strong><%= @bar.name %></strong></li>
       <li class="list-group-item">Descrizione: <strong><%= @bar.description %></strong></li>
       <li class="list-group-item">Indirizzo: <strong><%= @bar.address %></strong></li>
@@ -19,9 +30,6 @@
       <li class="list-group-item">Proprietario: <strong><%= @bar.barman.email %></strong></li>
     </ul>
   </div>
- 
-
-  <%= link_to 'Edit', edit_bar_path(@bar) %> |
 
   <hr/>
   
