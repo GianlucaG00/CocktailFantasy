@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  text: MyString
+  vote: 1
+  drinker: one
+  bar: one
+
+two:
+  text: MyString
+  vote: 1
+  drinker: two
+  bar: two

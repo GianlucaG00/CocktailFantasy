@@ -8,6 +8,9 @@ class Barman < ApplicationRecord
   # ASSOCIATIONS
   has_many :bars
 
+  validates :name, :presence => true
+  validates :surname, :presence => true
+
 
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |barman|

@@ -1,23 +1,59 @@
 <p id="notice"><%= notice %></p>
 
+<div class="row">
+  <div class="col-1 text-center">
+    <h1><a href="<%=bar_path(:id => @cocktail.bar)%>"><i class="fa-solid fa-arrow-left-long"></i></a></h1>
+  </div>
+  <div class="col-11 text-center">
+    <h1><%=@cocktail.name%></h1>
+  </div>
+</div>
+
+<hr/>
+<div class="container my-4 text-center">
+  <%if @cocktail.pic != nil%>
+    <img src="<%=@cocktail.pic%>" class="img-fluid"/>
+  <%else%>
+    <%= image_tag "bar/not-available.jpg", :class => "img-fluid"%>
+  <%end%>
+</div>
+
 <p>
-  <strong>Name:</strong>
+  <h3><strong>Nome:</strong></h3>
   <%= @cocktail.name %>
 </p>
 
 <p>
-  <strong>Preparation:</strong>
+  <h3><strong>Preparazione:</strong></h3>
   <%= @cocktail.preparation %>
 </p>
 
 <p>
-  <strong>Ingredients:</strong>
-  <%= @cocktail.ingredients %>
+  <h3><strong>Ingredienti:</strong></h3>
+  <%if @cocktail.ingredients == nil%>
+    <span>Gli ingredienti per questo cocktail non sono stati specificati</span>
+  <%else%>
+    <ol>
+      <% @cocktail.ingredients.split(",") do |ing| %>
+        <li>  
+          <span><%=ing%></span>
+        </li>
+      <%end%>
+    </ol>
+  <%end%>
 </p>
 
 <p>
-  <strong>Price:</strong>
-  <%= @cocktail.price %>
+  <h3><strong>Prezzo:</strong></h3>
+  <%if @cocktail.price == nil%>
+    <span>?? €</span>
+  <%else%>
+    <span><%= @cocktail.price %>> €</span>
+  <%end%>
 </p>
 
-<%= link_to 'Back', bar_path(:id => @cocktail.bar) %>
+<div class="row">
+  <div class="col">
+    <%= link_to 'Destroy', "/bars/#{@cocktail.bar.id}/cocktails/#{@cocktail.id}", method: :delete, data: { confirm: "Sei sicuro di voler cancellare #{@cocktail.name} ?" } %>
+  </div>
+</div>

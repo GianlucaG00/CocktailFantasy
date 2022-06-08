@@ -8,23 +8,23 @@ require "telegram/bot"
 Bundler.require(*Rails.groups)  
 
 def startBot 
-  puts "BOT AVVIVATO"
   token = "5305253621:AAE9ff-75kqLnlyCiIpyXH1Dso69wvD2vDE"
   help = "Ciao! Io sono il Bot di COCKTAIL FANTASY.\n\nEcco i parametri che puoi passarmi:\n
 /password id_utente password_utente: registrazione al servizio di notifiche Cocktail Fantasy;"
 
   Telegram::Bot::Client.run(token) do |bot|
-    puts "PARTITOOO"
+    puts "BOT AVVIATO"
     bot.listen do |message|
       case message.text
-      # HELPER
+
+      # per il riconoscimento su Telegram
       when /\/password [0-9]* [\w]*/
         array = message.text.split(" ")
         id_utente = array[1]
         password = array[2]
         if(Drinker.exists?(id: id_utente))
           if(Drinker.find(id_utente).valid_password?(password))
-            bot.api.send_message(chat_id: message.chat.id, text: "Password corretta!")
+            bot.api.send_message(chat_id: message.chat.id, text: "Password corretta! Sei stato correttamente riconosciuto!")
             Drinker.find(id_utente).update(chat_id: message.chat.id)
           else
             bot.api.send_message(chat_id: message.chat.id, text: "Password non corretta! Riprovare")
@@ -32,9 +32,12 @@ def startBot
         else 
           bot.api.send_message(chat_id: message.chat.id, text: "L'id inserito non corrisponde a nessun utente.")
         end 
+
+      # helper dei comandi 
       when '/help'
         bot.api.send_message(chat_id: message.chat.id, text: help)
       end
+      
       puts message
     end
   end 

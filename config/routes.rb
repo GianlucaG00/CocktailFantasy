@@ -1,14 +1,18 @@
 Rails.application.routes.draw do
   # model relativo ai BAR
   resources :bars do
-    resources :cocktails, only:[:new, :show, :create]
+    resources :cocktails, only:[:new, :show, :create, :destroy]
+    resources :reviews, only:[:new, :show, :create, :destroy]
   end 
+
+  root to: "bars#index"
   
   # relativo al model COCKTAILS
  
 
-  # per la richiesta API 
+  # per la richiesta API di ricerca Cocktail
   get "/api", to: "api#trigger"
+
   # per le API di telegram 
   post "api/message", to: "api#message"
 

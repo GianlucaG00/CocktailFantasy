@@ -10,9 +10,9 @@
       </ul>
     </div>
   <% end %>
-  <div class="row g-3 justify-content-center align-items-center m-4">
+  <div class="row g-3 justify-content-center align-items-center m-4" id="infromazioni">
     <div class="col-lg-6 col-12">
-      <label for="name" class="form-label">Nome del Bar </label>
+      <label for="name" class="form-label">Nome del Cocktail</label>
       <%= form.text_field :name, :id => "cocktail-name", :class => "form-control", :placeholder => "Inserisci il nome", :require => true%>
     </div>
 
@@ -26,23 +26,25 @@
       <%= form.text_area :preparation, :id => "cocktail-preparation", :class => "form-control", :placeholder => "Inserisci la preparazione", :require => true%>
     </div>
 
-    <div class="field">
-      <%= form.label :ingredients %>
-      <%= form.text_field :ingredients, :id => "cocktail-ingredients" %>
+    <div class="col-12">
+      <label for="pic" class="form-label">URL immagine </label>
+      <%= form.text_field :pic, :id => "drink-pic", :class => "form-control", :placeholder => "Inserisci l'URL dell'immagine", :require => true%>
     </div>
 
-    <div class="row justify-content-between">
-      <div class="col-lg-6 col-12">
+    <div class="col-12">
+      <%= form.label :ingredients %>
+      <%= form.text_field :ingredients, :id => "cocktail-ingredients", :class => "form-control", :placeholder => "Ingrediente1,Ingrediente2 ..."%>
+    </div>
+
+    <%= form.text_field :signature, :id => "drink-signature", :value => "1", :type => "hidden"%>
+
+    <div class="row justify-content-end mt-4">
+      <div class="col-6">
         <%= button_tag 'Reset', :type => 'reset', :class => "btn btn-lg btn-warning"%> <!-- Button per reset-->
       </div>
-      <div class="col-lg-6 col-12">
-        <%= form.submit 'Aggiungi Cocktail', :class => 'btn btn-lg btn-success'%>
+      <div class="col-6">
+        <%= form.submit 'Aggiungi', :class => 'btn btn-lg btn-success'%>
       </div>
-    </div>
-
-    <div class="actions">
-      <%= form.submit 'Aggiungi Cocktail'%>
-      <%= button_tag 'Reset', :type => 'reset'%> <!-- Button per reset-->
     </div>
   </div>
 <% end %>

@@ -13,12 +13,13 @@ body, p, ol, ul, td {
 pre {
   background-color: #eee;
   padding: 10px;
-  font-size: 11px; }
-
-
-a:hover {
-  color: #fff;
+  font-size: 11px; 
 }
+
+a {
+  color: #000; 
+}
+
 
 th {
   padding-bottom: 5px; 
@@ -34,8 +35,8 @@ div.actions {
 }
 
 #notice {
-  font-weight: bold;
   color: green; 
+  font-weight: bold;
 }
 
 .field_with_errors {

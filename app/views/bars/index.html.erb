@@ -1,3 +1,4 @@
+<!--
 <p id="notice"><%= notice %></p>
 <div class="row">
   <div class="col text-center">
@@ -25,44 +26,7 @@
 <%if drinker_signed_in?%>
   Bentornato DRINKER <%= current_drinker.email%> [ <%= link_to 'Logout', destroy_drinker_session_path, :method => :delete%> ] 
 <%end%>
-<!-- 
-<div class="row">
-  <div class="col">
-    <button type="button" class="btn btn-success">SUCCESS</button>
-  </div>
-</div>
 
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Description</th>
-      <th>Address</th>
-      <th>Tel</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @bars.each do |bar| %>
-      <tr>
-        <td><%= bar.name %></td>
-        <td><%= bar.description %></td>
-        <td><%= bar.address %></td>
-        <td><%= bar.tel %></td>
-        <td><%= link_to 'Show', bar %></td>
-        <td><%= link_to 'Edit', edit_bar_path(bar) %></td>
-        <td><%= link_to 'Destroy', bar, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Bar', new_bar_path %>
-
--->
 <div class="container mx-auto text-center m-3">
   <%@bars.each do |bar|%>
     <div class="row mt-2">
@@ -112,5 +76,93 @@
   </div>
 </div>
 <br>
+-->
 <!-- Per importare del codice javscript inserito in app/javascript/packs/bar-->
-<%= javascript_pack_tag 'bar/bar' %>
+<section id="header" class="jumbotron text-center">
+  <h1 class="display-3">Lista dei Bar</h1>
+  <p class="lead"><i>Iscriviti al nostro servizio per avere la visibilità che cerchi!</i></p>
+  <div class="row justify-content-end mt-5"> 
+    <div class="col-4">
+      <a href="/bars/new" class="btn btn-lg btn-success"><i class="fa-solid fa-plus"></i></a>
+    </div>
+    <div class="col-4">
+      <%= form_with  do |form| %>
+          <%= form.text_field :search, :class => "form-control", :placeholder => "Cerca", :require => true%>
+      <%end%>
+    </div>
+  </div>
+</section>
+<section id="gallery">
+  <div class="container">
+    <div class="row">
+      <%@bars.each do |bar|%>
+        <div class="col-lg-4 mb-4">
+          <div class="card">
+            <img src="https://images.unsplash.com/photo-1477862096227-3a1bb3b08330?ixlib=rb-1.2.1&auto=format&fit=crop&w=700&q=60" alt="" class="card-img-top">
+            <div class="card-body">
+              <h5 class="card-title text-center"><%=bar.name%> <i class="fa-solid fa-shop"></i></h5>
+              <p class="card-text"><i class="fa-solid fa-align-justify"></i> <%=bar.description%></p>
+              <p class="card-text"><i class="fa-solid fa-location-dot"></i> <%=bar.address%></p>
+              <hr/>
+              <div class="row">
+                <div class="col-8">
+                  <%= link_to "Visualizza", bar, :class => "btn btn-outline-success btn-sm mx-1"%>
+                  <a class="btn btn-outline-danger btn-sm"><i class="far fa-trash"></i></a>
+                </div>
+                <div class="col-4">
+                  <i>Media:</i>
+                  <%if bar.avg == nil%>
+                    <strong>NP</strong>
+                  <%else%>
+                    <strong><%=bar.avg%></strong>
+                  <%end%> 
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      <%end%>
+    </div>
+  </div>
+</section>
+
+<hr/>
+
+<% if drinker_signed_in? || barman_signed_in?%>
+  <section id="header" class="jumbotron text-center">
+    <h1 class="display-3">Bentornato!</h1>
+    <p class="lead">Accedi alla tua area personale per usufruire dei tuoi servizi!</p>
+    <div class="row justify-content-between mt-4">
+      <div class="col-6">
+        <%if drinker_signed_in?%>
+          <a href="<%=drinkers_personalArea_path%>" class="btn btn-lg btn-primary">Area personale <i class="fa-solid fa-gear"></i></a>
+      </div>
+          <div class="col-6">
+            <%=link_to "Logout", destroy_drinker_session_path, method: :delete, :class => "btn btn-lg btn-danger"%>
+          </div>
+        <%else%>
+          <a href="<%=barmen_personalArea_path%>" class="btn btn-lg btn-primary">Area personale <i class="fa-solid fa-gear"></i></a>
+      </div>
+          <div class="col-6">
+            <%=link_to "Logout", destroy_drinker_session_path, method: :delete, :class => "btn btn-lg btn-danger"%>
+          </div>
+        <%end%>
+      </div>
+    </div>
+  </section>
+<%else%>
+  <section id="header" class="jumbotron text-center">
+    <h1 class="display-3">Sei un drinker o un Barman?</h1>
+    <p class="lead">Effettua il login per accedere ai nostri servizi!</p>
+    <div class="row justify-content-between">
+      <div class="col-4">
+        <a href="<%=new_drinker_session_path%>" class="btn btn-lg btn-success">Drinker <i class="fa-solid fa-user"></i></a>
+      </div>
+      <div class="col-4">
+        <a href="<%=new_barman_session_path%>" class="btn btn-lg btn-success">Barman <i class="fa-solid fa-user-tie"></i></a>
+      </div>
+    </div>
+  </section>
+<%end%>
+
+<%= javascript_pack_tag 'bar/bar'%>

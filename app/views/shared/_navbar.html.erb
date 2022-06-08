@@ -15,25 +15,24 @@
           <div class="dropdown-menu dropdown-menu-dark dropdown-menu-end">
             <div class="text-center"><%= current_barman.email%></div>
             <hr/>
-            <a href="#" class="dropdown-item">Logout <i class="fa-solid fa-door-open" style="font-size:20px"></i></a>
-            <a href="#" class="dropdown-item">Area Personale <i class="fa-solid fa-pencil" style="font-size:20px"></i></a>
+            <%= link_to "Logout", destroy_barman_session_path, :method => :delete, :class => "dropdown-item"%>
+            <a href="<%=barmen_personalArea_path%>" class="dropdown-item">Area Personale <i class="fa-solid fa-pencil" style="font-size:20px"></i></a>
           </div>
         <%elsif(drinker_signed_in?)%>
-          <!-- Utente BARMAN AUTENTICATO--> 
+          <!-- Utente DRINKER AUTENTICATO--> 
           <i class="fa-solid fa-user user-logo" style="font-size:25px; color:red" alt="Avatar" data-bs-toggle="dropdown"></i>
           <div class="dropdown-menu dropdown-menu-dark dropdown-menu-end">
             <div class="text-center"><%= current_drinker.email%></div>
             <hr>
-            <a href="#" class="dropdown-item">Logout <i class="fa-solid fa-door-open" style="font-size:20px"></i></a>
-            <a href="#" class="dropdown-item">Area Personale <i class="fa-solid fa-pencil" style="font-size:20px"></i></a>
+            <%= link_to "Logout", destroy_drinker_session_path, :method => :delete, :class => "dropdown-item"%>
+            <a href="<%=drinkers_personalArea_path%>" class="dropdown-item">Area Personale <i class="fa-solid fa-pencil" style="font-size:20px"></i></a>
           </div>
         <%else%>
           <!-- Utente NON autenticato-->
           <i class="fa-solid fa-user user-logo" style="font-size:25px" alt="Avatar" data-bs-toggle="dropdown"></i>
           <div class="dropdown-menu dropdown-menu-dark dropdown-menu-end">
-            <a href="#" class="dropdown-item">Login <i class="fa-solid fa-door-open" style="font-size:20px"></i></a>
-            <hr>
-            <a href="#" class="dropdown-item">Registrazione <i class="fa-solid fa-pencil" style="font-size:20px"></i></a>
+            <a href="<%=new_barman_session_path%>" class="dropdown-item">Login Barmen<i class="fa-solid fa-door-open" style="font-size:20px"></i></a>
+            <a href="<%=new_drinker_session_path%>" class="dropdown-item">Login Drinker <i class="fa-solid fa-pencil" style="font-size:20px"></i></a>
           </div>
         <%end%>
       </div>
@@ -41,7 +40,7 @@
     <div class="collapse navbar-collapse justify-content-center" id="navbarContent">
       <div class="navbar-nav">
         <a class="nav-link" href="/#">Home</a>
-        <a class="nav-link" href="/garage.php">Bar</a>
+        <a class="nav-link" href="<%bars_path%>">Bar</a>
         <a class="nav-link" href="/garage.php">Area Personale</a>
       </div>
     </div>

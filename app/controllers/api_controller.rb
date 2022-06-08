@@ -42,7 +42,22 @@ class ApiController < ApplicationController
             session[:alcholic] = @alcholic
             session[:glass] = @glass
             session[:instructionsIT] = @instructionsIT
-
+            
+            session[:ing1] = @ing1
+            session[:ing2] = @ing2
+            session[:ing3] = @ing3
+            session[:ing4] = @ing4
+            session[:ing5] = @ing5
+            session[:ing6] = @ing6
+            session[:ing7] = @ing7
+            session[:ing8] = @ing8
+            session[:ing9] = @ing9
+            session[:ing10] = @ing10
+            session[:ing11] = @ing11
+            session[:ing12] = @ing12
+            session[:ing13] = @ing13
+            session[:ing14] = @ing14
+            session[:ing15] = @ing15
             # parametri passati tramite URL: 
             # redirect_to :controller => 'cocktails', :action => 'new', :id_drink => @id_drink, :drink_name => @drink_name, :drink_img => @drink_img, :instructions => @instructions, :found => true
 
@@ -56,18 +71,28 @@ class ApiController < ApplicationController
     end
 
     def message
-        text = params[:message]
+        text = params[:messaggio]
+        bar_id = params[:bar] #bar da cui proviene la comunicazione
+        @bar = Bar.find(bar_id)
+        text = 'Comunicazione da: ' + @bar.name + "\n" + text
+        puts "------------------------------"
+        puts text
+        puts bar_id
+        puts "------------------------------"
         api_key = "5305253621:AAE9ff-75kqLnlyCiIpyXH1Dso69wvD2vDE"
-        chat_id = "726564883"
-        HTTParty.post("https://api.telegram.org/bot#{api_key}/sendMessage",
-            headers: {
-                'Content-Type' => 'application/json'
-            },
-            body: {
-                chat_id: chat_id,
-                text: text
-            }.to_json
-        )
+        barman_id = current_barman
+        Chat.select(:drinker_id).where(bar_id: bar_id).each do |chat|
+            chat_id = Drinker.select(:chat_id).find(chat.drinker_id).chat_id
+            HTTParty.post("https://api.telegram.org/bot#{api_key}/sendMessage",
+                headers: {
+                    'Content-Type' => 'application/json'
+                },
+                body: {
+                    chat_id: chat_id,
+                    text: text
+                }.to_json
+            )
+        end 
         redirect_to barmen_personalArea_path, :notice => "Il messaggio è stato inviato correttamente"
     end
 end

@@ -49,23 +49,24 @@
 			</li>
 		</ul>
 	</div>
-	<p id="notice"><%= notice %></p>
 	<div class="container m-4">
         <div class="row my-2">
         	<div class="col-lg-6 col-12"> 
 				<h2>Le tue iscrizioni</h2>
 				<hr/>
-				<%if @bar_subscriptions == nil %>
-					Non ci sono iscrizioni
+				<%if @subscriptions.size == 0 %>
+					<p>Non sei ancora iscritto ad alcun Bar</p>
 				<%else%>
-					<% @bar_subscriptions.each do |bar| %>
-      					<tr>
-        				<td><%= Bar.select(:name).find(id: bar) %></td>
-      					</tr>
-					<%end%>
+					<ul>
+						<% @subscriptions.each do |sub| %>
+							<li>
+      							<%= sub.bar.name%>
+							</li>
+						<%end%>
+					</ul>
     			<% end %>
 				 
-				 <!-- NON FUNZIONANTE
+				 <!-- NON FUNZIONANTE LOGIN CON TELEGRAM 
 				<script async 
   					src="https://telegram.org/js/telegram-widget.js?19" 
   					data-telegram-login="Rails2000Gian_bot" 
@@ -75,45 +76,82 @@
   					data-request-access="write">
 				</script>
 				-->
-
         		<button  type="submit" class="btn btn-lg btn-primary">Invia messaggio <i class="fa-brands fa-telegram"></i></button>
         	</div>
 
-			<div class="col-lg-6 col-12">
-				<h2>Aggiungi iscrizioni <i></i></h2>
-				<hr/>
-				<div class="row">
-					<%= form_with url: "/drinkers/subscribe", :method => :post do |form|%>
-						<div class="col-10">
-        					<label for="name" class="form-label">Nome del Bar </label>
-        					<%= form.text_field :name, :class => "form-control", :placeholder => "Inserisci il nome del bar", :require => true%>
-      					</div>
-						<div class="row mt-3">
-							<div class="col">
+			<%if current_drinker.chat_id != nil%>
+				<div class="col-lg-6 col-12">
+					<h2>Aggiungi iscrizioni <i></i></h2>
+					<hr/>
+					<div class="">
+						<p>Sei stato correttamente riconosciuto su Telegram! Ora puoi usufruire del servizio Bot</p>
+						<%= form_with url: "/drinkers/subscribe", :method => :post do |form|%>
+							<div class="col-12">
+        						<label for="name" class="form-label">Nome del Bar </label>
+        						<%= form.text_field :name, :class => "form-control", :placeholder => "Inserisci il nome del bar", :require => true%>
+      						</div>
+							
+							<div class="col-12 mt-3">
 								<div class="input-group">
 									<span class="input-group-text">
 										<span class="fa-solid fa-shop"></span>
 									</span>
-									<select class="form-select" id="select-bar">
-										<option value="" selected>Seleziona nome del Bar</option>
+									<select name="bar" class="form-select" id="select-bar">
 										<% @bars.each do |bar|%>
 											<option value="<%=bar.id%>"><%=bar.name%></option>
 										<%end%>
 									</select>
 								</div>
 							</div>
-						</div>
-						<div class="col-2 mt-3">
-							<button type="submit" id="subscribe-btn" class="btn btn-lg btn-success">Iscriviti!</button>
-						</div>
-					<%end%>
+							
+							<div class=" container mt-3 justify content-between">
+								<div class="col-2">
+									<button type="submit" id="subscribe-btn" class="btn btn-lg btn-success">Iscriviti!</button>
+								</div>
+								<div class="col-10 mt-3">
+									<p class="message-w"><%= flash[:message] %></p>
+									<p id="notice"><%=notice%></p>
+								</div>
+							</div>
+						<%end%>
+					</div>
 				</div>
-			</div>
+			<%else%>
+				<!-- Drinker non ancora riconosciuto su Telegram-->
+				<div class="col-lg-6 col-12">
+					<h2>Aggiungi iscrizioni</h2>
+					<hr/>
+					<h5>Ci risulta che ancora non hai fatto il riconoscimento su telegram! Ecco qui le istruzioni:</h5>
+					<div class="utente">
+						<ol>
+							<li>Scrivi al bot su telegram </li>
+							<li>Usa il comando "<strong>/password id_utente password_utente"</strong></li>
+							<li>Se le credenziali sono corrette verrai correttamente registrato!</li>
+						</ol>
+					</div>
+				</div>
+			<%end%>
 	    </div>
     </div>
 	<div class="row align-items-center my-2">
-        <h2 class="text-center">I Commenti che hai lasciato <i class="fa-solid fa-comment"></i></h2>
-        <hr/>
+        <h2 class="text-center">Le recensioni che hai lasciato <i class="fa-solid fa-comment"></i></h2>
+			<hr/>
+			<%if @reviews.size == 0%>
+				<p>Non hai ancora lasciato alcun commento</p>
+			<%else%>
+				<%@reviews.each do |review|%>
+					<div class="card border-light mt-4" style="max-width: 100%;">
+  						<div class="card-header">
+						  Recensione lasciata a: <strong><%=review.bar.name%></strong> 
+						  <a href=""><i class="fa-solid fa-eye" style="color:green"></i></a>
+						  <a href=""><i class="fa-solid fa-trash" style="color:red"></i></a>
+						</div>
+  						<div class="card-body">
+    						<h6><i class="fa-solid fa-user"></i> Hai detto :<h6><i class="card-text"><%=review.text%></i>
+  						</div>
+					</div>
+				<%end%>
+			<%end%>
     </div>
 </div>
 
