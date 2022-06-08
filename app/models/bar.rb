@@ -5,6 +5,8 @@ class Bar < ApplicationRecord
 	has_many :reviews
 
      # model validation per i BAR 
-	validates :name, :presence => true    # uniqueness: { case_sensitive: false }
+	validates :name, :presence => true, uniqueness: { case_sensitive: false }
 	validates :description, :presence => true
+	validates :tel, :presence => true
+	validates :address, :presence => true
 end

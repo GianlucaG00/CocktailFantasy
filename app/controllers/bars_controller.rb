@@ -30,7 +30,6 @@ class BarsController < ApplicationController
   # POST /bars or /bars.json
   def create
     @bar = Bar.new(bar_params)
-    authorize! :create, @bar, :message => "Attenzione! Non sei autorizzato a creare annunci di Bar!"
     @bar.barman = current_barman
 
     respond_to do |format|
