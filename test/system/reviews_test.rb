@@ -14,7 +14,8 @@ class ReviewsTest < ApplicationSystemTestCase
     visit reviews_url
     click_on "New Review"
 
-    fill_in "Drinker", with: @review.Drinker_id
+    fill_in "Bar", with: @review.bar_id
+    fill_in "Drinker", with: @review.drinker_id
     fill_in "Text", with: @review.text
     fill_in "Vote", with: @review.vote
     click_on "Create Review"
@@ -27,7 +28,8 @@ class ReviewsTest < ApplicationSystemTestCase
     visit reviews_url
     click_on "Edit", match: :first
 
-    fill_in "Drinker", with: @review.Drinker_id
+    fill_in "Bar", with: @review.bar_id
+    fill_in "Drinker", with: @review.drinker_id
     fill_in "Text", with: @review.text
     fill_in "Vote", with: @review.vote
     click_on "Update Review"

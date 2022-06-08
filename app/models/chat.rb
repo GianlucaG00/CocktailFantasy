@@ -1,6 +1,4 @@
 class Chat < ApplicationRecord
-    # ASSOCIATIONS
-    has_many :bars
-    has_many :drinkers
-
+  belongs_to :bar
+  belongs_to :drinker
 end

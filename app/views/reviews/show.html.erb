@@ -12,7 +12,12 @@
 
 <p>
   <strong>Drinker:</strong>
-  <%= @review.Drinker_id %>
+  <%= @review.drinker_id %>
+</p>
+
+<p>
+  <strong>Bar:</strong>
+  <%= @review.bar_id %>
 </p>
 
 <%= link_to 'Edit', edit_review_path(@review) %> |

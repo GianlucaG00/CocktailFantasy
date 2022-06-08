@@ -1,4 +1,4 @@
 class Review < ApplicationRecord
-  belongs_to :Drinker
-  belongs_to :Bar
+  belongs_to :drinker
+  belongs_to :bar
 end

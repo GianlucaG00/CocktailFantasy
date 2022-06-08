@@ -23,6 +23,7 @@ class CocktailsController < ApplicationController
     id_bar = params[:bar_id]
     @bar = Bar.find(id_bar)
     @cocktail = @bar.cocktails.build
+    #authorize! :create, @cocktail, :message => "Attenzione! Non sei autorizzato ad aggiungere nuovi Cocktail!"
   end
 
   # GET /cocktails/1/edit
@@ -31,10 +32,12 @@ class CocktailsController < ApplicationController
 
   # POST /cocktails or /cocktails.json
   def create
+    #authorize! :create, @movie, :message => "Attenzione! Non sei autorizzato ad aggiungere nuovi Cocktail nel menù!"
     id_bar = params[:bar_id]
     @bar = Bar.find(id_bar)
     @cocktail = Cocktail.new(cocktail_params)
     @cocktail.bar = @bar
+    authorize! :create, @cocktail, :message => "Attenzione! Non sei autorizzato ad aggiungere nuovi Cocktail nel menù!"
     if(@cocktail.save)
       redirect_to bar_path(@bar), notice: "Il cocktail #{@cocktail.name} per il menù del Bar '#{@bar.name}' è stato aggiunto con successo"
     else
@@ -75,6 +78,7 @@ class CocktailsController < ApplicationController
 
   # DELETE /cocktails/1 or /cocktails/1.json
   def destroy
+    # authorize! :destroy, @cocktail, :message => "Attenzione! Non sei autorizzato ad eliminare Cocktail dal menù!"
     @bar = @cocktail.bar
     @cocktail.destroy
 

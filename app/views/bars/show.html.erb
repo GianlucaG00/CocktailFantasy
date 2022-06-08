@@ -42,7 +42,7 @@
 </div>
   
 <div class="container">
-  <%if @cocktails == nil%>
+  <%if @cocktails.size == 0%>
     <h4 class="text-center mt-4">Non ci sono ancora cocktail nel menù <i class="fa-solid fa-face-frown"></i></h4>
     <div class="text-center mt-4"><button class="btn btn-lg btn-success">Aggiungi <i class="fa-solid fa-martini-glass"></i></button></div>
   <%else%>
@@ -76,3 +76,39 @@
     </table>
   <%end%>
 </div>
+
+<hr/>
+
+
+<div class="row text-center">
+  <div class="col-11">
+    <h2>Recensioni su questo Bar <i class="fa-solid fa-comment"></i></h2>
+  </div>
+  <div class="col-1">
+    <a href="<%=new_bar_review_url(:bar_id=> @bar.id)%>"><h2><i class="fa-solid fa-plus-circle" style="color: green"></i></h2></a>
+  </div>
+</div>
+<%if @reviews.size == 0%>
+  <h4 class="text-center mt-4">Non ci sono ancora recensioni per questo bar <i class="fa-solid fa-face-frown"></i></h4>
+  <div class="text-center mt-4"><button class="btn btn-lg btn-success">Aggiungi <i class="fa-solid fa-comment"></i></button></div>
+<%else%>
+  <%@reviews.each do |review|%>
+    <div class="card m-auto mt-4" style="max-width: 540px;">
+      <div class="row g-0">
+        <div class="col-md-6">
+          <%= image_tag "bar/bottles.jpg", :class => "img-fluid"%>
+        </div>
+        <div class="col-md-6">
+          <div class="card-body">
+            <h5 class="card-title"><%= review.drinker.email %></h5>
+            <p class="card-text"><%= review.text%></p>
+            <p class="card-text"><small class="text-muted">Scritto il <%= review.created_at%></small></p>
+            <a class="btn btn-outline-success"><i class="fa-solid fa-eye"></i></a>
+            <a class="btn btn-outline-danger"><i class="fa-solid fa-trash"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  <%end%>
+<%end%>
+

@@ -3,9 +3,11 @@
 one:
   text: MyString
   vote: 1
-  Drinker: one
+  drinker: one
+  bar: one
 
 two:
   text: MyString
   vote: 1
-  Drinker: two
+  drinker: two
+  bar: two

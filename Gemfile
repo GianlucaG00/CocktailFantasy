@@ -74,4 +74,7 @@ gem 'faraday', '~> 1.0'
 # per SSL 
 gem 'thin'
 
+# per Canard
+gem 'canard', '~> 0.6.2.pre'
+
 

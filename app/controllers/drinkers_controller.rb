@@ -3,16 +3,30 @@ class DrinkersController < ApplicationController
         if(!(drinker_signed_in?) || barman_signed_in?)
             redirect_to "/"
         else
-            @bar_subscriptions = Drinker.select(:bar_id).find_by(chat_id: current_drinker.id)
             @bars = Bar.all
-            puts "CIAOOOO"
-            puts @bars
+            drinker_id = current_drinker.id
+            @subscriptions = Chat.where(drinker_id: drinker_id )
         end
     end 
 
     def subscribe
-        redirect_to bars_path
+        bar_id = params[:bar]
+        drinker_id = current_drinker.id
+        @drinker = Drinker.find(drinker_id)
+        @bar = Bar.find(bar_id) 
+        # nel caso in cui il Drinker sia già registrato per quel Bar
+        if(Chat.find_by(drinker_id: drinker_id, bar_id: bar_id))
+            flash[:message] = "Risulti già iscritto per #{@bar.name}"
+        else
+            @chat = Chat.new()
+            @chat.bar = @bar
+            @chat.drinker = @drinker
+            @chat.save
+            flash[:notice] = "Iscrizione al #{@bar.name} avvenuta con successo"
+        end
+        redirect_to drinkers_personalArea_path
     end 
+
 
     def verify
         code = params[:code] #codice inviato dall'utente

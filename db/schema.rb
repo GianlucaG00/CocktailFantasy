@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_06_07_230007) do
+ActiveRecord::Schema.define(version: 2022_06_08_124449) do
 
   create_table "barmen", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -45,12 +45,13 @@ ActiveRecord::Schema.define(version: 2022_06_07_230007) do
   end
 
   create_table "chats", force: :cascade do |t|
-    t.string "chat_id"
     t.string "option"
-    t.integer "bar_id"
+    t.integer "bar_id", null: false
+    t.integer "drinker_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["bar_id"], name: "index_chats_on_bar_id"
+    t.index ["drinker_id"], name: "index_chats_on_drinker_id"
   end
 
   create_table "cocktails", force: :cascade do |t|
@@ -81,6 +82,7 @@ ActiveRecord::Schema.define(version: 2022_06_07_230007) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "name"
     t.string "chat_id"
+    t.integer "roles_mask"
     t.index ["email"], name: "index_drinkers_on_email", unique: true
     t.index ["reset_password_token"], name: "index_drinkers_on_reset_password_token", unique: true
   end
@@ -88,16 +90,18 @@ ActiveRecord::Schema.define(version: 2022_06_07_230007) do
   create_table "reviews", force: :cascade do |t|
     t.string "text"
     t.integer "vote"
-    t.integer "Drinker_id", null: false
+    t.integer "drinker_id", null: false
+    t.integer "bar_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "bar_id", null: false
-    t.index ["Drinker_id"], name: "index_reviews_on_Drinker_id"
     t.index ["bar_id"], name: "index_reviews_on_bar_id"
+    t.index ["drinker_id"], name: "index_reviews_on_drinker_id"
   end
 
   add_foreign_key "bars", "barmen"
+  add_foreign_key "chats", "bars"
+  add_foreign_key "chats", "drinkers"
   add_foreign_key "cocktails", "bars"
-  add_foreign_key "reviews", "Drinkers"
   add_foreign_key "reviews", "bars"
+  add_foreign_key "reviews", "drinkers"
 end

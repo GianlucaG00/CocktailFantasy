@@ -1,5 +1,4 @@
 class ReviewsController < ApplicationController
-  before_action :authenticate_drinker!
   before_action :set_review, only: %i[ show edit update destroy ]
 
   # GET /reviews or /reviews.json
@@ -13,9 +12,10 @@ class ReviewsController < ApplicationController
 
   # GET /reviews/new
   def new
-    @review = Review.new 
-    puts params[:bar_id]
-    @bar = Bar.where(id: params[:bar_id])
+    @review = Review.new
+    id_bar = params[:bar_id]
+    @bar = Bar.find(id_bar)
+    @drinker = current_drinker
   end
 
   # GET /reviews/1/edit
@@ -25,18 +25,14 @@ class ReviewsController < ApplicationController
   # POST /reviews or /reviews.json
   def create
     @review = Review.new(review_params)
-    @review.Drinker_id = current_drinker.id
-    puts(params[:bar_id])
-    @review.bar_id = Bar.where(id: params[:bar_id])
-
-    respond_to do |format|
-      if @review.save
-        format.html { redirect_to review_url(@review), notice: "La recensione è stata creata correttamente" }
-        format.json { render :show, status: :created, location: @review }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @review.errors, status: :unprocessable_entity }
-      end
+    bar_id = params[:bar_id]
+    @bar = Bar.find(bar_id)
+    @review.drinker = current_drinker
+    @review.bar = @bar
+    if @review.save
+      redirect_to bar_path(@bar), notice: "La recensione per il Bar '#{@bar.name}' è stato aggiunta con successo"
+    else
+      render :new, status: :unprocessable_entity
     end
   end
 
@@ -44,7 +40,7 @@ class ReviewsController < ApplicationController
   def update
     respond_to do |format|
       if @review.update(review_params)
-        format.html { redirect_to review_url(@review), notice: "La recensione è stata aggiornata correttamente" }
+        format.html { redirect_to review_url(@review), notice: "Review was successfully updated." }
         format.json { render :show, status: :ok, location: @review }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -63,7 +59,7 @@ class ReviewsController < ApplicationController
     end
   end
 
-  private
+    private
     # Use callbacks to share common setup or constraints between actions.
     def set_review
       @review = Review.find(params[:id])
@@ -71,6 +67,6 @@ class ReviewsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def review_params
-      params.require(:review).permit(:text, :vote, :Drinker_id)
+      params.require(:review).permit(:text, :vote, :drinker_id, :bar_id)
     end
 end
