@@ -30,12 +30,26 @@
 
 <p>
   <strong>Ingredienti:</strong>
-  <%= @cocktail.ingredients %>
+  <%if @cocktail.ingredients == nil%>
+    <span>Gli ingredienti per questo cocktail non sono stati specificati</span>
+  <%else%>
+    <ol>
+      <% @cocktail.ingredients.split(",") do |ing| %>
+        <li>  
+          <span><%=ing%></span>
+        </li>
+      <%end%>
+    </ol>
+  <%end%>
 </p>
 
 <p>
   <strong>Prezzo:</strong>
-  <%= @cocktail.price %>
+  <%if @cocktail.price == nil%>
+    <span>?? €</span>
+  <%else%>
+    <span><%= @cocktail.price %>> €</span>
+  <%end%>
 </p>
 
 <div class="row">

@@ -42,32 +42,18 @@ class CocktailsController < ApplicationController
     else
       render :new, status: :unprocessable_entity
     end
-
-    #@cocktail = Cocktail.new(cocktail_params)
-    #respond_to do |format|
-    #  if @cocktail.save
-    #    format.html { redirect_to bar_cocktail_url(@cocktail), notice: "Il cocktail è stato aggiunto con successo" }
-    #    format.json { render :show, status: :created, location: @cocktail }
-    #    text = "Dai un'occhiata! E' stato aggiunto un cocktail nel menù: #{@cocktail.name}"
-    #    Chat.select(:chat_id).find_by(bar_id: @cocktail.bar).each do |user|
-    #      TelegramMailer.send_notification(text).deliver_now
-    #    end 
-    #  else
-    #    format.html { render :new, status: :unprocessable_entity }
-    #    format.json { render json: @cocktail.errors, status: :unprocessable_entity }
-    #  end
   end
 
 
   # DELETE /cocktails/1 or /cocktails/1.json
   def destroy
-    # authorize! :destroy, @cocktail, :message => "Attenzione! Non sei autorizzato ad eliminare Cocktail dal menù!"
     @bar = @cocktail.bar
+    @name = @cocktail.name
     @cocktail.destroy
 
     id_bar = @bar.id
     respond_to do |format|
-      format.html { redirect_to @bar, notice: "Il cocktail è stato rimosso con successo" }
+      format.html { redirect_to @bar, notice: "Il cocktail #{@name}è stato rimosso con successo" }
       format.json { head :no_content }
       text = "Ci dispiace! E' stato rimosso il cocktail #{@cocktail.name} dal menù di #{@cocktail.bar.name}!"
       Chat.select(:drinker_id).where(bar_id: id_bar).each do |user|
@@ -84,6 +70,6 @@ class CocktailsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def cocktail_params
-      params.require(:cocktail).permit(:name, :preparation, :ingredients, :price, :pic, :signature)
+      params.require(:cocktail).permit(:name, :preparation, :ingredients, :price, :pic, :signature, :ingredients)
     end
 end

@@ -58,15 +58,54 @@
   </div>
   <div class="row my-4">
     <div class="col">
+      <h2>Preparazione</h2>
       <div id="drink-preparation-api"><%= session[:instructionsIT]%></div>
     </div>
   </div>
+  <div class="row my-4">
+    <div class="col">
+      <h2>Ingredienti</h2>
+      <ol>
+        <li><%=session[:ing1]%></li>
+        <li><%=session[:ing2]%></li>
+        <li><%=session[:ing3]%></li>
+        <li><%=session[:ing4]%></li>
+        <li><%=session[:ing5]%></li>
+        <li><%=session[:ing6]%></li>
+        <li><%=session[:ing7]%></li>
+        <li><%=session[:ing8]%></li>
+        <li><%=session[:ing9]%></li>
+        <li><%=session[:ing10]%></li>
+        <li><%=session[:ing11]%></li>
+        <li><%=session[:ing12]%></li>
+        <li><%=session[:ing13]%></li>
+        <li><%=session[:ing14]%></li>
+        <li><%=session[:ing15]%></li>
+      </ol>
+    </div>
+  </div>
+
   <!-- Vengono resettate le variabili -->
   <%session[:found] = nil%>
   <%session[:drink_name] = nil%>
   <%session[:id_drink] = nil%>
   <%session[:drink_img] = nil%>
   <%session[:instructionsIT] = nil%>
+  <%session[:ing1] = nil%>
+  <%session[:ing2] = nil%>
+  <%session[:ing3] = nil%>
+  <%session[:ing4] = nil%>
+  <%session[:ing5] = nil%>
+  <%session[:ing6] = nil%>
+  <%session[:ing7] = nil%>
+  <%session[:ing8] = nil%>
+  <%session[:ing9] = nil%>
+  <%session[:ing10] = nil%>
+  <%session[:ing11] = nil%>
+  <%session[:ing12] = nil%>
+  <%session[:ing13] = nil%>
+  <%session[:ing14] = nil%>
+  <%session[:ing15] = nil%>
 <%else%>
   <!-- NESSUN RISULTATO DALLA RICERCA-->
   <%if session[:found] == false%>

@@ -42,7 +42,22 @@ class ApiController < ApplicationController
             session[:alcholic] = @alcholic
             session[:glass] = @glass
             session[:instructionsIT] = @instructionsIT
-
+            
+            session[:ing1] = @ing1
+            session[:ing2] = @ing2
+            session[:ing3] = @ing3
+            session[:ing4] = @ing4
+            session[:ing5] = @ing5
+            session[:ing6] = @ing6
+            session[:ing7] = @ing7
+            session[:ing8] = @ing8
+            session[:ing9] = @ing9
+            session[:ing10] = @ing10
+            session[:ing11] = @ing11
+            session[:ing12] = @ing12
+            session[:ing13] = @ing13
+            session[:ing14] = @ing14
+            session[:ing15] = @ing15
             # parametri passati tramite URL: 
             # redirect_to :controller => 'cocktails', :action => 'new', :id_drink => @id_drink, :drink_name => @drink_name, :drink_img => @drink_img, :instructions => @instructions, :found => true
 

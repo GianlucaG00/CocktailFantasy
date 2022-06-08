@@ -31,15 +31,14 @@
       <%= form.text_field :pic, :id => "drink-pic", :class => "form-control", :placeholder => "Inserisci l'URL dell'immagine", :require => true%>
     </div>
 
-    <div class="field">
+    <div class="col-12">
       <%= form.label :ingredients %>
-      <%= form.text_field :ingredients, :id => "cocktail-ingredients" %>
+      <%= form.text_field :ingredients, :id => "cocktail-ingredients", :class => "form-control", :placeholder => "Ingrediente1,Ingrediente2 ..."%>
     </div>
-
 
     <%= form.text_field :signature, :id => "drink-signature", :value => "1", :type => "hidden"%>
 
-    <div class="row justify-content-between">
+    <div class="row justify-content-between mt-4">
       <div class="col-lg-6 col-12">
         <%= button_tag 'Reset', :type => 'reset', :class => "btn btn-lg btn-warning"%> <!-- Button per reset-->
       </div>

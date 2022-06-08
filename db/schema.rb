@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_06_08_141805) do
+ActiveRecord::Schema.define(version: 2022_06_08_163657) do
 
   create_table "barmen", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -57,13 +57,13 @@ ActiveRecord::Schema.define(version: 2022_06_08_141805) do
   create_table "cocktails", force: :cascade do |t|
     t.string "name"
     t.text "preparation"
-    t.json "ingredients"
     t.integer "price"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "bar_id", null: false
     t.string "pic"
     t.boolean "signature"
+    t.string "ingredients"
     t.index ["bar_id"], name: "index_cocktails_on_bar_id"
   end
 
