@@ -134,8 +134,24 @@
 	    </div>
     </div>
 	<div class="row align-items-center my-2">
-        <h2 class="text-center">I Commenti che hai lasciato <i class="fa-solid fa-comment"></i></h2>
-        <hr/>
+        <h2 class="text-center">Le recensioni che hai lasciato <i class="fa-solid fa-comment"></i></h2>
+			<hr/>
+			<%if @reviews.size == 0%>
+				<p>Non hai ancora lasciato alcun commento</p>
+			<%else%>
+				<%@reviews.each do |review|%>
+					<div class="card border-light mt-4" style="max-width: 100%;">
+  						<div class="card-header">
+						  Recensione lasciata a: <strong><%=review.bar.name%></strong> 
+						  <a href="<%=review%>"><i class="fa-solid fa-eye" style="color:green"></i></a>
+						  <a href="<%=%>"><i class="fa-solid fa-trash" style="color:red"></i></a>
+						</div>
+  						<div class="card-body">
+    						<h6><i class="fa-solid fa-user"></i> Hai detto :<h6><i class="card-text"><%=review.text%></i>
+  						</div>
+					</div>
+				<%end%>
+			<%end%>
     </div>
 </div>
 

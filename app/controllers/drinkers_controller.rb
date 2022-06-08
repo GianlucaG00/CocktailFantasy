@@ -6,6 +6,7 @@ class DrinkersController < ApplicationController
             @bars = Bar.all
             drinker_id = current_drinker.id
             @subscriptions = Chat.where(drinker_id: drinker_id )
+            @reviews = Review.where(drinker_id: drinker_id)
         end
     end 
 
