@@ -5,4 +5,5 @@ class Drinker < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_many :reviews
+  has_many :chats
 end

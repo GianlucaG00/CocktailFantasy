@@ -50,11 +50,22 @@
         <div class="row align-items-center my-2">
 		    <div class="col-12">
                 <%= form_with url: "/api/message", :id => "form-telegram", :method => :post, :id => "form" do |form|%>
-                    <div class="row">
-                        <div class="col-12 mt-2">
-                        <%= form.text_area :message, :id => "msg", :name => "msg", :class => "form-control", :placeholder => "Inserisci il messaggio...", :require => true%>
+                    <div class="row mt-4">
+						<p>Inserisci il testo del messaggio:</p>
+                        <div class="col-12">
+                        <%= form.text_area :messaggio, :id => "msg", :name => "messaggio", :class => "form-control", :placeholder => "Inserisci il messaggio...", :require => true%>
                         </div>
                     </div>
+					<div class="row mt-4">
+						<p>Seleziona il Bar dal quale vuoi inviare la comunicazione:</p>
+						<div class="col-12">
+							<select name="bar" class="form-select" id="select-bar">
+								<% @bars.each do |bar|%>
+									<option value="<%=bar.id%>"><%=bar.name%></option>
+								<%end%>
+							</select>
+						</div>
+					</div>
                     <div class="row mt-4">
                         <div class="col-12">
                         	<button id="submit" type="submit" class="btn btn-lg btn-primary">Invia messaggio <i class="fa-brands fa-telegram"></i></button>
@@ -67,6 +78,17 @@
 	<div class="row align-items-center my-2">
         <h2 class="text-center">I Bar che possiedi</h2>
         <hr/>
+
+		<%@bars.each do |bar|%>
+			<div class="card bg-light mt-3" style="max-width: 100%;">
+  				<div class="card-header"><%=bar.name%></div>
+  					<div class="card-body">
+    					<h5 class="card-title"> <%=bar.barman.email%></h5>
+    					<p class="card-text"><%=bar.description%></p>
+  					</div>
+				</div>
+			</div>
+		<%end%>
     </div>
 </div>
 

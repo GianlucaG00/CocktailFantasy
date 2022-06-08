@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_06_08_163657) do
+ActiveRecord::Schema.define(version: 2022_06_08_203852) do
 
   create_table "barmen", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -41,6 +41,7 @@ ActiveRecord::Schema.define(version: 2022_06_08_163657) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "barman_id", null: false
+    t.integer "avg"
     t.index ["barman_id"], name: "index_bars_on_barman_id"
   end
 

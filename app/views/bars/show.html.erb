@@ -1,32 +1,27 @@
 <div class="container">
 
   <section class="text-center">
-    <h1 class="display-5"><%=@bar.name%> <i class="fa-solid fa-shop"></i></h1>
+    <div class="col-1">
+      <h1 class="display-5"><a href="<%=bars_path%>"><i class="fa-solid fa-arrow-left-long"></i></a></h1>
+    </div>
+    <div class="col-12">
+      <h1 class="display-5"><%=@bar.name%> <i class="fa-solid fa-shop"></i></h1>
+    </div>
   </section>
 
 
-  <p>
-    <strong>Nome:</strong>
-    <%= @bar.name %>
-  </p>
-
-  <p>
-    <strong>Description:</strong>
-    <%= @bar.description %>
-  </p>
-
-  <p>
-    <strong>Address:</strong>
-    <%= @bar.address %>
-  </p>
-
-  <p>
-    <strong>Tel:</strong>
-    <%= @bar.tel %>
-  </p>
+  <div class="row">
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item">Nome: <strong><%= @bar.name %></strong></li>
+      <li class="list-group-item">Descrizione: <strong><%= @bar.description %></strong></li>
+      <li class="list-group-item">Indirizzo: <strong><%= @bar.address %></strong></li>
+      <li class="list-group-item">Telefono: <strong><%= @bar.tel %></strong></li>
+      <li class="list-group-item">Proprietario: <strong><%= @bar.barman.email %></strong></li>
+    </ul>
+  </div>
+ 
 
   <%= link_to 'Edit', edit_bar_path(@bar) %> |
-  <%= link_to 'Back', bars_path %>
 
   <hr/>
   

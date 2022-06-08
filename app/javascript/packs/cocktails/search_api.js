@@ -8,7 +8,6 @@ $(document).ready(function() {
     });
 
     $("#add-button").on("click", function() {
-        alert("add button"); 
         drink_name = $("#drink-name-api").text();
         drink_id = $("#drink-id-api").text(); 
         drink_preparation = $("#drink-preparation-api").text(); 
@@ -19,7 +18,6 @@ $(document).ready(function() {
             if(ing == "") break;
             ingredients += $("#ing" + i).text() + ",";
         }
-        alert(ingredients); 
 
         $("#cocktail-name").val(drink_name); 
         $("#cocktail-preparation").val(drink_preparation);

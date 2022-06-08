@@ -71,18 +71,28 @@ class ApiController < ApplicationController
     end
 
     def message
-        text = params[:message]
+        text = params[:messaggio]
+        bar_id = params[:bar] #bar da cui proviene la comunicazione
+        @bar = Bar.find(bar_id)
+        text = 'Comunicazione da: ' + @bar.name + "\n" + text
+        puts "------------------------------"
+        puts text
+        puts bar_id
+        puts "------------------------------"
         api_key = "5305253621:AAE9ff-75kqLnlyCiIpyXH1Dso69wvD2vDE"
-        chat_id = "726564883"
-        HTTParty.post("https://api.telegram.org/bot#{api_key}/sendMessage",
-            headers: {
-                'Content-Type' => 'application/json'
-            },
-            body: {
-                chat_id: chat_id,
-                text: text
-            }.to_json
-        )
+        barman_id = current_barman
+        Chat.select(:drinker_id).where(bar_id: bar_id).each do |chat|
+            chat_id = Drinker.select(:chat_id).find(chat.drinker_id).chat_id
+            HTTParty.post("https://api.telegram.org/bot#{api_key}/sendMessage",
+                headers: {
+                    'Content-Type' => 'application/json'
+                },
+                body: {
+                    chat_id: chat_id,
+                    text: text
+                }.to_json
+            )
+        end 
         redirect_to barmen_personalArea_path, :notice => "Il messaggio è stato inviato correttamente"
     end
 end

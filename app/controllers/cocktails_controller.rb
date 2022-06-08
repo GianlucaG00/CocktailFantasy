@@ -35,8 +35,9 @@ class CocktailsController < ApplicationController
     @cocktail.bar = @bar
     if(@cocktail.save)
       text = "Dai un'occhiata! E' stato aggiunto il cocktail #{@cocktail.name} nel menù di #{@cocktail.bar.name}!"
-      Chat.select(:drinker_id).where(bar_id: id_bar).each do |user|
-        TelegramMailer.send_notification(text).deliver_now
+      Chat.where(bar_id: id_bar).each do |chat|
+        chat_id = Drinker.find(chat.drinker_id).chat_id
+        TelegramMailer.send_notification(text, chat_id).deliver_now
       end 
       redirect_to bar_path(@bar), notice: "Il cocktail #{@cocktail.name} per il menù del Bar '#{@bar.name}' è stato aggiunto con successo"
     else
@@ -56,8 +57,9 @@ class CocktailsController < ApplicationController
       format.html { redirect_to @bar, notice: "Il cocktail #{@name}è stato rimosso con successo" }
       format.json { head :no_content }
       text = "Ci dispiace! E' stato rimosso il cocktail #{@cocktail.name} dal menù di #{@cocktail.bar.name}!"
-      Chat.select(:drinker_id).where(bar_id: id_bar).each do |user|
-        TelegramMailer.send_notification(text).deliver_now
+      Chat.where(bar_id: id_bar).each do |chat|
+        chat_id = Drinker.find(chat.drinker_id).chat_id
+        TelegramMailer.send_notification(text, chat_id).deliver_now
       end 
     end
   end

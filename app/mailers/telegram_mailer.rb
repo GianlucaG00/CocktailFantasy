@@ -1,9 +1,8 @@
 class TelegramMailer < ApplicationMailer
 
     # Invia Notifiche
-    def send_notification(text)
+    def send_notification(text, chat_id)
         api_key = "5305253621:AAE9ff-75kqLnlyCiIpyXH1Dso69wvD2vDE"
-        chat_id = "726564883"
         
         HTTParty.post("https://api.telegram.org/bot#{api_key}/sendMessage",
             headers: {

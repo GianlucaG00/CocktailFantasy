@@ -3,6 +3,7 @@ class BarmenController < ApplicationController
         if(!(barman_signed_in?) || drinker_signed_in?)
             redirect_to "/"
         end
+        @bars = Bar.where(barman_id: current_barman) # Bar posseduti dal Barman
     end 
 
     def new 
