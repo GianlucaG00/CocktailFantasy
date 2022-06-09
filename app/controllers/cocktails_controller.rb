@@ -25,16 +25,29 @@ class CocktailsController < ApplicationController
       redirect_to bars_path
       return
     end
-    id_bar = params[:bar_id]
+    id_bar = params[:bar_id] # id bar 
     @bar = Bar.find(id_bar)
+    id_barman = current_barman.id # id Barman loggato
+    if(@bar.barman_id != id_barman)
+      flash[:message] = "Attenzione! Solo il Barman proprietario può creare nuovi cocktail!"
+      redirect_to bars_path
+      return
+    end
     @cocktail = @bar.cocktails.build
-    #authorize! :create, @cocktail, :message => "Attenzione! Non sei autorizzato ad aggiungere nuovi Cocktail!"
   end
 
 
   # POST /cocktails or /cocktails.json
   def create
     if(!(barman_signed_in?))
+      flash[:message] = "Attenzione! Solo il Barman proprietario può creare nuovi cocktail!"
+      redirect_to bars_path
+      return
+    end
+    id_bar = params[:bar_id]
+    @bar = Bar.find(id_bar)
+    id_barman = current_barman.id
+    if(@bar.barman_id != id_barman)
       flash[:message] = "Attenzione! Solo il Barman proprietario può creare nuovi cocktail!"
       redirect_to bars_path
       return

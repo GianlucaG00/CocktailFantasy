@@ -100,7 +100,7 @@ class BarsController < ApplicationController
       redirect_to bars_path
       return
     end
-    barman_id = current_barman # id Barman Loggato 
+    barman_id = current_barman.id # id Barman Loggato 
     if(barman_id != @bar.barman_id)
       flash[:message] = "Attenzione! Solo il Barman proprietario può eliminare l'annuncio"
       redirect_to bars_path
