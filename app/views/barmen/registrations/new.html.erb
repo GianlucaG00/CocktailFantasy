@@ -20,12 +20,12 @@
   </div>
 
   <div class="col-12">
-    <%= f.label :email, :class => "form-label", :value => "Email"%>
+    <%= f.label :email, :class => "form-label", :value => "Email"%> <i class="fa-solid fa-envelope"></i>
     <%= f.email_field :email, :autocomplete => "email",  :class => "form-control", :placeholder => "Inserisci l'email", :require => true%>
   </div>
 
   <div class="col-12">
-    <%= f.label :password, :value => "Password"%>
+    <%= f.label :password, :value => "Password"%> <i class="fa-solid fa-key"></i>
     <% if @minimum_password_length %>
     <em>(<%= @minimum_password_length %> caratteri almeno)</em>
     <% end %><br />
@@ -33,7 +33,7 @@
   </div>
 
   <div class="field">
-    <%= f.label :password_confirmation, :value => "Conferma Password"%><br />
+    <%= f.label :password_confirmation, :value => "Conferma Password"%> <i class="fa-solid fa-key"></i>
     <%= f.password_field :password_confirmation, :class => "form-control", :autocomplete => "new-password", :placeholder => "Conferma Password" %>
   </div>
 

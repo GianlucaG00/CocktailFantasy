@@ -25,12 +25,12 @@
 
 
     <div class="col-12">
-      <%= f.label :email, :class => "form-label"%>
+      <%= f.label :email, :class => "form-label"%> <i class="fa-solid fa-envelope"></i>
       <%= f.email_field :email, :autofocus => true, :autocomplete => "email",  :class => "form-control", :placeholder => "Inserisci la mail", :require => true%>
     </div>
 
     <div class="col-12">
-      <%= f.label :password, :class => "form-label"%>
+      <%= f.label :password, :class => "form-label"%> <i class="fa-solid fa-key"></i>
       <%= f.password_field :password, :autofocus => true, :autocomplete => "email",  :class => "form-control", :placeholder => "Inserisci la password", :require => true%>
     </div>
 
@@ -41,38 +41,19 @@
       </div>
     <%end%>
 
-
-    <div class="row justify-content-center">
-      <div class="col-3">
-        <%= f.submit "Login", :class => "btn btn-lg btn-success"%>
-      </div>
-      <div class="col-3">
-        <button type="reset" class="btn btn-lg btn-warning">Reset</button>
-      </div>
-    </div>
-
-
     <div class="row justify-content-between mt-4">
       <div class="col-4">
         <%= f.submit "Login", :class => "btn btn-success" %>
       </div>
-      <!--
-      <div class="col-4">
-        <%= link_to drinker_facebook_omniauth_authorize_path, method: :post, :class => "btn btn-primary facebook" do%>
-				  Continua con Facebook <i class="fa-brands fa-facebook-f" aria-hidden="true" target="_blank"></i>
-		    <%end%>
-      </div>
-      -->
     </div>
 
     <div class="row mt-4">
       <div class="col">
         <span>Non sei ancora registrato?</span>
-        <%= link_to "Registrati ora!", new_barman_registration_path , :class => "link-success" %>
+        <%= link_to "Registrati ora!", new_drinker_registration_path , :class => "link-success" %>
       </div>
     </div>
     <% end %>
   </div>
 <%end%>
 
-<%= render "drinkers/shared/links" %>
