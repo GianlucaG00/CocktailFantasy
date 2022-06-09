@@ -20,6 +20,11 @@ class CocktailsController < ApplicationController
 
   # GET /cocktails/new
   def new
+    if(!(barman_signed_in?))
+      flash[:message] = "Attenzione! Solo il Barman proprietario può creare nuovi cocktail!"
+      redirect_to bars_path
+      return
+    end
     id_bar = params[:bar_id]
     @bar = Bar.find(id_bar)
     @cocktail = @bar.cocktails.build
@@ -29,6 +34,12 @@ class CocktailsController < ApplicationController
 
   # POST /cocktails or /cocktails.json
   def create
+    if(!(barman_signed_in?))
+      flash[:message] = "Attenzione! Solo il Barman proprietario può creare nuovi cocktail!"
+      redirect_to bars_path
+      return
+    end
+
     id_bar = params[:bar_id]
     @bar = Bar.find(id_bar)
     @cocktail = Cocktail.new(cocktail_params)
@@ -48,6 +59,17 @@ class CocktailsController < ApplicationController
 
   # DELETE /cocktails/1 or /cocktails/1.json
   def destroy
+    if(!(barman_signed_in?))
+      flash[:message] = "Attenzione! Solo il Barman proprietario può eliminare cocktail dal menù!"
+      redirect_to @cocktail.bar
+      return
+    end
+    barman_id = current_barman.id # id Barman Loggato
+    if(barman_id != @cocktail.bar.barman_id)
+      flash[:message] = "Attenzione! Non sei autorizzato ad eliminare cocktail dal menù di altri Barman"
+      redirect_to @cocktail.bar
+    end
+
     @bar = @cocktail.bar
     @name = @cocktail.name
     @cocktail.destroy

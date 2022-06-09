@@ -1,30 +1,26 @@
 class ReviewsController < ApplicationController
   before_action :set_review, only: %i[ show edit update destroy ]
 
-  
-  # GET /reviews or /reviews.json
-  def index
-    @reviews = Review.all
-  end
-
-  # GET /reviews/1 or /reviews/1.json
-  def show
-  end
-
   # GET /reviews/new
   def new
+    if(!(drinker_signed_in?))
+      flash[:message] = "Attenzione! Solo i Drinker possono lasciare recensioni!"
+      redirect_to bars_path
+      return
+    end
     @review = Review.new
     id_bar = params[:bar_id]
     @bar = Bar.find(id_bar)
     @drinker = current_drinker
   end
 
-  # GET /reviews/1/edit
-  def edit
-  end
-
   # POST /reviews or /reviews.json
   def create
+    if(!(drinker_signed_in?))
+      flash[:message] = "Attenzione! Solo i Drinker possono lasciare recensioni!"
+      redirect_to bars_path
+      return
+    end
     @review = Review.new(review_params)
     bar_id = params[:bar_id]
     @bar = Bar.find(bar_id)
@@ -39,6 +35,17 @@ class ReviewsController < ApplicationController
 
   # DELETE /reviews/1 or /reviews/1.json
   def destroy
+    if(!(drinker_signed_in?))
+      flash[:message] = "Attenzione! Solo il Drinker proprietario può eliminare la recensione!"
+      redirect_to bars_path
+      return
+    end
+    drinker_id = current_drinker.id # id Barman Loggato 
+    if(drinker_id != @review.drinker_id)
+      flash[:message] = "Attenzione! Solo il Drinker proprietario può eliminare la recensione!"
+      redirect_to :back
+    end
+
     @review.destroy
     respond_to do |format|
       if drinker_signed_in?

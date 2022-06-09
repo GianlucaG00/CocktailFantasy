@@ -19,13 +19,8 @@
     <%= f.label :password %> <i class="fa-solid fa-key"></i>
     <% if @minimum_password_length %>
     <em>(<%= @minimum_password_length %> characters minimum)</em>
-    <% end %><br /> 
+    <%end%><br /> 
     <%= f.password_field :password, :autofocus => true, autocomplete: "new-password",  :class => "form-control", :placeholder => "Inserisci la password", :require => true%>
-  </div>
-
-  <div class="col-12">
-    <%= f.label :password_confirmation, :class => "form-label"%> <i class="fa-solid fa-key"></i>
-    <%= f.password_field :password_confirmation, :autofocus => true, :autocomplete => "new-password",  :class => "form-control", :placeholder => "Inserisci conferma password", :require => true%>
   </div>
 
 
@@ -37,8 +32,8 @@
 
   <div class="row mt-4">
     <div class="col">
-      <span>Non sei già registrato?</span>
-      <%= link_to "Registrati ora!", drinker_session_path , :class => "link-success" %>
+      <span>Sei già registrato?</span>
+      <%= link_to "Effettua il login!", drinker_session_path , :class => "link-success" %>
     </div>
   </div>
 <% end %>

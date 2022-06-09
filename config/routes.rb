@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   # model relativo ai BAR
   resources :bars do
     resources :cocktails, only:[:new, :show, :create, :destroy]
-    resources :reviews, only:[:new, :show, :create, :destroy]
+    resources :reviews, only:[:new, :create, :destroy]
   end 
 
   root to: "bars#index"
