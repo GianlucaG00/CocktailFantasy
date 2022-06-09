@@ -37,26 +37,17 @@ class ReviewsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /reviews/1 or /reviews/1.json
-  def update
-    respond_to do |format|
-      if @review.update(review_params)
-        format.html { redirect_to review_url(@review), notice: "Review was successfully updated." }
-        format.json { render :show, status: :ok, location: @review }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @review.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
   # DELETE /reviews/1 or /reviews/1.json
   def destroy
     @review.destroy
-
     respond_to do |format|
-      format.html { redirect_to reviews_url, notice: "Review was successfully destroyed." }
-      format.json { head :no_content }
+      if drinker_signed_in?
+        format.html { redirect_to drinkers_personalArea_path, notice: "La recensione è stata eliminata con successo" }
+        format.json { head :no_content }
+      else
+        format.html { redirect_to bars_path, notice: "La recensione è stata eliminata con successo" }
+        format.json { head :no_content }
+      end 
     end
   end
 

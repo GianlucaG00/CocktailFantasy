@@ -23,6 +23,8 @@ Rails.application.routes.draw do
   get "/drinkers/personalArea", to: "drinkers#personalArea"
   get "/drinkers/info", to: "drinkers#getkey" 
   post "/drinkers/subscribe", to: "drinkers#subscribe"
+  get "/drinkers/personalArea/unsubscribe/:bar_id", to:"drinkers#unsubscribe"
+  delete "/drinkers/bars/:id_bar/reviews/:id", to:"reviews#destroy"
 
 
 

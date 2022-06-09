@@ -1,18 +1,10 @@
 <div class="row text-center mt-3">
 	<div class="col">
-		<h1> Area Personale Drinker </h1>
+		<h1> Area Personale Drinker <i class="fa-solid fa-user"></i></h1>
 	</div>
 </div>
     <hr/>
 <div class="container">
-	<div class="row align-items-center my-2">
-		<div class="col-md-6 col-12">
-			<label>Nome utente</label>
-		</div>
-		<div class="col-md-6 col-12">
-			<div><strong><%=current_drinker.name%></strong></div>
-		</div>
-	</div>
 	<div class="row align-items-center my-2">
 		<div class="col-md-6 col-12">
 			<label>Codice utente</label>
@@ -55,12 +47,17 @@
 				<h2>Le tue iscrizioni</h2>
 				<hr/>
 				<%if @subscriptions.size == 0 %>
-					<p>Non sei ancora iscritto ad alcun Bar</p>
+					<p>Non sei ancora iscritto ad alcun Bar. Cosa aspetti ad iscriverti?</p>
 				<%else%>
 					<ul>
 						<% @subscriptions.each do |sub| %>
 							<li>
-      							<%= sub.bar.name%>
+      							<h5>
+								<%=link_to "#{sub.bar.name}", sub.bar%>
+								<%= link_to "personalArea/unsubscribe/#{sub.bar.id}" ,  data: {confirm: "Sei sicuro di voler eliminare l'iscrizione a #{sub.bar.name}?"} do%>
+									<i class="fa-solid fa-trash" style="color:red" aria-hidden="true" target="_blank"></i>
+								<%end%>
+								</h5>
 							</li>
 						<%end%>
 					</ul>
@@ -76,7 +73,6 @@
   					data-request-access="write">
 				</script>
 				-->
-        		<button  type="submit" class="btn btn-lg btn-primary">Invia messaggio <i class="fa-brands fa-telegram"></i></button>
         	</div>
 
 			<%if current_drinker.chat_id != nil%>
@@ -84,11 +80,16 @@
 					<h2>Aggiungi iscrizioni <i></i></h2>
 					<hr/>
 					<div class="">
-						<p>Sei stato correttamente riconosciuto su Telegram! Ora puoi usufruire del servizio Bot</p>
+						<p>
+							Sei stato correttamente riconosciuto su Telegram! Ora puoi usufruire del servizio Bot<br>
+							Seleziona il nome del bar a cui vuoi iscriverti per non perderti nessuna notifica!
+						</p>
 						<%= form_with url: "/drinkers/subscribe", :method => :post do |form|%>
 							<div class="col-12">
+								<!--
         						<label for="name" class="form-label">Nome del Bar </label>
         						<%= form.text_field :name, :class => "form-control", :placeholder => "Inserisci il nome del bar", :require => true%>
+								-->
       						</div>
 							
 							<div class="col-12 mt-3">
@@ -142,12 +143,20 @@
 				<%@reviews.each do |review|%>
 					<div class="card border-light mt-4" style="max-width: 100%;">
   						<div class="card-header">
-						  Recensione lasciata a: <strong><%=review.bar.name%></strong> 
-						  <a href=""><i class="fa-solid fa-eye" style="color:green"></i></a>
-						  <a href=""><i class="fa-solid fa-trash" style="color:red"></i></a>
+						  	Recensione lasciata a: <strong><%=review.bar.name%></strong> 
+						  	<%= link_to "bars/#{review.bar.id}/reviews/#{review.id}", :method => "delete", data: {confirm: "Sei sicuro di voler eliminare la recensione lasciata a #{review.bar.name}?"} do%>
+								<i class="fa-solid fa-trash" style="color:red" aria-hidden="true" target="_blank"></i>
+							<%end%>
 						</div>
   						<div class="card-body">
-    						<h6><i class="fa-solid fa-user"></i> Hai detto :<h6><i class="card-text"><%=review.text%></i>
+    						<h6><i class="fa-solid fa-user"></i> <%=current_drinker.email%></h6>
+							<h6>Hai detto: <i>"<%=review.text%>"</i></h6>
+							<h6>
+								Voto: 
+								<%for i in 0..review.vote-1%>
+									<span class="star">★</span>
+								<%end%>
+							</h6>
   						</div>
 					</div>
 				<%end%>
@@ -164,8 +173,10 @@
 				</div>
 				<div class="modal-body">
 					<!-- todo: scrivere le info  -->
-					<div>In qualità di utente drinker, puoi ricevere tutti gli aggiornamenti sui bar a cui ti iscrivi.<br>
-				</div>
+					<div>
+						In qualità di utente drinker, puoi ricevere tutti gli aggiornamenti sui bar a cui ti iscrivi.<br>
+						Ogni volta che un Bar a cui ti sei iscritto inserisce una nuova proposta nel menù, oppure quando vuole mandare una comunicazione, riceverai tali aggiornamenti su Telegram!
+					</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-success" data-bs-dismiss="modal">
 						<span>Ho capito</span>

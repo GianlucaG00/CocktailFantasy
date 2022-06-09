@@ -4,6 +4,6 @@ class Drinker < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  has_many :reviews
-  has_many :chats
+  has_many :reviews, dependent: :destroy
+  has_many :chats, dependent: :destroy
 end

@@ -10,7 +10,7 @@ class DrinkersController < ApplicationController
         end
     end 
 
-    def subscribe
+    def subscribe # Effettua l'iscrizione
         bar_id = params[:bar]
         drinker_id = current_drinker.id
         @drinker = Drinker.find(drinker_id)
@@ -26,6 +26,20 @@ class DrinkersController < ApplicationController
             flash[:notice] = "Iscrizione al #{@bar.name} avvenuta con successo"
         end
         redirect_to drinkers_personalArea_path
+    end 
+
+    def unsubscribe # Annulla l'iscrizione
+        bar_id = params[:bar_id]
+        drinker_id = current_drinker.id
+        puts "-------------------------------------"
+        puts current_drinker.id
+        puts bar_id
+        puts Chat.where(bar_id: bar_id, drinker_id: drinker_id)
+        puts "-------------------------------------"
+        @chat = Chat.find_by(bar_id: bar_id, drinker_id: drinker_id)
+        @chat.destroy
+        redirect_to drinkers_personalArea_path
+         
     end 
 
 

@@ -6,10 +6,10 @@ class Barman < ApplicationRecord
          :omniauthable, :omniauth_providers => [:facebook]
   
   # ASSOCIATIONS
-  has_many :bars
+  has_many :bars, dependent: :destroy
 
-  validates :name, :presence => true
-  validates :surname, :presence => true
+  validates :name, :presence => { :message => "Devi inserire il nome"}
+  validates :surname, :presence => { :message => "Devi inserire il cognome"}
 
 
   def self.from_omniauth(auth)
