@@ -18,6 +18,7 @@ Rails.application.routes.draw do
 
   # BARMAN
   get "/barmen/personalArea", to: "barmen#personalArea"
+  delete "/barmen/bars/:id", to:"bars#destroy"
 
   # DRINKERS
   get "/drinkers/personalArea", to: "drinkers#personalArea"

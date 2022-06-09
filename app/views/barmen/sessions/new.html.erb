@@ -38,15 +38,23 @@
       </div>
     <%end%>
 
-    <div class="actions">
-      <%= f.submit "Log in" %>
+    <div class="row justify-content-between mt-4">
+      <div class="col-4">
+        <%= f.submit "Log in", :class => "btn btn-success" %>
+      </div>
+      <div class="col-4">
+        <%= link_to barman_facebook_omniauth_authorize_path, method: :post, :class => "btn btn-primary facebook" do%>
+				  Continua con Facebook <i class="fa-brands fa-facebook-f" aria-hidden="true" target="_blank"></i>
+		    <%end%>
+      </div>
     </div>
 
-
-    <%= link_to "Sign in with Facebook!!", barman_facebook_omniauth_authorize_path, method: :post%>
-    <%= link_to "Sign in with Facebook!!", barman_facebook_omniauth_authorize_path, method: :post%>
+    <div class="row mt-4">
+      <div class="col">
+        <span>Non sei ancora registrato?</span>
+        <%= link_to "Registrati ora!", new_barman_registration_path , :class => "link-success" %>
+      </div>
+    </div>
   <% end %>
-
-  <%= render "barmen/shared/links" %>
 <%end%>
 

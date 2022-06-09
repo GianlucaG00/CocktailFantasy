@@ -37,16 +37,22 @@
     <%= f.password_field :password_confirmation, :class => "form-control", :autocomplete => "new-password", :placeholder => "Conferma Password" %>
   </div>
 
-  <div class="containter">
-    <div class="actions">
-      <div class= "row">
-        <div class="col-12">
-          <%= f.submit "Sign up", :class => "btn btn-lg btn-success"%>
-        </div>
+  <div class="row justify-content-between mt-4">
+      <div class="col-4">
+        <%= f.submit "Registrati", :class => "btn btn-success" %>
       </div>
+      <div class="col-4">
+        <%= link_to barman_facebook_omniauth_authorize_path, method: :post, :class => "btn btn-primary facebook" do%>
+				  Continua con Facebook <i class="fa-brands fa-facebook-f" aria-hidden="true" target="_blank"></i>
+		    <%end%>
+      </div>
+  </div>
+
+  <div class="row mt-4">
+    <div class="col-4">
+      <span>Sei già registrato ?</span>
+        <%= link_to "Effettua il login!", barman_session_path , :class => "link-success" %>
     </div>
   </div>
 
 <% end %>
-
-<%= render "barmen/shared/links" %>

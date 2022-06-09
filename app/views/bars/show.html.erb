@@ -9,14 +9,9 @@
     </div>
   </section>
 
-  <div class="row text-center">
-    <div class="col-6">
-      <a href="<%=edit_bar_path(@bar)%>"><button type="button" class="btn btn-outline-warning">Modifica <i class="fa-solid fa-pencil"></i></button></a>
-    </div>
-    <div class="col-6">
-      <%= link_to  @bar, :method => :delete, :class => "btn btn-outline-danger" do%>
-        Elimina <i class="fa-solid fa-trash"></i>
-      <%end%>
+  <div class="row">
+    <div class="col text-center">
+      <h3>Informazioni su questo Bar</h3>
     </div>
   </div>
 
@@ -71,8 +66,11 @@
             <%else%>
               <td><%= image_tag "bar/not-available.jpg", :class => "img-fluid", :width => "150px"%></td>
             <%end%>
-            <td><a href="<%= bar_cocktail_url(:bar_id => @bar.id, :id => cocktail.id)%>"><i class="fa-solid fa-trash"></i></a></td>
-            <td><a href="<%= bar_cocktail_url(:bar_id=> @bar.id, :id => cocktail.id)%>"><i class="fa-solid fa-eye"></i></a></td>
+            <td>
+              <%= link_to  bar_cocktail_url(:bar_id=> @bar.id, :id => cocktail.id), :class => "btn btn-outline-success" do%>
+							  <i class="fa-solid fa-eye" aria-hidden="true" target="_blank"></i>
+						  <%end%>
+            </td>
           </tr>
         <%end%>
       </tbody>
