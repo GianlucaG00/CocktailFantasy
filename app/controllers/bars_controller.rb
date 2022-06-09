@@ -5,7 +5,10 @@ class BarsController < ApplicationController
   # CRUD operations
   # GET /bars or /bars.json
   def index
-    @bars = Bar.all
+    @bars = Bar.search(params[:search])
+    if @bars.size == 0
+      flash[:message] = "Spiacente, la ricerca non ha prodotto alcun risultato"
+    end
   end
 
   # GET /bars/1 or /bars/1.json
@@ -14,21 +17,39 @@ class BarsController < ApplicationController
     @bar = Bar.find(id_bar)
     @cocktails = Cocktail.where(bar_id: id_bar)
     @reviews = Review.where(bar_id: id_bar)
+    @num_sub = Chat.where(bar_id: id_bar).size
   end
 
   # GET /bars/new
   def new
+    if(!(barman_signed_in?))
+      flash[:message] = "Attenzione! Solo i Barman proprietari possono modificare l'annuncio"
+      redirect_to bars_path
+    end
     @bar = Bar.new
-    #authorize! :create, @bar, :message => "Attenzione! Non sei autorizzato a creare annunci di Bar!"
   end
 
   # GET /bars/1/edit
   def edit
-    #authorize! :update, @bar, :message => "Attenzione! Non sei autorizzato a modificare annunci di Bar!"
+    if(!(barman_signed_in?))
+      flash[:message] = "Attenzione! Solo i Barman proprietari possono modificare l'annuncio"
+      redirect_to bars_path
+    end
+    barman_id = current_barman.id # id Barman Loggato 
+    if(barman_id != @bar.barman_id)
+      flash[:message] = "Attenzione! Non sei autorizzato a modificare annunci di altri Barman"
+      redirect_to bars_path
+    end
   end
 
   # POST /bars or /bars.json
   def create
+    if(!(barman_signed_in?))
+      flash[:message] = "Attenzione! Solo i Barman possono creare annunci"
+      redirect_to bars_path
+    end
+
+
     @bar = Bar.new(bar_params)
     @bar.barman = current_barman
 
@@ -45,7 +66,17 @@ class BarsController < ApplicationController
 
   # PATCH/PUT /bars/1 or /bars/1.json
   def update
-    #authorize! :update, @bar, :message => "Attenzione: non sei autorizzato a modificare annunci di Bar!"
+    if(!(barman_signed_in?))
+      flash[:message] = "Attenzione! Solo i Barman possono modificare annunci"
+      redirect_to bars_path
+    end
+    barman_id = current_barman.id # id Barman Loggato 
+    if(barman_id != @bar.barman_id)
+      flash[:message] = "Attenzione! Non sei autorizzato a modificare annunci di altri Barman"
+      redirect_to bars_path
+    end
+
+
     respond_to do |format|
       if @bar.update(bar_params)
         format.html { redirect_to bar_url(@bar), notice: "Bar was successfully updated." }
@@ -59,8 +90,15 @@ class BarsController < ApplicationController
 
   # DELETE /bars/1 or /bars/1.json
   def destroy
-    #authorize! :destroy, @bar, :message => "Attenzione: non sei autorizzato a cancellare annunci di Bar!"
-
+    if(!(barman_signed_in?))
+      flash[:message] = "Attenzione! Solo i Barman possono eliminare annunci"
+      redirect_to bars_path
+    end
+    barman_id = current_barman # id Barman Loggato 
+    if(barman_id != @bar.barman_id)
+      flash[:message] = "Attenzione! Non sei autorizzato ad eliminare annunci di altri Barman"
+      redirect_to bars_path
+    end
     @bar.destroy
     respond_to do |format|
       format.html { redirect_to bars_url, notice: "Bar was successfully destroyed." }

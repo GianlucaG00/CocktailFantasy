@@ -1,5 +1,8 @@
 <div class="row mt-3">   
-    <div class="col text-center">
+    <div class="col-1">
+        <h1 class="display-5"><a href="<%=barmen_personalArea_path%>"><i class="fa-solid fa-arrow-left-long"></i></a></h1>
+    </div>
+    <div class="col-11 text-center">
         <h1>Modifica <%=@bar.name%></h1>
     </div>
 </div>
@@ -7,5 +10,4 @@
 
 <%= render 'form', bar: @bar %>
 
-<%= link_to 'Show', @bar %> |
-<%= link_to 'Back', bars_path %>
+

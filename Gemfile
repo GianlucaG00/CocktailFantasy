@@ -57,8 +57,11 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem 'devise'
 
+#OAuth con Facebook
 gem 'omniauth-facebook'
 gem 'omniauth-rails_csrf_protection'
+#Oauth con Google
+gem 'omniauth-google-oauth2'
 
 # gemma per richieste HTTP
 gem 'httparty'

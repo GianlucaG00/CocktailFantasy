@@ -6,6 +6,7 @@
     </div>
     <div class="col-12">
       <h1 class="display-5"><%=@bar.name%> <i class="fa-solid fa-shop"></i></h1>
+      <small class="text-muted">Questo bar ha <strong><%=@num_sub%></strong> iscritti</small>
     </div>
   </section>
 
@@ -103,9 +104,13 @@
           <div class="card-body">
             <h5 class="card-title"><%= review.drinker.email %></h5>
             <p class="card-text"><%= review.text%></p>
-            <p class="card-text"><small class="text-muted">Scritto il <%= review.created_at%></small></p>
-            <a class="btn btn-outline-success"><i class="fa-solid fa-eye"></i></a>
-            <a class="btn btn-outline-danger"><i class="fa-solid fa-trash"></i></a>
+            <p class="card-text">
+              Voto: 
+              <%for i in 0..review.vote-1%>
+						  	<span class="star">★</span>
+						  <%end%>
+            </p>
+            <p class="card-text mt-3"><small class="text-muted">Recensione scritta il <i><%= review.created_at%></i></small></p>
           </div>
         </div>
       </div>

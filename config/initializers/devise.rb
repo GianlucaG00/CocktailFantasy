@@ -310,6 +310,7 @@ Devise.setup do |config|
   # config.sign_in_after_change_password = true
 
   config.omniauth :facebook, '2285367941647870', 'c8baa0077beb7af442e775ad48343ec9'
+  config.omniauth :google_oauth2, '894113916775-k1l57do33scpfuarr560kqt4fa30gfok.apps.googleusercontent.com', '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'
 
   config.sign_out_all_scopes = false
 end

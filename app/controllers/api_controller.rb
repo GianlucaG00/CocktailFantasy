@@ -93,6 +93,7 @@ class ApiController < ApplicationController
                 }.to_json
             )
         end 
-        redirect_to barmen_personalArea_path, :notice => "Il messaggio è stato inviato correttamente"
+        @num_sub = Chat.where(bar_id: bar_id).size
+        redirect_to barmen_personalArea_path, :notice => "Messaggio inviato correttamente ai tuoi #{@num_sub} iscritti"
     end
 end

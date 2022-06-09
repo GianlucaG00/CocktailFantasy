@@ -86,12 +86,21 @@
       <a href="/bars/new" class="btn btn-lg btn-success"><i class="fa-solid fa-plus"></i></a>
     </div>
     <div class="col-4">
-      <%= form_with  do |form| %>
-          <%= form.text_field :search, :class => "form-control", :placeholder => "Cerca", :require => true%>
+      <%= form_tag bars_path, method: :get do %>
+          <%= text_field_tag :search, params[:search], :class => "form-control", :placeholder => "Cerca"%>
+          <%= submit_tag  "Cerca", :class => "btn btn-light"%>
       <%end%>
     </div>
   </div>
 </section>
+
+<div class="row">
+  <div class="col text-center">
+    <p class="message-w"><%=flash[:message]%></p>
+  </div>
+</div>
+
+
 <section id="gallery">
   <div class="container">
     <div class="row">

@@ -1,4 +1,4 @@
-<h1 class="text-center">Area personale Barman</h1>
+<h1 class="text-center mt-3">Area personale <strong>Barman</strong> <i class="fa-solid fa-user-tie"></i></h1>
     <hr/>
 <div class="container">
 	<div class="row align-items-center my-2">
@@ -46,35 +46,53 @@
 		</ul>
 	</div>
 	<p id="notice"><%= notice %></p>
-    <div class="container m-4">
-        <div class="row align-items-center my-2">
-		    <div class="col-12">
-                <%= form_with url: "/api/message", :id => "form-telegram", :method => :post, :id => "form" do |form|%>
-                    <div class="row mt-4">
-						<p>Inserisci il testo del messaggio:</p>
-                        <div class="col-12">
-                        <%= form.text_area :messaggio, :id => "msg", :name => "messaggio", :class => "form-control", :placeholder => "Inserisci il messaggio...", :require => true%>
-                        </div>
-                    </div>
-					<div class="row mt-4">
-						<p>Seleziona il Bar dal quale vuoi inviare la comunicazione:</p>
-						<div class="col-12">
-							<select name="bar" class="form-select" id="select-bar">
-								<% @bars.each do |bar|%>
-									<option value="<%=bar.id%>"><%=bar.name%></option>
-								<%end%>
-							</select>
+	<%if @bars.size == 0%>
+		<div class="container m-4">
+			<div class="row">
+				<div class="col-12 text-center">
+					<p>
+						Spiacente! Ancora non possiedi alcun Bar!<br/>
+						Per poter usufruire del servizio Bot e notificare gli iscritti è necessario possedere dei bar
+					</p>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-12 text-center">
+					<%=link_to "Aggiungi un Bar", new_bar_path, :class => "btn btn-outline-success"%>
+				</div>
+			</div>
+		</div>
+	<%else%>
+    	<div class="container m-4">
+    	    <div class="row align-items-center my-2">
+			    <div class="col-12">
+    	            <%= form_with url: "/api/message", :id => "form-telegram", :method => :post, :id => "form" do |form|%>
+    	                <div class="row mt-4">
+							<p>Inserisci il testo del messaggio:</p>
+    	                    <div class="col-12">
+    	                    <%= form.text_area :messaggio, :id => "msg", :name => "messaggio", :class => "form-control", :placeholder => "Inserisci il messaggio...", :require => true%>
+    	                    </div>
+    	                </div>
+						<div class="row mt-4">
+							<p>Seleziona il Bar dal quale vuoi inviare la comunicazione:</p>
+							<div class="col-12">
+								<select name="bar" class="form-select" id="select-bar">
+									<% @bars.each do |bar|%>
+										<option value="<%=bar.id%>"><%=bar.name%></option>
+									<%end%>
+								</select>
+							</div>
 						</div>
-					</div>
-                    <div class="row mt-4">
-                        <div class="col-12">
-                        	<button id="submit" type="submit" class="btn btn-lg btn-primary">Invia messaggio <i class="fa-brands fa-telegram"></i></button>
-                        </div>
-                    </div>
-                <%end%>
+    	                <div class="row mt-4">
+    	                    <div class="col-12">
+    	                    	<button id="submit" type="submit" class="btn btn-lg btn-primary">Invia messaggio <i class="fa-brands fa-telegram"></i></button>
+    	                    </div>
+    	                </div>
+    	            <%end%>
+			    </div>
 		    </div>
-	    </div>
-    </div>
+    	</div>
+	<%end%>
 	<div class="row align-items-center my-2">
         <h2 class="text-center">I Bar che possiedi <i class="fa-solid fa-shop"></i></h2>
         <hr/>
