@@ -8,9 +8,16 @@ class ReviewsController < ApplicationController
       redirect_to bars_path
       return
     end
-    @review = Review.new
+    @drinker = current_drinker
     id_bar = params[:bar_id]
     @bar = Bar.find(id_bar)
+    @r = Review.where(drinker_id: @drinker.id, bar_id: id_bar) 
+    if @r.size != 0
+      flash[:message] = "Hai già espresso un parere su #{@bar.name}"
+      redirect_to @bar
+      return 
+    end 
+    @review = Review.new
     @drinker = current_drinker
   end
 

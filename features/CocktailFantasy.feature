@@ -1,6 +1,6 @@
 Feature: features
 
-Scenario: As a unregistered user I want to signin with email so that I can become a new drinker
+Scenario: As an unregistered user I want to signin with email so that I can become a new drinker
     When I am on the CocktailFantasy home page
     When I follow "Drinker"
     Then I should be on the Drinker login page
@@ -9,6 +9,11 @@ Scenario: As a unregistered user I want to signin with email so that I can becom
     And I press "commit"
     Then I should be on the CocktailFantasy home page
     And I should see "Bentornato!"
+
+Scenario: As an unregistered user I want to contact the developer so that I can report any misuse of the application
+    When I am on the CocktailFantasy home page
+    Then I should see "Contatti Sviluppatore"
+
 
 Scenario: As a Barman I want to add a bar so that I can populate the bar list
     Given a registered Barman as "prova4", "prova4", "prova4@prova4.it", "password"

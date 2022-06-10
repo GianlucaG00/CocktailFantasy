@@ -8,11 +8,11 @@ RSpec.describe Bar, type: :model do
         @barman = Barman.create(name: "Prova", surname: "Prova", email: "prova@prova.it", password: "password")
         @bar = Bar.create(name: "Bar Prova", address: "Via della Prova 43, Roma", tel: "0000000000", description: "Descrizione di Prova", barman_id: @barman.id)
       end
-      it "Should be created a Bar" do
+      it "should be created a Bar" do
         expect(@bar).to be_valid
       end
   
-      describe "Bar Validation" do
+      describe "Validation" do
         it "should not be valid without a name" do
           @bar.name = nil
           expect(@bar).to_not be_valid
@@ -21,14 +21,22 @@ RSpec.describe Bar, type: :model do
           @bar.description = nil
           expect(@bar).to_not be_valid
         end
+        it "should not be valid without a Barman" do 
+          @bar.barman = nil
+          expect(@bar).to_not be_valid
+        end
       end
 
       # test per Associations
       describe "Associations" do
-        it "Bar belongs to a Barman" do
-          assc = described_class.reflect_on_association(:barman)
-          expect(assc.macro).to eq :belongs_to
+        it "belongs to a Barman" do
+          var = described_class.reflect_on_association(:barman)
+          expect(var.macro).to eq :belongs_to
         end
+        it "has many reviews" do 
+          var = described_class.reflect_on_association(:reviews)
+          expect(var.macro).to eq :has_many
+        end 
       end
     end
   end

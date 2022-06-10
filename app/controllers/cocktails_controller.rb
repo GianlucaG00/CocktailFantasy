@@ -2,6 +2,7 @@ class CocktailsController < ApplicationController
   before_action :set_cocktail, only: %i[ show edit update destroy ]
 
   # per la richiesta API a CocktailDB
+  # da eliminare !!!
   def search_cocktail
     response = HTTParty.get("http://thecocktaildb.com/api/json/v1/1/search.php?s=margarita")
     @array = JSON.parse(response)

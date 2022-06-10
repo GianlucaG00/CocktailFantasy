@@ -53,7 +53,7 @@
 </p>
 
 <div class="row">
-  <div class="col">
-    <%= link_to 'Destroy', "/bars/#{@cocktail.bar.id}/cocktails/#{@cocktail.id}", method: :delete, data: { confirm: "Sei sicuro di voler cancellare #{@cocktail.name} ?" } %>
+  <div class="col-12 text-center">
+    <%= link_to 'Destroy', "/bars/#{@cocktail.bar.id}/cocktails/#{@cocktail.id}", :class => "btn btn-outline-danger",method: :delete, data: { confirm: "Sei sicuro di voler cancellare #{@cocktail.name} ?" } %>
   </div>
 </div>

@@ -3,7 +3,7 @@ class DrinkersController < ApplicationController
         if(!(drinker_signed_in?) || barman_signed_in?)
             redirect_to "/"
         else
-            @bars = Bar.all
+            @bars = Bar.search(params[:search])
             drinker_id = current_drinker.id
             @subscriptions = Chat.where(drinker_id: drinker_id )
             @reviews = Review.where(drinker_id: drinker_id)
@@ -39,14 +39,12 @@ class DrinkersController < ApplicationController
         @chat = Chat.find_by(bar_id: bar_id, drinker_id: drinker_id)
         @chat.destroy
         redirect_to drinkers_personalArea_path
-         
     end 
 
 
     def verify
-        code = params[:code] #codice inviato dall'utente
+        code = params[:code] # codice inviato dall'utente
         puts code
-        #response = Searcher.search_cocktail(name)
 
         api_key = "5305253621:AAE9ff-75kqLnlyCiIpyXH1Dso69wvD2vDE"
         response = HTTP.get("https://api.telegram.org/bot#{api_key}/getUpdates")

@@ -12,7 +12,7 @@ class Bar < ApplicationRecord
 	validates_format_of :tel, :with => /[0-9]{9,15}/, message: "Inserisci un recapito telefonico valido"
 	validates :address, :presence => true
 
-	# funzione per la ricerca tramite nome
+	# funzione per la ricerca tramite nome nella pagina dei Bar
 	def self.search(name)
 		if name
 			where(["name LIKE ?","%#{name}%"])

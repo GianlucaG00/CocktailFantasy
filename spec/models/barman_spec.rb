@@ -3,6 +3,7 @@ require 'rails_helper'
 RSpec.describe Barman, type: :model do
   
   describe "Barman" do
+    # test per Creazione
     describe "Create a Barman" do
       before do
         @barman = Barman.create(name: "Gianluca", surname: "Prova", email: "gian@prova.it", password: "password")
@@ -11,6 +12,7 @@ RSpec.describe Barman, type: :model do
         expect(@barman).to be_valid
       end
   
+      # test per Model validation
       describe "Barman Validation" do
         it "should not be valid without a name" do
           @barman.name = nil
@@ -24,6 +26,14 @@ RSpec.describe Barman, type: :model do
           @barman.email = nil
           expect(@barman).to_not be_valid
         end
+        it "should not be valid without a password" do
+          @barman.password = nil
+          expect(@barman).to_not be_valid
+        end 
+        it "should not be valid with a password with less than 6 characters" do 
+          @barman.password = "....."
+          expect(@barman).to_not be_valid
+        end 
       end
 
       # test per Associations

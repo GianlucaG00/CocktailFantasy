@@ -84,7 +84,7 @@ class BarsController < ApplicationController
 
     respond_to do |format|
       if @bar.update(bar_params)
-        format.html { redirect_to bar_url(@bar), notice: "Bar was successfully updated." }
+        format.html { redirect_to bar_url(@bar), notice: "Il Bar è stato aggiornato con successo." }
         format.json { render :show, status: :ok, location: @bar }
       else
         format.html { render :edit, status: :unprocessable_entity }
