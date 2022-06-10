@@ -28,6 +28,9 @@ module NavigationHelpers
     when /^the new Bar page/
       '/bars/new'
 
+    when /^the bars page/
+      '/bars'
+
     when /^the barman personal area/
       '/barmen/personalArea'
 
