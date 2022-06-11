@@ -58,7 +58,7 @@ class BarsController < ApplicationController
 
     respond_to do |format|
       if @bar.save
-        format.html { redirect_to bar_url(@bar), notice: "Il Bar è stato correttamente inserito" }
+        format.html { redirect_to bar_url(@bar), notice: "Il Bar è stato correttamente creato" }
         format.json { render :show, status: :created, location: @bar }
       else
         format.html { render :new, status: :unprocessable_entity }

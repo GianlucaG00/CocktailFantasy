@@ -13,17 +13,6 @@ RSpec.describe "Bars", type: :request do
         get "/bars"
         expect(response.status).to eq(200)
       end
-
-      it 'should returns a 200 status code' do
-        get bars_path
-        expect(response.status).to eq(200)
-      end
-    end
-
-
-    describe "Display the bars" do
-      it "should display the new bars" do
-      end
     end
   
     describe "Search a Bar" do
@@ -35,7 +24,7 @@ RSpec.describe "Bars", type: :request do
         end
         click_button("commit")  # submit della form
         #expect(page).to have_content 'You have signed up successfully'
-        expect(response).to redirect_to("http://localhost/bars?#{prova}&commit=Cerca")
+        expect(response.body).to include "Bar Prova"
       end
     end
   end

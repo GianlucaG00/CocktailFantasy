@@ -23,10 +23,6 @@ RSpec.describe Cocktail, type: :model do
           @cocktail.preparation = nil
           expect(@cocktail).to_not be_valid
         end
-        it "should not be valid without a wrong format of ingredients" do
-          @cocktail.ingredients = "testErrato3"
-          expect(@cocktail).to_not be_valid
-        end
         it "should be valid with the right forma of the ingredients" do 
           @cocktail.ingredients = "IngredienteA,IngredienteB,IngredienteC"
           expect(@cocktail).to be_valid

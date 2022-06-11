@@ -93,6 +93,22 @@ Scenario: As a Barman I want to add a new cocktail in the menu of a Bar I own so
     And I press "Aggiungi"
     Then I should see "Il cocktail Cocktail Prova per il menù del Bar 'Bar Prova' è stato aggiunto con successo"
 
+Scenario: As a Barman I want to be assisted adding a new cocktail with informations from the CocktailDB api so that I can more easily add a new cocktail 
+    Given I am a registered Barman as "prova5", "prova5", "prova5@prova.it", "password" and I have a Bar "Bar Prova5", "Via della Prova 5", "Questa è una descrizione di prova 5", "5555555555"
+    When I go to the barman personal area
+    Then I should be on the barman personal area 
+    And I should see "Bar Prova5"
+    When I follow "Bar Prova5"
+    Then I should see "Informazioni su questo Bar"
+    When I follow "add-cocktail"
+    Then I should see "Vuoi cercare le informazioni?"
+    When I fill in "cocktail_name" with "Margarita"
+    And I press "search-cocktail"
+    Then I should see "11007"
+    And I should see "Tequila"
+    And I should see "Salt"
+
+ 
 
 
     
