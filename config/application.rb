@@ -11,7 +11,8 @@ def startBot
   token = "5305253621:AAE9ff-75kqLnlyCiIpyXH1Dso69wvD2vDE"
   help = "Ciao! Io sono il Bot di COCKTAIL FANTASY.\n\nEcco i comandi che puoi usare:\n
 -/password id_utente password_utente: riconoscimento e registrazione al servizio di notifiche Cocktail Fantasy;\n
--/help per visualizzare l'elenco dei comandi"
+-/help per visualizzare l'elenco dei comandi
+-/riconosciuto: per verificare se è stato effettuato il riconoscimento"
 
   Telegram::Bot::Client.run(token) do |bot|
     puts "BOT AVVIATO"
@@ -37,8 +38,16 @@ def startBot
       # helper dei comandi 
       when '/help'
         bot.api.send_message(chat_id: message.chat.id, text: help)
+
+      when '/riconosciuto'
+        @dr = Drinker.find_by(chat_id: message.chat.id)
+        if(@dr.nil?)
+          bot.api.send_message(chat_id: message.chat.id, text: "Il riconoscimento non è stato ancora effettuato")
+        else
+          
+          bot.api.send_message(chat_id: message.chat.id, text: "Il riconoscimento è stato effettuato con successo. La tua mail è #{@dr.email}")
+        end
       end
-      
       puts message
     end
   end 
@@ -64,7 +73,7 @@ module CocktailFantasy4
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
   
-    # il Bot si avvia in un Thread 
+    # il Bot si avvia in un Thread separato
     function()
   end
 end
