@@ -28,6 +28,8 @@ def startBot
           if(Drinker.find(id_utente).valid_password?(password))
             bot.api.send_message(chat_id: message.chat.id, text: "Password corretta! Sei stato correttamente riconosciuto!")
             Drinker.find(id_utente).update(chat_id: message.chat.id)
+            # per motivi di sicurezza si elimina il messaggio non appena inviato
+            HTTParty.get("https://api.telegram.org/bot#{token}/deleteMessage?chat_id=#{message.chat.id}&message_id=#{message.message_id}")
           else
             bot.api.send_message(chat_id: message.chat.id, text: "Password non corretta! Riprovare")
           end 
