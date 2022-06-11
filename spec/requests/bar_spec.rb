@@ -13,7 +13,6 @@ RSpec.describe "Bars", type: :request do
         get "/bars"
         expect(response.status).to eq(200)
       end
-    end
 
       it 'should returns a 200 status code' do
         get bars_path
@@ -24,14 +23,6 @@ RSpec.describe "Bars", type: :request do
 
     describe "Display the bars" do
       it "should display the new bars" do
-        get "/barman/sign_in"
-        fill_in "email", :with => @barman.email
-        fill_in "password", :with => @barman.password
-        click_button "Login"
-        #visit bar_path(bar.id)
-        visit barmen_personalArea_path
-        page.should have_link("Elimina")
-        expect { click_link "Elimina" }.to change(Bar, :count).by(-1)
       end
     end
   

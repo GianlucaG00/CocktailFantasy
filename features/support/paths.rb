@@ -24,11 +24,17 @@ module NavigationHelpers
 
     when /^the Barman login page/
       '/barmen/sign_in'
+    
+    when /^the Drinker registration page/
+      '/drinkers/sign_up'
+
+    when /^the Barman registration page/
+      '/barmen/sign_up'
 
     when /^the new Bar page/
       '/bars/new'
 
-    when /^the bars page/
+    when /^the Bar page/
       '/bars'
 
     when /^the barman personal area/
