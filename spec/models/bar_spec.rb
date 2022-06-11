@@ -38,7 +38,7 @@ RSpec.describe Bar, type: :model do
           expect(var.macro).to eq :has_many
         end 
       end
+
     end
   end
-
 end

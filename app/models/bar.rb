@@ -1,4 +1,5 @@
 class Bar < ApplicationRecord
+	before_save :capitalize_title
 	# ASSOCIATIONS
 	belongs_to :barman
 	has_many :cocktails, dependent: :destroy
@@ -20,4 +21,21 @@ class Bar < ApplicationRecord
 			all
 		end
 	end 
+
+	def capitalize_title
+        self.name = self.name.split(/\s+/).map(&:downcase).
+          map(&:capitalize).join(' ')
+    end
+
+	def avg_reviews
+		sum = 0
+		self.reviews.each do |review|
+			sum = sum + review.potatoes
+		end
+		if self.reviews.count>0
+			return sum/self.reviews.count
+		else
+			return "--"
+		end
+	end
 end

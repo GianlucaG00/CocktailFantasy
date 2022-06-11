@@ -9,8 +9,9 @@ Bundler.require(*Rails.groups)
 
 def startBot 
   token = "5305253621:AAE9ff-75kqLnlyCiIpyXH1Dso69wvD2vDE"
-  help = "Ciao! Io sono il Bot di COCKTAIL FANTASY.\n\nEcco i parametri che puoi passarmi:\n
-/password id_utente password_utente: registrazione al servizio di notifiche Cocktail Fantasy;"
+  help = "Ciao! Io sono il Bot di COCKTAIL FANTASY.\n\nEcco i comandi che puoi usare:\n
+-/password id_utente password_utente: riconoscimento e registrazione al servizio di notifiche Cocktail Fantasy;\n
+-/help per visualizzare l'elenco dei comandi"
 
   Telegram::Bot::Client.run(token) do |bot|
     puts "BOT AVVIATO"
@@ -63,6 +64,7 @@ module CocktailFantasy4
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
   
+    # il Bot si avvia in un Thread 
     function()
   end
 end

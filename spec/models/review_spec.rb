@@ -37,10 +37,14 @@ RSpec.describe Review, type: :model do
 
       # test per Associations
       describe "Associations" do
-        it "Drinker has many reviews" do
-          var = described_class.reflect_on_association(:reviews)
-          expect(var.macro).to eq :has_many
+        it "belongs to a Bar" do
+          var = described_class.reflect_on_association(:bar)
+          expect(var.macro).to eq :belongs_to
         end
+        it "belongs to a Drinker" do 
+          var = described_class.reflect_on_association(:drinker)
+          expect(var.macro).to eq :belongs_to
+        end 
       end
     end
   end

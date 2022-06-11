@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_06_08_203852) do
+ActiveRecord::Schema.define(version: 2022_06_11_073518) do
 
   create_table "barmen", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -42,6 +42,7 @@ ActiveRecord::Schema.define(version: 2022_06_08_203852) do
     t.datetime "updated_at", precision: 6, null: false
     t.integer "barman_id", null: false
     t.integer "avg"
+    t.string "pic"
     t.index ["barman_id"], name: "index_bars_on_barman_id"
   end
 
@@ -84,6 +85,8 @@ ActiveRecord::Schema.define(version: 2022_06_08_203852) do
     t.string "name"
     t.string "chat_id"
     t.integer "roles_mask"
+    t.string "provider"
+    t.string "uid"
     t.index ["email"], name: "index_drinkers_on_email", unique: true
     t.index ["reset_password_token"], name: "index_drinkers_on_reset_password_token", unique: true
   end

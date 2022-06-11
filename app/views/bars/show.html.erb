@@ -10,10 +10,16 @@
     </div>
   </section>
 
+  <%if @bar.pic.nil?%>
+    <%= image_tag "bar/bar.jpg", :class => "img-fluid rounded"%>
+  <%else%>
+    <img src="<%=@bar.pic%>" class="img-fluid rounded"/>
+  <%end%>
+
   <div class="row">
     <div class="col text-center">
       <p class="message-w"><%=flash[:message]%></p>
-      <h3>Informazioni su questo Bar</h3>
+      <h2>Informazioni su questo Bar</h2>
     </div>
   </div>
 
@@ -99,7 +105,7 @@
     <div class="card m-auto mt-4" style="max-width: 540px;">
       <div class="row g-0">
         <div class="col-md-6">
-          <%= image_tag "bar/bottles.jpg", :class => "img-fluid"%>
+          <%= image_tag "bar/review.jpg", :class => "img-fluid rounded"%>
         </div>
         <div class="col-md-6">
           <div class="card-body">

@@ -151,6 +151,11 @@ GEM
     dry-inflector (0.2.1)
     erubi (1.10.0)
     eventmachine (1.2.7)
+    factory_bot (6.2.1)
+      activesupport (>= 5.0.0)
+    factory_bot_rails (6.2.0)
+      factory_bot (~> 6.2.0)
+      railties (>= 5.0.0)
     faraday (1.10.0)
       faraday-em_http (~> 1.0)
       faraday-em_synchrony (~> 1.0)
@@ -413,6 +418,7 @@ DEPENDENCIES
   cucumber-rails-training-wheels
   database_cleaner
   devise
+  factory_bot_rails
   faraday (~> 1.0)
   http
   httparty

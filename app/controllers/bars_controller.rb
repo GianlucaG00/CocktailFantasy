@@ -108,7 +108,8 @@ class BarsController < ApplicationController
     end
     @bar.destroy
     respond_to do |format|
-      format.html { redirect_to bars_url, notice: "Il Bar è stato eliminato con successo" }
+      format.html { redirect_to barmen_personalArea_path, notice: "Il Bar è stato eliminato con successo" }
+      flash[:message] = "Il Bar è stato rimosso con successo"; 
       format.json { head :no_content }
     end
   end
@@ -121,6 +122,6 @@ class BarsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def bar_params
-      params.require(:bar).permit(:name, :description, :address, :tel)
+      params.require(:bar).permit(:name, :description, :address, :tel, :pic)
     end
 end

@@ -32,6 +32,11 @@
         <%= form.text_field :tel, :class => "form-control", :placeholder => "Inserisci il telefono", :require => true%>
       </div>
 
+      <div class="col-12">
+        <label for="pic" class="form-label">Url foto locale: </label>
+        <%= form.text_field :pic, :class => "form-control", :placeholder => "Inserisci Url ", :require => true%>
+      </div>
+
       <div class="col-12 text-center">
         <%= form.submit 'Aggiungi Bar', :class => 'btn btn-outline-success' %>
       </div>
