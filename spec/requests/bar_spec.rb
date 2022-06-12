@@ -14,18 +14,5 @@ RSpec.describe "Bars", type: :request do
         expect(response.status).to eq(200)
       end
     end
-  
-    describe "Search a Bar" do
-      it "should be return the bar" do
-        stringa = "prova"
-        redirect_to bars_path
-        within("#search") do
-          fill_in stringa
-        end
-        click_button("commit")  # submit della form
-        #expect(page).to have_content 'You have signed up successfully'
-        expect(response.body).to include "Bar Prova"
-      end
-    end
   end
 end
