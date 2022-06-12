@@ -33,6 +33,19 @@ RSpec.describe Review, type: :model do
           @review.vote = -1
           expect(@review).to_not be_valid
         end 
+        it "should not be valid to create a Review with the same drinker_id referred to the same Bar" do 
+          # Ogni utente può lasciare al più una recensione per Bar
+          @review1 = Review.create
+          @review1.bar_id = 70
+          @review1.drinker_id = 80
+          @review1.save
+          @review2 = Review.create
+          @review2.bar_id = 70
+          @review2.drinker_id = 80
+          expect {
+              @review2.save!
+          }.to raise_error(ActiveRecord::RecordInvalid)
+        end
       end
 
       # test per Associations

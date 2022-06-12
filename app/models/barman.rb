@@ -11,6 +11,7 @@ class Barman < ApplicationRecord
   validates :name, :presence => { :message => "Devi inserire il nome"}
   validates :surname, :presence => { :message => "Devi inserire il cognome"}
   validates :email, :presence => { :message => "Devi inserire la mail"}
+  validates :email, uniqueness: true
   validates_format_of :password, :with => /(.){6,}/, message: "Il formato della password non è corretto! Almeno 6 caratteri"
 
 

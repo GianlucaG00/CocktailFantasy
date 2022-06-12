@@ -10,9 +10,10 @@ Bundler.require(*Rails.groups)
 def startBot 
   token = "5305253621:AAE9ff-75kqLnlyCiIpyXH1Dso69wvD2vDE"
   help = "Ciao! Io sono il Bot di COCKTAIL FANTASY.\n\nEcco i comandi che puoi usare:\n
--/password id_utente password_utente: riconoscimento e registrazione al servizio di notifiche Cocktail Fantasy;\n
+-/password id_usr password_utente: riconoscimento e registrazione al servizio di notifiche Cocktail Fantasy;\n
 -/help per visualizzare l'elenco dei comandi
--/riconosciuto: per verificare se è stato effettuato il riconoscimento"
+-/riconosciuto: per verificare se è stato effettuato il riconoscimento
+-/changePass id_usr old_pass new_pass: permette di cambiare la password dell'utente"
 
   Telegram::Bot::Client.run(token) do |bot|
     puts "BOT AVVIATO"
@@ -46,9 +47,30 @@ def startBot
         if(@dr.nil?)
           bot.api.send_message(chat_id: message.chat.id, text: "Il riconoscimento non è stato ancora effettuato")
         else
-          
           bot.api.send_message(chat_id: message.chat.id, text: "Il riconoscimento è stato effettuato con successo. La tua mail è #{@dr.email}")
         end
+      
+      when /\/changePass [0-9]* [\w]* [\w]*/
+        array = message.text.split(" ")
+        id_utente = array[1]
+        old_pass = array[2]
+        new_pass = array[3]
+        if(Drinker.exists?(id: id_utente))
+          if(Drinker.find(id_utente).valid_password?(old_pass))
+            if new_pass.size < 6
+              bot.api.send_message(chat_id: message.chat.id, text: "La nuova password deve contenere almeno 6 caratteri!")
+            else
+              bot.api.send_message(chat_id: message.chat.id, text: "La tua password è stata aggiornata!")
+              Drinker.find(id_utente).update(password: new_pass)
+              # per motivi di sicurezza si elimina il messaggio non appena inviato
+              HTTParty.get("https://api.telegram.org/bot#{token}/deleteMessage?chat_id=#{message.chat.id}&message_id=#{message.message_id}")
+            end
+          else
+            bot.api.send_message(chat_id: message.chat.id, text: "La vecchia password non è corretta! Riprovare")
+          end 
+        else 
+          bot.api.send_message(chat_id: message.chat.id, text: "L'id inserito non corrisponde a nessun utente! Riprovare")
+        end 
       end
       puts message
     end

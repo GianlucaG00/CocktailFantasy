@@ -27,6 +27,21 @@ RSpec.describe Cocktail, type: :model do
           @cocktail.ingredients = "IngredienteA,IngredienteB,IngredienteC"
           expect(@cocktail).to be_valid
         end 
+        it "should not be valid to create a Cocktail with same name for the same Bar" do 
+          # Non ci possono essere due cocktail con lo stesso nome per uno stesso bar
+          @cocktail1 = Cocktail.create
+          @cocktail1.bar_id = 80
+          @cocktail1.name = "TEST"
+          @cocktail1.save
+          @cocktail2 = Cocktail.create
+          @cocktail2.bar_id = 80
+          @cocktail2.name = "TEST"
+
+          expect {
+              @cocktail2.save!
+          }.to raise_error(ActiveRecord::RecordInvalid)
+        end
+        
       end
 
       describe "Associations" do

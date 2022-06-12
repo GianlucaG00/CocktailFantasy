@@ -8,7 +8,7 @@ RSpec.describe Drinker, type: :model do
       before do
         @drinker = Drinker.create(email: "test@test.it", password: "password")
       end
-      it "Should be created a Drinkr" do
+      it "should be created a Drinker" do
         expect(@drinker).to be_valid
       end
   
@@ -30,10 +30,14 @@ RSpec.describe Drinker, type: :model do
 
       # test per Associations
       describe "Associations" do
-        it "Drinker has many reviews" do
+        it "has many reviews" do
           var = described_class.reflect_on_association(:reviews)
           expect(var.macro).to eq :has_many
         end
+        it "has many chats" do
+          var = described_class.reflect_on_association(:chats)
+          expect(var.macro).to eq :has_many
+        end 
       end
     end
   end

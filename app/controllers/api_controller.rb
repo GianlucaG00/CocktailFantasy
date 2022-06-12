@@ -5,7 +5,6 @@ class ApiController < ApplicationController
         id_bar = params[:bar]
         puts id_bar
         puts name
-        #response = Searcher.search_cocktail(name)
         response = HTTP.get("https://www.thecocktaildb.com/api/json/v1/1/search.php?", :params => {:s => name})
         res = JSON.parse(response.body)
         begin

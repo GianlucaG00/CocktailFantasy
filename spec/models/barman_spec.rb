@@ -38,9 +38,9 @@ RSpec.describe Barman, type: :model do
 
       # test per Associations
       describe "Associations" do
-        it "Barman has many bars" do
-          assc = described_class.reflect_on_association(:bars)
-          expect(assc.macro).to eq :has_many
+        it "has many bars" do
+          var = described_class.reflect_on_association(:bars)
+          expect(var.macro).to eq :has_many
         end
       end
     end

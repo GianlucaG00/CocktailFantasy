@@ -25,6 +25,14 @@ RSpec.describe Bar, type: :model do
           @bar.barman = nil
           expect(@bar).to_not be_valid
         end
+        it "should not be valid with a short number tel" do 
+          @bar.tel = "1"
+          expect(@bar).to_not be_valid
+        end
+        it "should not be valid with an invalid number tel" do 
+          @bar.tel = "non sono numeri"
+          expect(@bar).to_not be_valid
+        end
       end
 
       # test per Associations
@@ -37,6 +45,14 @@ RSpec.describe Bar, type: :model do
           var = described_class.reflect_on_association(:reviews)
           expect(var.macro).to eq :has_many
         end 
+        it "has many cocktails" do 
+          var = described_class.reflect_on_association(:cocktails)
+          expect(var.macro).to eq :has_many
+        end 
+        it "has many chat" do   
+          var = described_class.reflect_on_association(:chats)
+          expect(var.macro).to eq :has_many
+        end
       end
 
     end
