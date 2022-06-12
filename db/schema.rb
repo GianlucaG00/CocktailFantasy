@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_06_12_175302) do
+ActiveRecord::Schema.define(version: 2022_06_12_200651) do
 
   create_table "barmen", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -48,7 +48,6 @@ ActiveRecord::Schema.define(version: 2022_06_12_175302) do
   end
 
   create_table "chats", force: :cascade do |t|
-    t.string "option"
     t.integer "bar_id", null: false
     t.integer "drinker_id", null: false
     t.datetime "created_at", precision: 6, null: false
@@ -65,8 +64,8 @@ ActiveRecord::Schema.define(version: 2022_06_12_175302) do
     t.datetime "updated_at", precision: 6, null: false
     t.integer "bar_id", null: false
     t.string "pic"
-    t.boolean "signature"
     t.string "ingredients"
+    t.string "signature"
     t.index ["bar_id"], name: "index_cocktails_on_bar_id"
   end
 

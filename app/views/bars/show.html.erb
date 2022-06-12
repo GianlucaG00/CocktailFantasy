@@ -50,7 +50,6 @@
 <div class="container">
   <%if @cocktails.size == 0%>
     <h4 class="text-center mt-4">Non ci sono ancora cocktail nel menù <i class="fa-solid fa-face-frown"></i></h4>
-    <div class="text-center mt-4"><button class="btn btn-lg btn-success">Aggiungi <i class="fa-solid fa-martini-glass"></i></button></div>
   <%else%>
     <table class="table">
       <thead class="thead-dark">
@@ -69,7 +68,7 @@
             <td><%=cocktail.name%></td>
             <td><%=cocktail.preparation%></td>
             <td><%=cocktail.price%> €</td>
-            <%if cocktail.pic != nil%>
+            <%if cocktail.pic =~ /(http|https):\/\/(.)*/%>
               <td><img src="<%=cocktail.pic%>" width="150px"></td>
             <%else%>
               <td><%= image_tag "bar/not-available.jpg", :class => "img-fluid", :width => "150px"%></td>
@@ -99,7 +98,6 @@
 </div>
 <%if @reviews.size == 0%>
   <h4 class="text-center mt-4">Non ci sono ancora recensioni per questo bar <i class="fa-solid fa-face-frown"></i></h4>
-  <div class="text-center mt-4"><button class="btn btn-lg btn-success">Aggiungi <i class="fa-solid fa-comment"></i></button></div>
 <%else%>
   <%@reviews.each do |review|%>
     <div class="card m-auto mt-4" style="max-width: 540px;">
