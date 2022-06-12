@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_06_12_080100) do
+ActiveRecord::Schema.define(version: 2022_06_12_175302) do
 
   create_table "barmen", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -43,6 +43,7 @@ ActiveRecord::Schema.define(version: 2022_06_12_080100) do
     t.integer "barman_id", null: false
     t.integer "avg"
     t.string "pic"
+    t.string "regione"
     t.index ["barman_id"], name: "index_bars_on_barman_id"
   end
 

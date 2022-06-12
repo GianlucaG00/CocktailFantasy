@@ -3,7 +3,7 @@ class DrinkersController < ApplicationController
         if(!(drinker_signed_in?) || barman_signed_in?)
             redirect_to "/"
         else
-            @bars = Bar.search(params[:search])
+            @bars = Bar.search(params[:search], "nome")
             drinker_id = current_drinker.id
             @subscriptions = Chat.where(drinker_id: drinker_id )
             @reviews = Review.where(drinker_id: drinker_id)

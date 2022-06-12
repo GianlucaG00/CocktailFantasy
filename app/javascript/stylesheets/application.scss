@@ -1,14 +1,14 @@
 @import "bootstrap";
-@import url('https://fonts.googleapis.com/css2?family=Monserrat&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
 
 :root {
 	/* Grazie Bootstrap 5.2! */
-	--giallo: #ff0000;
-	--giallo-rgb: 218, 165, 32;
-	--bs-border-color: var(--giallo);
+	--verde: #3dab0a;
+	--verde-rgb: 218, 165, 32;
+	--bs-border-color: var(--verde);
 	--bs-border-radius: 3rem;
 	--bs-link-color: var(--bs-light);
-	--bs-link-hover-color: var(--giallo);
+	--bs-link-hover-color: var(--verde);
 }
 
 html {
@@ -16,12 +16,12 @@ html {
 }
 
 body {
-	font-family: 'Monserrat', sans-serif;
+	font-family: 'Montserrat', sans-serif;
 	height: 100%;
 }
 
 .text-yellow {
-	color: var(--giallo);
+	color: var(--verde);
 }
 
 /* Navbar */
@@ -34,11 +34,11 @@ body {
 }
 
 .dropdown-menu {
-	--bs-dropdown-link-active-bg: rgb(var(--giallo-rgb), 0.5);
+	--bs-dropdown-link-active-bg: rgb(var(--verde-rgb), 0.5);
 }
 
 .navbar-dark .navbar-nav .nav-link:hover {
-	color: var(--giallo);
+	color: var(--verde);
 }
 
 
@@ -79,13 +79,13 @@ a:active {
 
 /* Stile: Bottoni */
 .btn {
-	--bs-btn-focus-box-shadow: 0 0 0 0.1rem rgba(var(--giallo-rgb), .5);
+	--bs-btn-focus-box-shadow: 0 0 0 0.1rem rgba(var(--verde-rgb), .5);
 	border-radius: 3rem;
 	box-shadow: none;
 }
 
 /* .btn:focus {
-	box-shadow: 0 0 0 0.1rem var(--giallo);
+	box-shadow: 0 0 0 0.1rem var(--verde);
 } */
 
 .btn-light,
@@ -95,7 +95,7 @@ a:active {
 
 .btn-dark,
 .btn-dark:visited {
-	color: var(--giallo);
+	color: var(--verde);
 }
 
 .btn-dark:active {
@@ -104,24 +104,24 @@ a:active {
 
 .btn-dark:hover,
 .btn-light:hover {
-	background: var(--giallo);
+	background: var(--verde);
 	color: var(--bs-dark);
 }
 
 /* Dropdown */
 .dropdown-menu {
-	border-color: var(--giallo);
+	border-color: var(--verde);
 }
 
 /* Forms */
 .form-select:focus {
-	border-color: var(--giallo);
-	box-shadow: 0 0 0 0.1rem rgba(var(--giallo-rgb), .5);
+	border-color: var(--verde);
+	box-shadow: 0 0 0 0.1rem rgba(var(--verde-rgb), .5);
 }
 
 .form-control:focus {
-	border-color: var(--giallo);
-	box-shadow: 0 0 0 0.1rem rgba(var(--giallo-rgb), .5);
+	border-color: var(--verde);
+	box-shadow: 0 0 0 0.1rem rgba(var(--verde-rgb), .5);
 }
 
 .form-control {
@@ -137,7 +137,7 @@ a:active {
 }
 
 .form-control:focus {
-	border-color: var(--giallo);
+	border-color: var(--verde);
 }
 
 .input-group-text {
@@ -154,40 +154,40 @@ a:active {
 
 /* Cards */
 .card {
-	border-color: var(--giallo);
+	border-color: var(--verde);
 }
 
 hr,
 hr:not([size]) {
 	border: none;
 	height: 1px;
-	background-color: var(--giallo);
+	background-color: var(--verde);
 	opacity: 1;
 }
 
 /* calendario */
 .day {
-	color: var(--giallo)
+	color: var(--verde)
 }
 
 .day.active {
-	background-color: rgb(var(--giallo-rgb), 0.25) !important;
-	color: var(--giallo) !important;
+	background-color: rgb(var(--verde-rgb), 0.25) !important;
+	color: var(--verde) !important;
 }
 
 .day.today:before {
-	border-bottom-color: rgb(var(--giallo-rgb), 0.25) !important;
+	border-bottom-color: rgb(var(--verde-rgb), 0.25) !important;
 }
 
 /* icone social footer */
 .btn-social {
-	color: var(--giallo);
+	color: var(--verde);
 	width: 40px;
 	height: 40px;
 }
 
 .giallo {
-	color: var(--giallo);
+	color: var(--verde);
 }
 
 .no-border {
@@ -197,7 +197,7 @@ hr:not([size]) {
 }
 
 .fa-solid:hover{
-	color: red;
+	color: var(--verde);
 }
 
 .btn-info {

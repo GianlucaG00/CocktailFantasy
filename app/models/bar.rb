@@ -14,11 +14,19 @@ class Bar < ApplicationRecord
 	validates :address, :presence => true
 
 	# funzione per la ricerca tramite nome nella pagina dei Bar
-	def self.search(name)
-		if name
-			where(["name LIKE ?","%#{name}%"])
+	def self.search(name, type)
+		if type == "nome"
+			if name
+				where(["name LIKE ?","%#{name}%"])
+			else
+				all
+			end
 		else
-			all
+			if name
+				where(["regione LIKE ?","%#{name}%"])
+			else
+				all
+			end
 		end
 	end 
 
@@ -27,15 +35,4 @@ class Bar < ApplicationRecord
           map(&:capitalize).join(' ')
     end
 
-	def avg_reviews
-		sum = 0
-		self.reviews.each do |review|
-			sum = sum + review.potatoes
-		end
-		if self.reviews.count>0
-			return sum/self.reviews.count
-		else
-			return "--"
-		end
-	end
 end

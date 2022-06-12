@@ -10,10 +10,10 @@
     </div>
   </section>
 
-  <%if @bar.pic.nil?%>
-    <%= image_tag "bar/bar.jpg", :class => "img-fluid rounded"%>
-  <%else%>
+  <%if @bar.pic =~ /(http|https):\/\/(.)*/%>
     <img src="<%=@bar.pic%>" class="img-fluid rounded"/>
+  <%else%>
+    <%= image_tag "bar/bar.jpg", :class => "img-fluid rounded"%>
   <%end%>
 
   <div class="row">

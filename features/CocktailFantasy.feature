@@ -61,7 +61,7 @@ Scenario: As a Barman I want to display the bars I own in my personal area so th
 Scenario: As a Drinker I want to subscribe to a Bar going in my personal Area so that I can receive telegram notification for announcements on Bar I am interested in 
     Given a Bar "Bar Prova" of a Barman
     And I am a registered Drinker as "prova@prova.it", "prova123" correctly recognized in telegram
-    When I go to the drinker personal area 
+    When I go to the drinker personal area
     Then I should be on the drinker personal area
     And I should see "Aggiungi iscrizioni"
     When I select "Bar Prova" from "select-bar"
@@ -74,6 +74,7 @@ Scenario: As an unregistered user I want to filter the bar list by name so that 
     Then I should see "Bar One"
     And I should see "Bar Two"
     When I fill in "search" with "One"
+    And I select "NOME" from "type"
     And I press "Cerca"
     Then I should be on the Bar page 
     And I should see "Bar One"

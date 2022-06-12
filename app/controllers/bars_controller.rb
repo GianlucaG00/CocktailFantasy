@@ -5,7 +5,7 @@ class BarsController < ApplicationController
   # CRUD operations
   # GET /bars or /bars.json
   def index
-    @bars = Bar.search(params[:search])
+    @bars = Bar.search(params[:search], params[:type])
     if @bars.size == 0
       flash[:message] = "Spiacente, la ricerca non ha prodotto alcun risultato"
     end
@@ -122,6 +122,6 @@ class BarsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def bar_params
-      params.require(:bar).permit(:name, :description, :address, :tel, :pic)
+      params.require(:bar).permit(:name, :description, :address, :tel, :pic, :regione)
     end
 end

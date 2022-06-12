@@ -1,5 +1,3 @@
-
-
 <section id="header" class="jumbotron text-center">
   <h1 class="display-3">Lista dei Bar <i class="fa-solid fa-list"></i></h1>
   <p class="lead"><i>Iscriviti al nostro servizio per avere la visibilità che cerchi!</i></p>
@@ -11,8 +9,14 @@
     </div>
     <div class="col-4">
       <%= form_tag bars_path, method: :get do %>
-          <%= text_field_tag :search, params[:search], :class => "form-control", :placeholder => "Cerca"%>
-          <%= submit_tag  "Cerca", :class => "btn btn-light mt-2"%>
+          <select name="type" class="form-select mt-2">
+            <option value="nome">NOME</option>
+            <option value="regione">REGIONE</option>
+          </select>
+          <div class="input-group mt-2">
+            <%= text_field_tag :search, params[:search], :class => "form-control", :placeholder => "Cerca"%>
+            <%= submit_tag  "Cerca", :class => "btn btn-outline-success"%>
+          </div>
       <%end%>
     </div>
   </div>
@@ -31,15 +35,15 @@
       <%@bars.each do |bar|%>
         <div class="col-lg-4 mb-4">
           <div class="card">
-            <%if bar.pic.nil?%>
-              <img src="https://images.unsplash.com/photo-1477862096227-3a1bb3b08330?ixlib=rb-1.2.1&auto=format&fit=crop&w=700&q=60" alt="" class="card-img-top img-fluid">
-            <%else%>
+            <%if bar.pic =~ /(http|https):\/\/(.)*/%>
               <img src="<%=bar.pic%>" alt="" class="card-img-top img-fluid">
+            <%else%>
+              <%= image_tag "bar/bar.jpg", :class => "card-img-top img-fluid"%>
             <%end%>
             <div class="card-body">
               <h5 class="card-title text-center"><%=bar.name%> <i class="fa-solid fa-shop"></i></h5>
               <p class="card-text"><i class="fa-solid fa-align-justify"></i> <%=bar.description%></p>
-              <p class="card-text"><i class="fa-solid fa-location-dot"></i> <%=bar.address%></p>
+              <p class="card-text"><i class="fa-solid fa-location-dot"></i> <%=bar.address%>, <%=bar.regione%></p>
               <hr/>
               <div class="row">
                 <div class="col-8">

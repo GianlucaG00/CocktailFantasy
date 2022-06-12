@@ -94,13 +94,11 @@
 											<option value="<%=bar.id%>"><%=bar.name%></option>
 										<%end%>
 									</select>
+									<button type="submit" id="subscribe-btn" class="btn btn-lg btn-success">Iscriviti!</button>
 								</div>
 							</div>
 							
 							<div class=" container mt-3 justify content-between">
-								<div class="col-2">
-									<button type="submit" id="subscribe-btn" class="btn btn-lg btn-success">Iscriviti!</button>
-								</div>
 								<div class="col-10 mt-3">
 									<p class="message-w"><%= flash[:message] %></p>
 									<p id="notice"><%=notice%></p>
@@ -110,11 +108,11 @@
 					</div>
 					<div class="row">
 						<%= form_tag drinkers_personalArea_path, method: :get do %>
-							<div class="col-8 mt-3">
-							<%= text_field_tag :search, params[:search], :class => "form-control", :placeholder => "Cerca"%>
-							</div>
-							<div class="col-2 mt-3">
-								<%= submit_tag  "Cerca", :class => "btn mt-2 btn-outline-primary"%>
+							<div class="col">
+								<div class="input-group mb-3">
+									<%= text_field_tag :search, params[:search], :class => "form-control", :placeholder => "Cerca"%>
+									<%= submit_tag  "Cerca", :class => "btn btn-outline-primary"%>
+								</div>
 							</div>
 						<%end%>
 					</div>

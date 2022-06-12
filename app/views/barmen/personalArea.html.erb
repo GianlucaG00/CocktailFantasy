@@ -90,21 +90,20 @@
 
 		<%@bars.each do |bar|%>
 			<div class="card bg-light mt-3" style="max-width: 100%;">
-  				<div class="card-header"><%= link_to bar.name, bar%></a></div>
-  					<div class="card-body">
-    					<h5 class="card-title"><%=bar.barman.email%></h5>
-    					<p class="card-text"><%=bar.description%></p>
-						<%= link_to  "bars/#{bar.id}", method: :delete, data: {confirm: "Sei sicuro di voler eliminare #{bar.name}?"}, :class => "btn btn-outline-danger" do%>
-							Elimina <i class="fa-solid fa-trash" aria-hidden="true" target="_blank"></i>
-						<%end%>
-						<%= link_to  edit_bar_path(id: bar), :class => "btn btn-outline-warning" do%>
-							Modifica <i class="fa-solid fa-pencil" aria-hidden="true" target="_blank"></i>
-						<%end%>
-						<%= link_to  bar, :class => "btn btn-outline-success" do%>
-							Visualizza <i class="fa-solid fa-eye" aria-hidden="true" target="_blank"></i>
-						<%end%>
-  					</div>
-				</div>
+  				<div class="card-header"><%= link_to bar.name, bar%></div>
+  				<div class="card-body">
+    				<h5 class="card-title"><%=bar.barman.email%></h5>
+    				<p class="card-text"><%=bar.description%></p>
+					<%= link_to  "bars/#{bar.id}", method: :delete, data: {confirm: "Sei sicuro di voler eliminare #{bar.name}?"}, :class => "btn btn-outline-danger" do%>
+						Elimina <i class="fa-solid fa-trash" aria-hidden="true" target="_blank"></i>
+					<%end%>
+					<%= link_to  edit_bar_path(id: bar), :class => "btn btn-outline-warning" do%>
+						Modifica <i class="fa-solid fa-pencil" aria-hidden="true" target="_blank"></i>
+					<%end%>
+					<%= link_to  bar, :class => "btn btn-outline-success" do%>
+						Visualizza <i class="fa-solid fa-eye" aria-hidden="true" target="_blank"></i>
+					<%end%>
+  				</div>
 			</div>
 		<%end%>
     </div>
